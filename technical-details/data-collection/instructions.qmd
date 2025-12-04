@@ -1,5 +1,30 @@
 # Instructions 
 
+The data for this project is collected directly from the official Riot Games Teamfight Tactics (TFT) API, which is a public API maintained by Riot Games. It provides real-time and historical game data for TFT players, matches, and ranked ladders.
+
+Data Tables Used:
+
+League endpoints: retrieves Master, Grandmaster, and Challenger ranked players
+Match endpoints: retrieves match history and full match JSON data
+PUUID lookup: maps players to their unique global identifiers
+
+API Documentation:
+https://developer.riotgames.com/apis#tft-match-v1
+https://developer.riotgames.com/apis#tft-league-v1
+
+All of the data was taken from the Riot Games API and collected via Python script.
+packages used:
+requests for API calls
+pathlib for file management
+logging for debugging and transparency
+
+Process Overview
+
+The raw data is stored as JSON files produced by the API. A single JSON file corresponds to a singular TFT game.
+All data collection code is included, and the process is fully reproducible if the user has an valid Riot Game API key and account.
+
+For future reference, I highly recommend Riot Watcher (https://riot-watcher.readthedocs.io/en/latest/riotwatcher/TeamFightTactics/index.html). This package contains multiple functions that would have simplified the coding process. 
+
 `Note`: You should remove these instruction once you have read and understood them. They should not be included in your final submission.
 
 `Remember:` Exactly what do you put on this page will be specific you your project and data. Some things might "make more sense" on one page rather than another, depending on your workflow. Organize your project in a logical way that makes the most sense to you.  
@@ -59,19 +84,14 @@ To ensure clarity and transparency throughout your project, your data collection
    - Specify where the data comes from, whether public datasets, APIs, or original collection.
    - Provide links to datasets or API documentation and explain their relevance to the project.
 
-   Data source is the Riot Games API. This is an API mananged by the developers of TeamFight Tactics. Within the API there exists multiple tables.
-   Link:
 
 2. **Data Collection Methods**  
    - If you used an API or web scraping, explain the tools (e.g., `BeautifulSoup`, `Selenium`) and the process.
    - Include links to your code for replicating data collection.
 
-
-
 3. **Data Structure and Format**  
    - Describe the structure of your raw data (e.g., rows, columns, data types) and its format (CSV, JSON, etc.).
    Structure of data.
-   Currently, data is exported in JSON.
 
 4. **Linking to Data**  
    - Include links to the **raw dataset**, ensuring transparency and allowing replication.

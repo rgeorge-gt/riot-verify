@@ -1,27 +1,67 @@
 ---
 title: "Landing page"
+author: "Robert George"
 ---
 
-**Audio instructions:**
+## Project Introduction
 
-If you want, you can listen to the instructions:
+**Title: ** Statistical analysis of TeamFight Tactics high level Gameplay
 
-<audio controls><source src="audio/landing-page-instructions.mp3" type="audio/mpeg"></audio>
+**Motivation: ** The motivation came from my intrest in the application of data science in the video game industry. In November 2025, Riot Games posted an opening for a Teamfight Tactics (TFT) Insights Analyst summer internship. After downloading TFT and playing the game, I enjoyed the various strategic elements of the gameplay
 
-<sup> **Source**: Text-to-speech conversion done with Amazon Polly on AWS </sup>
+I hope this work demonstrates how data science can support decision-making in esports analytics—a field that continues to grow in relevance both academically and professionally.
 
-`Note`: These audio instructions should not be included in your final submission or repository, once you are done wiht them, please delete the files and remove them from the website. 
+## Research Questions
 
-## Getting Started
+- What are the most common units found?
+- What are the most common units found at top 4 placement?
+- How does unit star level distribution units correlate to placement?
+-  
+- 
+- 
 
-To begin the project, first read the instruction document ([click here](instructions/overview.qmd)). This document is also accessible from the navigation bar.
+## Literature Review 1 
+**Title:** Predicting Teamfight Tactics Results with Machine Learning Techniques. 
+https://researchportal.hkr.se/en/studentTheses/predicting-teamfight-tactics-results-with-machine-learning-techni-5/
 
-Once you’ve completed that, you can proceed with the instructions found throughout the website.
+**Summary:** This undergraduate thesis investigates whether machine learning models traditionally used to predict outcomes in professional sports translates to esports. Teamfight Tactics is used as the test case, and the authors construct feature sets based on board state, itemization, synergies, and unit upgrades to determine their predictive power.
+
+**Key Findings:**
+
+- Determined that there is a pattern in a team that leads to higher win rates.
+- Esports data contains high dimensonality and a large number of data points. 
+
+**Takeaway:** 
+
+## Literature Review 2
+**Title:** E-Sports Analytics: A Primer and Resource for Student Research Projects and Lesson Plans
+https://files.eric.ed.gov/fulltext/EJ1242004.pdf
+
+**Summary:** This article provides an overview of esports analytics as an emerging academic domain. It outlines common analytical techniques used in competitive games—such as classification, clustering, and player behavioral modeling—and discusses the challenges caused by dynamic rulesets and patch updates.
+
+**Key Findings:**
+
+- 
+-  
+
+**Takeaway:** 
+
+## Literature Review 3
+**Title:** ”Getting Mortdogged”; How high-ranking players experience randomness in Teamfight Tactics (TFT)
+https://uu.diva-portal.org/smash/get/diva2%3A1805620/FULLTEXT01.pdf
+
+**Summary:** This bachelor thesis explores how top-tier TFT players perceive randomness and probability within the game. Through qualitative interviews, the authors capture how players reason about rolling odds, shop variance, and combat randomness—and how these perceptions influence strategic decisions.
+
+**Key Findings:**
+
+- TFT and AutoBattler video games lack a lot of academic research despite high popularity.
+- Controlled randomness (e.g., random augment selection) enhances replayability, making the game strategically richer without overshadowing skill. 
+
+**Takeaway:** 
+
+
 
 ## What to Include on This Page
-
-This is the landing page for your project. Content from this page can be reused in sections of your final report.
-
 ### Create an "About You" Page  
 
 - Develop your "About You" page. You can reuse content from previous assignments.
