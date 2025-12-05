@@ -387,9 +387,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Landing page",
+    "title": "Landing Page",
     "section": "",
-    "text": "Audio instructions:\nIf you want, you can listen to the instructions:\nSource: Text-to-speech conversion done with Amazon Polly on AWS\nNote: These audio instructions should not be included in your final submission or repository, once you are done wiht them, please delete the files and remove them from the website."
+    "text": "Title:  Statistical Analysis of TeamFight Tactics Top level Gameplay\n\nMotivation:  The motivation came from my intrest in the application of data science in the video game industry. In November 2025, Riot Games posted an opening for a Teamfight Tactics (TFT) Insights Analyst summer internship. After downloading TFT and playing the game, I enjoyed the various strategic elements of the gameplay and decided on it being the topic of my DSAN 5000 final project.\nI hope this work demonstrates how data science can support decision-making in esports analytics—a field that continues to grow in relevance both academically and professionally."
   },
   {
     "objectID": "index.html#getting-started",
@@ -408,9 +408,9 @@
   {
     "objectID": "index.html#additional-ideas-for-things-to-include",
     "href": "index.html#additional-ideas-for-things-to-include",
-    "title": "Landing page",
+    "title": "Landing Page",
     "section": "Additional Ideas for things to include",
-    "text": "Additional Ideas for things to include\n\nAudience: Who is this for? Data professionals, businesses, researchers, or curious readers.\nHeadline: A captivating title introducing the data science theme (e.g., “Unlocking Insights Through Data Stories”).\nIntroduction: A brief, engaging overview of what the website offers (e.g., data-driven stories, insights, or case studies).\nQuestions You Are Addressing: What do you hope to learn?\nMotivation: Explain why this topic matters, highlighting the importance of data in solving real-world problems.\nKey Topics: List the main focus areas (e.g., machine learning, data visualization, predictive modeling).\nUse Cases/Examples: A brief teaser of compelling stories or case studies you’ve worked on.\nCall to Action: Invite visitors to explore the content, follow along, or contact you for more information.\nVisual/Infographic: Add a simple graphic or visual element to make the page more dynamic."
+    "text": "Additional Ideas for things to include\n\nAudience: Who is this for? Data professionals, businesses, researchers, or curious readers.\nHeadline: A captivating title introducing the data science theme (e.g., “Unlocking Insights Through Data Stories”).\nIntroduction: A brief, engaging overview of what the website offers (e.g., data-driven stories, insights, or case studies).\nQuestions You Are Addressing: What do you hope to learn?\nMotivation: Explain why this topic matters, highlighting the importance of data in solving real-world problems.\nKey Topics: List the main focus areas (e.g., machine learning, data visualization, predictive modeling).\nUse Cases/Examples: A brief teaser of compelling stories or case studies you’ve worked on.\nCall to Action: Invite visitors to explore the content, follow along, or contact you for more information.\nVisual/Infographic: Add a simple graphic or visual element to make the page more dynamic.\n\nReferences:"
   },
   {
     "objectID": "instructions/github-usage.html",
@@ -908,5 +908,40 @@
     "title": "Supervised Learning",
     "section": "",
     "text": "Result Interpretation: Interpret the results obtained from the analysis.\nModel Performance Comparison: Compare the performance of different models.\nInsights Gained: Share insights learned from the analysis."
+  },
+  {
+    "objectID": "index.html#project-introduction",
+    "href": "index.html#project-introduction",
+    "title": "Landing Page",
+    "section": "",
+    "text": "Title:  Statistical Analysis of TeamFight Tactics Top level Gameplay\n\nMotivation:  The motivation came from my intrest in the application of data science in the video game industry. In November 2025, Riot Games posted an opening for a Teamfight Tactics (TFT) Insights Analyst summer internship. After downloading TFT and playing the game, I enjoyed the various strategic elements of the gameplay and decided on it being the topic of my DSAN 5000 final project.\nI hope this work demonstrates how data science can support decision-making in esports analytics—a field that continues to grow in relevance both academically and professionally."
+  },
+  {
+    "objectID": "index.html#research-questions",
+    "href": "index.html#research-questions",
+    "title": "Landing Page",
+    "section": "Research Questions",
+    "text": "Research Questions\n\nWhat game factors most strongly predict a player’s final placement (either 1st place or top 4)?\nDoes the number of high cost units (4-5) have a statistically singinifcant impact on placement?\nWhat champions are grouped together? Do they share traits (ie Jinx + Ahiri because both are Star Guardian)"
+  },
+  {
+    "objectID": "index.html#literature-review-1",
+    "href": "index.html#literature-review-1",
+    "title": "Landing Page",
+    "section": "Literature Review 1",
+    "text": "Literature Review 1\nTitle: Predicting Teamfight Tactics Results with Machine Learning Techniques. https://researchportal.hkr.se/en/studentTheses/predicting-teamfight-tactics-results-with-machine-learning-techni-5/\nSummary: This undergraduate thesis investigates whether machine learning models traditionally used to predict outcomes in professional sports translates to esports. Teamfight Tactics is used as the test case, and the authors construct feature sets based on board state, itemization, synergies, and unit upgrades to determine their predictive power.\nKey Findings:\n\nDetermined that there is a pattern in a team that leads to higher win rates.\nEsports data contains high dimensonality and a large number of data points.\n\nTakeaway:"
+  },
+  {
+    "objectID": "index.html#literature-review-2",
+    "href": "index.html#literature-review-2",
+    "title": "Landing Page",
+    "section": "Literature Review 2",
+    "text": "Literature Review 2\nTitle: E-Sports Analytics: A Primer and Resource for Student Research Projects and Lesson Plans https://files.eric.ed.gov/fulltext/EJ1242004.pdf\nSummary: This article provides an overview of esports analytics as an emerging academic domain. It outlines common analytical techniques used in competitive games—such as classification, clustering, and player behavioral modeling—and discusses the challenges caused by dynamic rulesets and patch updates.\nKey Findings:\n\n\n\n\nTakeaway:"
+  },
+  {
+    "objectID": "index.html#literature-review-3",
+    "href": "index.html#literature-review-3",
+    "title": "Landing Page",
+    "section": "Literature Review 3",
+    "text": "Literature Review 3\nTitle: ”Getting Mortdogged”; How high-ranking players experience randomness in Teamfight Tactics (TFT) https://uu.diva-portal.org/smash/get/diva2%3A1805620/FULLTEXT01.pdf\nSummary: This bachelor thesis explores how top-tier TFT players perceive randomness and probability within the game. Through qualitative interviews, the authors capture how players reason about rolling odds, shop variance, and combat randomness—and how these perceptions influence strategic decisions.\nKey Findings:\n\nAutoBattler video games (such as TFT) lack academic research despite high popularity.\nControlled randomness (e.g., random augment selection) enhances replayability, making the game strategically richer without overshadowing skill.\n\nTakeaway:\n\nUse LLM Tools for Summarization\nUpload the selected papers to an LLM tool capable of text summarization. Have it condense the main points of each paper into a concise, manageable summary (e.g., condense hundreds of pages into a 10-page summary). Carefully review this summary to absorb the key insights.\nLeverage Interactive LLM Tools\nUse tools like NotebookLM or other AI-based text digesters to ask specific, targeted questions about the papers:\n\nExample questions:\n\n“In the papers uploaded, did any of them explore XYZ?”\n“Which paper is most closely related to the following project idea: [explain idea]?” These tools will help you quickly extract relevant information without re-reading entire papers."
   }
 ]

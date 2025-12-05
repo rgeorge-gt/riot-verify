@@ -1,22 +1,23 @@
 ---
-title: "Landing page"
+title: "Landing Page"
 author: "Robert George"
 ---
 
 ## Project Introduction
 
-**Title: ** Statistical analysis of TeamFight Tactics high level Gameplay
+**Title: ** Statistical Analysis of TeamFight Tactics Top level Gameplay
 
-**Motivation: ** The motivation came from my intrest in the application of data science in the video game industry. In November 2025, Riot Games posted an opening for a Teamfight Tactics (TFT) Insights Analyst summer internship. After downloading TFT and playing the game, I enjoyed the various strategic elements of the gameplay
+![](images/Teamfight_Tactics_logo.png)
+
+**Motivation: ** The motivation came from my intrest in the application of data science in the video game industry. In November 2025, Riot Games posted an opening for a Teamfight Tactics (TFT) Insights Analyst summer internship. After downloading TFT and playing the game, I enjoyed the various strategic elements of the gameplay and decided on it being the topic of my DSAN 5000 final project. 
 
 I hope this work demonstrates how data science can support decision-making in esports analytics—a field that continues to grow in relevance both academically and professionally.
 
 ## Research Questions
 
-- What are the most common units found?
-- What are the most common units found at top 4 placement?
-- How does unit star level distribution units correlate to placement?
--  
+- What game factors most strongly predict a player’s final placement (either 1st place or top 4)?
+- Does the number of high cost units (4-5) have a statistically singinifcant impact on placement?
+- What champions are grouped together? Do they share traits (ie Jinx + Ahiri because both are Star Guardian)
 - 
 - 
 
@@ -54,50 +55,14 @@ https://uu.diva-portal.org/smash/get/diva2%3A1805620/FULLTEXT01.pdf
 
 **Key Findings:**
 
-- TFT and AutoBattler video games lack a lot of academic research despite high popularity.
+- AutoBattler video games (such as TFT) lack academic research despite high popularity.
 - Controlled randomness (e.g., random augment selection) enhances replayability, making the game strategically richer without overshadowing skill. 
 
 **Takeaway:** 
 
 
 
-## What to Include on This Page
-### Create an "About You" Page  
 
-- Develop your "About You" page. You can reuse content from previous assignments.
-- You can include the content here or on a separate page.
-   - It’s recommended to create one "About You" page for all DSAN projects, with links to your various class projects.
-
-### Create a Landing Page for Your Project  
-
-- Summarize your topic, its significance, related work, and the questions you plan to explore.
-- Draft an introduction with at least **5 research questions**. These may evolve as your project progresses, since data science is an iterative process.
-- Include your data science questions on this page.
-
-### Literature review
-
-Once you decide on a topic, you should `ALWAYS START WITH A LITERATURE REVIEW`, this is particularly important for academic projects.
-
-The literature review is the most important part of most projects. 
-
-It allows you to; 
-
-* 1. Determine what is already known and what has already been tried, so that you `don't re-invent the wheel`.
-* 2. It makes you more of a subject matter expert, allowing you to `ask the right questions`, `target impactful projects`, and `communicate with other professionals`.
-
-> Doing a project that you think will change the world, only to find at the end that a very similar version of your project was already done in the 1980's, isn't a great use of time.
-
-In this section, please do a literature review and cite at least **3 academic publications** per group member, and include **internal academic citations**.
-
-**Optional**: Consider using LLM tools to 10X your literature review, e.g. instead of focusing on 3 papers, aim for 30 or more
-
-By following these steps, you can 10X the efficiency of your literature review process, gaining more insights while minimizing the time spent on manual reading.
-
-1. **Expand Your Literature Search**  
-   Aim to gather a larger pool of papers. Use academic databases (Google Scholar, arXiv, etc.) to find relevant studies and ensure a broad scope.
-
-2. **Skim the Abstracts**  
-   Read the abstracts of each paper to quickly understand their focus and identify those most relevant to your topic. Prioritize these papers for deeper analysis.
 
 3. **Use LLM Tools for Summarization**  
    Upload the selected papers to an LLM tool capable of text summarization. Have it condense the main points of each paper into a concise, manageable summary (e.g., condense hundreds of pages into a 10-page summary). Carefully review this summary to absorb the key insights.
@@ -121,3 +86,5 @@ By following these steps, you can 10X the efficiency of your literature review p
 - **Use Cases/Examples**: A brief teaser of compelling stories or case studies you’ve worked on.
 - **Call to Action**: Invite visitors to explore the content, follow along, or contact you for more information.
 - **Visual/Infographic**: Add a simple graphic or visual element to make the page more dynamic.
+
+References:
