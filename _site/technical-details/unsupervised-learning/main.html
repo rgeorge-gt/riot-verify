@@ -193,8 +193,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction:</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction:</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
   <ul class="collapse">
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions:</a></li>
   <li><a href="#part-1-dimensionality-reduction" id="toc-part-1-dimensionality-reduction" class="nav-link" data-scroll-target="#part-1-dimensionality-reduction">Part 1: Dimensionality Reduction</a></li>
   <li><a href="#part-2-clustering-methods" id="toc-part-2-clustering-methods" class="nav-link" data-scroll-target="#part-2-clustering-methods">Part 2: Clustering Methods</a></li>
   </ul></li>
@@ -229,39 +231,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level1">
 <h1>Introduction:</h1>
 <p>In this section, I will be using awnsering the following data science questions: What are meta comps among top level TFT player boards? What are meta comps among players who place top 4?</p>
-<p>Champions in TFT have unique abilites and share types. A basic strategy is composing a team of unit that share traits because of bonuses given to units that share traits. For example, in Set 15, Ahiri and Jinx are both Star Guardians. When they are on the board together, they each get a unique bonus. The more Star Guardians are on the board, the greater the bonus. This aims to find common champion pairings at top level play. Originally, I was going to use hierachial clustering, but I switched over to DBSCAN.</p>
+<p>Champions in TFT have unique abilites and share types. A basic strategy is composing a team of unit that share traits because of bonuses given to units that share traits. For example, in Set 15, Ahiri and Jinx are both Star Guardians. When they are on the board together, they each get a unique bonus. The more Star Guardians are on the board, the greater the bonus. This aims to find common team comps at top level play.</p>
+</section>
+<section id="methods" class="level1">
+<h1>Methods</h1>
+<p>Originally, I tried HDBSCAN, but realized I had used distance = Euclidean. As my data was purley categorical, euclidean distance results would be useless. When I switched to Jaccard distance, the results were poor. Which made me decide on using Hieracical Clustering.</p>
 <p>Using my cleaned dataset, I created a new binary dataset that showed how many frequency of unit appearance.</p>
-<p>My main issue was the size of the dataset. Original shape = (32455, 63) which would cause Jupyter to take to long or outright crash. So I decided to first remove duplicates and then perform PCA (Principal Component Analysis) if necessary. My reasoning for this is that duplicates do not improve the performance or content of DBSCAN while PCA removes potentially useful data. Removing the duplicates was the right call, cutting the shape down to (10757, 31). This is about a third of what we started but it makes sense. We are only looking at the list of units a player employed without consideration of other variables such as star level, items, or auguments. Despite the games innate RNG, top players are very consistent at bulding top level meta comps.</p>
-<p>#Methods HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) - HDBSCAN is a clustering algorithm build upon DBSCAN.</p>
+<p>My main issue was the size of the dataset. Original shape = (32455, 63) which would cause Jupyter to take to long or outright crash. Before performing PCA, I removed duplicates as they do not improve the results and increase run time. After removing the duplicates, the shape became (10757, 63). This is about a third of what we started but it makes sense. We are only looking at the list of units a player employed without consideration of other variables such as star level, items, or auguments. Despite the games innate RNG, top players are very consistent at building top level meta comps.</p>
+<p>After removing duplicates, I ran hierachtic clustering with Jaccard distance. Results lead to over 100 clusters which required me to perform PCA with n_components = 25. pca.explained_variance_ratio_ = 0.826.</p>
+<p>Since PCA was performed, distance used was euclidean instead of Jaccard.</p>
+<p>After running, I wanted to find the number of cluster relative to t. t = 2 → clusters = 228 t = 3 → clusters = 11 t = 4 → clusters = 1 t = 5 → clusters = 1</p>
+<p>I choose t = 3 and then wanted to look at the number</p>
+<p>#Methods Hierarchic Clustering: - A clustering algorithm.</p>
+<p>HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) - HDBSCAN is a clustering algorithm build upon DBSCAN. It can dynamically adapt adjust to different densities and form clusters within the data. It is best used for datasets with complex structures or varying densities because it creates a hierarchical tree of clusters that enable users to examine the data at different levels of granularity. Parameters that can be adjusted by the ende user are: The minimum number of points to form a cluster. The minimum number of samples in a neighborhood for a point to be considered a core point.</p>
+<p>Principal Component Analysis (PCA): -</p>
 <p>TSNE -</p>
-<p>#Results Section: Below are the HDBSCAN clusters shown in TSNE form.</p>
-<p>Below are the 13 clusters produced. The left hand side is the units name and the right hand side is the frequency of appearance.</p>
-<p>=== Noise (cluster -1) === Braum 0.411457 Swain 0.389261 Udyr 0.342908 Shen 0.312061 XinZhao 0.292639 Sett 0.289212 LeeSin 0.279745 Zyra 0.278603 Leona 0.269463 Rell 0.260976 dtype: float64</p>
-<p>=== Cluster 0 === Malphite 0.986595 Janna 0.949062 Ziggs 0.790885 Sivir 0.772118 Shen 0.764075 Ryze 0.584450 JarvanIV 0.546917 TwistedFate 0.337802 KSante 0.300268 Neeko 0.249330 dtype: float64</p>
-<p>=== Cluster 1 === Ryze 0.98750 JarvanIV 0.98125 Akali 0.95625 Darius 0.85625 Kennen 0.85000 Senna 0.77500 KSante 0.71875 Aatrox 0.61250 LeeSin 0.41875 Janna 0.19375 dtype: float64</p>
-<p>The core of Cluster 1 is Ryze, JarvanIV, Akali, Darius, Kennen, and KSante. Aatorox and LeeSin are secondary. While Janna is a fringe choice.</p>
-<p>=== Cluster 2 === Kobuko 1.000000 Udyr 0.990950 Aatrox 0.977376 Ryze 0.927602 JarvanIV 0.809955 Senna 0.733032 Janna 0.705882 Yasuo 0.411765 KSante 0.285068 Volibear 0.194570 dtype: float64</p>
-<p>Kobuko is the most valuable unit of Comp 2. Udyr, Aatrox, and Ryze are also staples.</p>
-<p>KSante and Volibear are fringe picks.</p>
-<p>=== Cluster 3 === Lucian 0.994253 Karma 0.994253 Aatrox 0.982759 Senna 0.982759 JarvanIV 0.977011 Gangplank 0.890805 Yone 0.712644 Ryze 0.706897 LeeSin 0.275862 Volibear 0.178161 dtype: float64</p>
-<p>Staples of Cluster 3 are Lucian 0.994253 Karma 0.994253 Aatrox 0.982759 Senna 0.982759 JarvanIV 0.977011 Gangplank 0.890805</p>
-<p>Yone, Ryze are secondary.</p>
-<p>LeeSin, and Volibear are fringe</p>
-<p>=== Cluster 4 === Karma 1.000000 Lucian 0.988439 Swain 0.982659 JarvanIV 0.971098 Lux 0.849711 Ryze 0.786127 Gwen 0.774566 Kennen 0.641618 Braum 0.341040 KSante 0.341040 dtype: float64</p>
-<p>This Cluster contains all of the units found in Stier comp Me Mech. This is a Mighty Mech team built around taking advantage of Mighty Mech trait.</p>
-<p>=== Cluster 5 === Poppy 0.985229 Jinx 0.982275 Neeko 0.901034 Rell 0.821270 Kobuko 0.769572 KSante 0.748892 Seraphine 0.556869 Xayah 0.546529 Varus 0.521418 Braum 0.462334 dtype: float64</p>
-<p>Cluster 5 is a StarGuardian team based around Poppy, Jinx, Neeko, and Rell. Kobuko and KSante compliment Poppys ability to hold the front line.</p>
-<p>=== Cluster 6 === Garen 0.978333 Rakan 0.941667 Ezreal 0.925000 Leona 0.883333 Yuumi 0.870000 Jayce 0.566667 Katarina 0.556667 Ryze 0.331667 KSante 0.331667 Malzahar 0.318333 dtype: float64</p>
-<p>=== Cluster 7 === Malzahar 0.700422 Darius 0.696203 Zac 0.677918 Kobuko 0.593530 Poppy 0.530239 Jayce 0.507736 Rammus 0.385373 Aatrox 0.372714 Seraphine 0.288326 Syndra 0.218003 dtype: float64</p>
-<p>=== Cluster 8 === Rell 0.976048 Leona 0.976048 Braum 0.916168 Swain 0.910180 Shen 0.892216 XinZhao 0.892216 Seraphine 0.862275 TwistedFate 0.844311 Zyra 0.670659 Syndra 0.287425 dtype: float64</p>
-<p>=== Cluster 9 === Sett 0.993377 Samira 0.986755 XinZhao 0.986755 Naafiri 0.966887 Lux 0.947020 Gwen 0.788079 Volibear 0.761589 Viego 0.576159 Braum 0.423841 Kalista 0.390728 dtype: float64</p>
-<p>=== Cluster 10 === Udyr 0.984308 Sett 0.831669 DrMundo 0.815977 Naafiri 0.784593 LeeSin 0.681883 Vi 0.650499 TwistedFate 0.529244 Braum 0.526391 Zyra 0.510699 Aatrox 0.452211 dtype: float64</p>
-<p>This comp contains the champions used in the S Tier Juggernaut Jackpot Comp. Source: https://mobalytics.gg/tft/champions/dr-mundo Comp uses Zyra, LeeSin, and TwistedFate to deal damage. Sett and the other Juggernauts are backup to form a wall.</p>
-<p>=== Cluster 11 === Swain 0.977011 Janna 0.975096 Ashe 0.957854 Vi 0.823755 JarvanIV 0.821839 KSante 0.816092 Zyra 0.775862 Braum 0.599617 Udyr 0.570881 LeeSin 0.496169 dtype: float64</p>
-<p>Primary: Swain Janna Ashe Vi JarvanIV KSante<br>
-Secondary: Braum, Udyr, and LeeSin</p>
-<p>The units with the highest total usage are: Jarvan IV, Ryze, Aatrox, KSante, Braum</p>
-<p>Which indicates to me, that they are top tier units during Game Version 15.22.</p>
+<p>#Results Section: Below are the sizes of the clusters which served as an indicator of usage.</p>
+<p>Below are the 11 clusters produced. The number each to name is the frequency of appearance. The higher the number, the more likely the champion appears on the comp which indicates if they are a staple or a secondary pick.</p>
+<p>===== COMP 1 ===== Poppy: 0.95 Jinx: 0.95 Neeko: 0.81 Rell: 0.75 Kobuko: 0.72 KSante: 0.68 Xayah: 0.52 Seraphine: 0.48 Varus: 0.47 Braum: 0.46</p>
+<p>===== COMP 2 ===== Garen: 0.95 Rakan: 0.90 Ezreal: 0.88 Leona: 0.84 Yuumi: 0.83 Jayce: 0.57 Katarina: 0.53 Ryze: 0.31 Malzahar: 0.29 KSante: 0.29</p>
+<p>===== COMP 3 ===== Shen: 0.89 Leona: 0.85 Rell: 0.84 Swain: 0.83 XinZhao: 0.81 Braum: 0.66 Garen: 0.43 Seraphine: 0.38 TwistedFate: 0.37 Zyra: 0.31</p>
+<p>===== COMP 4 ===== Samira: 0.93 Sett: 0.92 Volibear: 0.77 Naafiri: 0.73 XinZhao: 0.72 Lux: 0.54 Gwen: 0.48 Braum: 0.46 Viego: 0.40 Shen: 0.38</p>
+<p>===== COMP 5 ===== DrMundo: 0.93 Udyr: 0.91 Sett: 0.87 Naafiri: 0.80 Vi: 0.71 LeeSin: 0.71 Braum: 0.54 TwistedFate: 0.53 Zyra: 0.45 Aatrox: 0.44</p>
+<p>===== COMP 6 ===== Swain: 0.91 Janna: 0.90 Ashe: 0.85 Vi: 0.77 Zyra: 0.71 KSante: 0.69 JarvanIV: 0.67 Braum: 0.55 Udyr: 0.53 LeeSin: 0.47</p>
+<p>===== COMP 7 ===== Janna: 0.83 Malphite: 0.81 Sivir: 0.60 Ziggs: 0.57 Shen: 0.57 Ryze: 0.46 JarvanIV: 0.44 Neeko: 0.41 KSante: 0.34 Kennen: 0.31</p>
+<p>===== COMP 8 ===== Karma: 0.97 Lucian: 0.94 JarvanIV: 0.90 Ryze: 0.66 Swain: 0.51 Aatrox: 0.49 Senna: 0.46 Gwen: 0.44 Lux: 0.43 Gangplank: 0.41</p>
+<p>===== COMP 9 ===== Kayle: 0.82 Udyr: 0.79 Zac: 0.72 Jhin: 0.62 Aatrox: 0.60 Varus: 0.54 KSante: 0.54 LeeSin: 0.40 Malzahar: 0.40 Sett: 0.31</p>
+<p>===== COMP 10 ===== Zac: 0.64 Darius: 0.64 Malzahar: 0.64 Kobuko: 0.58 Poppy: 0.50 Jayce: 0.46 Aatrox: 0.37 Rammus: 0.32 Seraphine: 0.28 KSante: 0.21</p>
+<p>===== COMP 11 ===== Aatrox: 0.75 Ryze: 0.71 Udyr: 0.65 JarvanIV: 0.62 Akali: 0.56 Darius: 0.55 Senna: 0.49 Kennen: 0.49 Kobuko: 0.44 KSante: 0.41</p>
+<section id="conclusions" class="level3">
+<h3 class="anchored" data-anchor-id="conclusions">Conclusions:</h3>
+</section>
 <section id="part-1-dimensionality-reduction" class="level3">
 <h3 class="anchored" data-anchor-id="part-1-dimensionality-reduction">Part 1: Dimensionality Reduction</h3>
 <p>The objective of this section is to explore and demonstrate the effectiveness of PCA and t-SNE in reducing the dimensionality of complex data while preserving essential information and improving visualization.</p>
@@ -290,25 +290,6 @@ Secondary: Braum, Udyr, and LeeSin</p>
 </section>
 <section id="part-2-clustering-methods" class="level3">
 <h3 class="anchored" data-anchor-id="part-2-clustering-methods">Part 2: Clustering Methods</h3>
-<p>Apply clustering techniques (K-Means, DBSCAN, and Hierarchical clustering) to a selected dataset. The goal is to understand how each method works, compare their performance, and interpret the results.</p>
-<ol type="1">
-<li><strong>Clustering Methods:</strong>
-<ul>
-<li>Apply <strong>K-Means</strong>, <strong>DBSCAN</strong>, and <strong>Hierarchical clustering</strong> to your dataset.</li>
-<li>Write a technical summary for each method (2–4 paragraphs per method) explaining how it works, its purpose, and any model selection methods used (e.g., Elbow, Silhouette).</li>
-</ul></li>
-<li><strong>Results Section:</strong>
-<ul>
-<li>Discuss and visualize the results of each clustering analysis.</li>
-<li>Compare the performance of different clustering methods, noting any insights gained from the analysis.</li>
-<li>Visualize cluster patterns and how they relate (if at all) to existing labels in the dataset.</li>
-<li>Use professional, labeled, and clear visualizations that support your discussion.</li>
-</ul></li>
-<li><strong>Conclusion:</strong>
-<ul>
-<li>Summarize the key findings and their real-world implications in a non-technical way. Focus on the most important results and how they could apply to practical situations.</li>
-</ul></li>
-</ol>
 </section>
 </section>
 <section id="code" class="level1">
@@ -519,252 +500,263 @@ Secondary: Braum, Udyr, and LeeSin</p>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>X.shape</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Reduce dimensionality for PCA. Tried it but after removing duplicates I dont think its necessary</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#pca = PCA(n_components = 20)</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#X1 = pca.fit_transform(X)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components <span class="op">=</span> <span class="dv">25</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>X1 <span class="op">=</span> pca.fit_transform(X)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#See variance ratio</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span>(pca.explained_variance_ratio_)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>(10757, 63)</code></pre>
+<pre><code>0.8263144237799275</code></pre>
 </div>
 </div>
 <div id="cell-11" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>clusterer <span class="op">=</span> hdbscan.HDBSCAN(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    min_cluster_size<span class="op">=</span><span class="dv">150</span>,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    min_samples<span class="op">=</span><span class="dv">20</span>, </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    metric<span class="op">=</span><span class="st">'euclidean'</span>, </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    cluster_selection_epsilon<span class="op">=</span><span class="fl">0.0</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    cluster_selection_method<span class="op">=</span><span class="st">'leaf'</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Note: We Are using X. Removal of duplicates made dataset manageable</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> clusterer.fit_predict(X)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect cluster sizes</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pd.Series(labels).value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ast</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MultiLabelBinarizer</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> pairwise_distances</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> linkage</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> fcluster</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Get the Jaccard distances between champions</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#D = pairwise_distances(X1.astype(bool), metric="jaccard")</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> pairwise_distances</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#dist = euclidean not jaccard due to PCA.</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>D_pca <span class="op">=</span> pairwise_distances(X1, metric<span class="op">=</span><span class="st">"euclidean"</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Then convert matrix to condensed form due to scipy requirements</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>D_condensed <span class="op">=</span> D_pca[np.triu_indices(<span class="bu">len</span>(D_pca), k<span class="op">=</span><span class="dv">1</span>)]</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> linkage(D_condensed, method<span class="op">=</span><span class="st">"average"</span>)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> fcluster(Z, t<span class="op">=</span><span class="dv">15</span>, criterion<span class="op">=</span><span class="st">"maxclust"</span>)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>dfTFT[<span class="st">"cluster"</span>] <span class="op">=</span> labels</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-12" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]:</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> fcluster(Z, t<span class="op">=</span>t, criterion<span class="op">=</span><span class="st">"distance"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"t ="</span>, t, <span class="st">"→ clusters ="</span>, <span class="bu">len</span>(np.unique(labels)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-1     6127
- 7      711
- 10     701
- 5      677
- 6      600
- 11     522
- 0      373
- 2      221
- 3      174
- 4      173
- 8      167
- 1      160
- 9      151
+<pre><code>t = 2 → clusters = 228
+t = 3 → clusters = 11
+t = 4 → clusters = 1
+t = 5 → clusters = 1</code></pre>
+</div>
+</div>
+<div id="cell-13" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> fcluster(Z, t<span class="op">=</span><span class="dv">3</span>, criterion<span class="op">=</span><span class="st">"distance"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dfTFT[<span class="st">"cluster"</span>] <span class="op">=</span> labels</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>dfTFT[<span class="st">"cluster"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>cluster
+3     1680
+6     1505
+5     1363
+10     960
+1      955
+4      852
+2      819
+9      802
+11     744
+7      566
+8      511
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="cell-12" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>champ_names <span class="op">=</span> mlb.classes_</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> describe_clusters(X_bin, labels, champ_names, top_n <span class="op">=</span> <span class="dv">10</span>):</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    df_bin <span class="op">=</span> pd.DataFrame(X_bin, columns<span class="op">=</span>champ_names)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> {}</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> cluster_id <span class="kw">in</span> <span class="bu">sorted</span>(<span class="bu">set</span>(labels)):</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> cluster_id <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Noise (cluster -1) ==="</span>)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">=== Cluster </span><span class="sc">{</span>cluster_id<span class="sc">}</span><span class="ss"> ==="</span>)</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        rows <span class="op">=</span> df_bin[labels <span class="op">==</span> cluster_id]</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        freq <span class="op">=</span> rows.mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(freq.head(top_n))</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        results[cluster_id] <span class="op">=</span> freq.head(top_n)</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> results</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>cluster_summary <span class="op">=</span> describe_clusters(X, labels, champ_names)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-14" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>clusters <span class="op">=</span> <span class="bu">sorted</span>(dfTFT[<span class="st">"cluster"</span>].unique())</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cid <span class="kw">in</span> clusters:</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    subset <span class="op">=</span> X[dfTFT[<span class="st">"cluster"</span>] <span class="op">==</span> cid]</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    freq <span class="op">=</span> subset.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">===== COMP </span><span class="sc">{</span>cid<span class="sc">}</span><span class="ss"> ====="</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    top_idx <span class="op">=</span> freq.argsort()[::<span class="op">-</span><span class="dv">1</span>][:<span class="dv">10</span>]</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx <span class="kw">in</span> top_idx:</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>mlb<span class="sc">.</span>classes_[idx]<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>freq[idx]<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-=== Noise (cluster -1) ===
-Braum      0.411457
-Swain      0.389261
-Udyr       0.342908
-Shen       0.312061
-XinZhao    0.292639
-Sett       0.289212
-LeeSin     0.279745
-Zyra       0.278603
-Leona      0.269463
-Rell       0.260976
-dtype: float64
+===== COMP 1 =====
+  Poppy: 0.95
+  Jinx: 0.95
+  Neeko: 0.81
+  Rell: 0.75
+  Kobuko: 0.72
+  KSante: 0.68
+  Xayah: 0.52
+  Seraphine: 0.48
+  Varus: 0.47
+  Braum: 0.46
 
-=== Cluster 0 ===
-Malphite       0.986595
-Janna          0.949062
-Ziggs          0.790885
-Sivir          0.772118
-Shen           0.764075
-Ryze           0.584450
-JarvanIV       0.546917
-TwistedFate    0.337802
-KSante         0.300268
-Neeko          0.249330
-dtype: float64
+===== COMP 2 =====
+  Garen: 0.95
+  Rakan: 0.90
+  Ezreal: 0.88
+  Leona: 0.84
+  Yuumi: 0.83
+  Jayce: 0.57
+  Katarina: 0.53
+  Ryze: 0.31
+  Malzahar: 0.29
+  KSante: 0.29
 
-=== Cluster 1 ===
-Ryze        0.98750
-JarvanIV    0.98125
-Akali       0.95625
-Darius      0.85625
-Kennen      0.85000
-Senna       0.77500
-KSante      0.71875
-Aatrox      0.61250
-LeeSin      0.41875
-Janna       0.19375
-dtype: float64
+===== COMP 3 =====
+  Shen: 0.89
+  Leona: 0.85
+  Rell: 0.84
+  Swain: 0.83
+  XinZhao: 0.81
+  Braum: 0.66
+  Garen: 0.43
+  Seraphine: 0.38
+  TwistedFate: 0.37
+  Zyra: 0.31
 
-=== Cluster 2 ===
-Kobuko      1.000000
-Udyr        0.990950
-Aatrox      0.977376
-Ryze        0.927602
-JarvanIV    0.809955
-Senna       0.733032
-Janna       0.705882
-Yasuo       0.411765
-KSante      0.285068
-Volibear    0.194570
-dtype: float64
+===== COMP 4 =====
+  Samira: 0.93
+  Sett: 0.92
+  Volibear: 0.77
+  Naafiri: 0.73
+  XinZhao: 0.72
+  Lux: 0.54
+  Gwen: 0.48
+  Braum: 0.46
+  Viego: 0.40
+  Shen: 0.38
 
-=== Cluster 3 ===
-Lucian       0.994253
-Karma        0.994253
-Aatrox       0.982759
-Senna        0.982759
-JarvanIV     0.977011
-Gangplank    0.890805
-Yone         0.712644
-Ryze         0.706897
-LeeSin       0.275862
-Volibear     0.178161
-dtype: float64
+===== COMP 5 =====
+  DrMundo: 0.93
+  Udyr: 0.91
+  Sett: 0.87
+  Naafiri: 0.80
+  Vi: 0.71
+  LeeSin: 0.71
+  Braum: 0.54
+  TwistedFate: 0.53
+  Zyra: 0.45
+  Aatrox: 0.44
 
-=== Cluster 4 ===
-Karma       1.000000
-Lucian      0.988439
-Swain       0.982659
-JarvanIV    0.971098
-Lux         0.849711
-Ryze        0.786127
-Gwen        0.774566
-Kennen      0.641618
-Braum       0.341040
-KSante      0.341040
-dtype: float64
+===== COMP 6 =====
+  Swain: 0.91
+  Janna: 0.90
+  Ashe: 0.85
+  Vi: 0.77
+  Zyra: 0.71
+  KSante: 0.69
+  JarvanIV: 0.67
+  Braum: 0.55
+  Udyr: 0.53
+  LeeSin: 0.47
 
-=== Cluster 5 ===
-Poppy        0.985229
-Jinx         0.982275
-Neeko        0.901034
-Rell         0.821270
-Kobuko       0.769572
-KSante       0.748892
-Seraphine    0.556869
-Xayah        0.546529
-Varus        0.521418
-Braum        0.462334
-dtype: float64
+===== COMP 7 =====
+  Janna: 0.83
+  Malphite: 0.81
+  Sivir: 0.60
+  Ziggs: 0.57
+  Shen: 0.57
+  Ryze: 0.46
+  JarvanIV: 0.44
+  Neeko: 0.41
+  KSante: 0.34
+  Kennen: 0.31
 
-=== Cluster 6 ===
-Garen       0.978333
-Rakan       0.941667
-Ezreal      0.925000
-Leona       0.883333
-Yuumi       0.870000
-Jayce       0.566667
-Katarina    0.556667
-Ryze        0.331667
-KSante      0.331667
-Malzahar    0.318333
-dtype: float64
+===== COMP 8 =====
+  Karma: 0.97
+  Lucian: 0.94
+  JarvanIV: 0.90
+  Ryze: 0.66
+  Swain: 0.51
+  Aatrox: 0.49
+  Senna: 0.46
+  Gwen: 0.44
+  Lux: 0.43
+  Gangplank: 0.41
 
-=== Cluster 7 ===
-Malzahar     0.700422
-Darius       0.696203
-Zac          0.677918
-Kobuko       0.593530
-Poppy        0.530239
-Jayce        0.507736
-Rammus       0.385373
-Aatrox       0.372714
-Seraphine    0.288326
-Syndra       0.218003
-dtype: float64
+===== COMP 9 =====
+  Kayle: 0.82
+  Udyr: 0.79
+  Zac: 0.72
+  Jhin: 0.62
+  Aatrox: 0.60
+  Varus: 0.54
+  KSante: 0.54
+  LeeSin: 0.40
+  Malzahar: 0.40
+  Sett: 0.31
 
-=== Cluster 8 ===
-Rell           0.976048
-Leona          0.976048
-Braum          0.916168
-Swain          0.910180
-Shen           0.892216
-XinZhao        0.892216
-Seraphine      0.862275
-TwistedFate    0.844311
-Zyra           0.670659
-Syndra         0.287425
-dtype: float64
+===== COMP 10 =====
+  Zac: 0.64
+  Darius: 0.64
+  Malzahar: 0.64
+  Kobuko: 0.58
+  Poppy: 0.50
+  Jayce: 0.46
+  Aatrox: 0.37
+  Rammus: 0.32
+  Seraphine: 0.28
+  KSante: 0.21
 
-=== Cluster 9 ===
-Sett        0.993377
-Samira      0.986755
-XinZhao     0.986755
-Naafiri     0.966887
-Lux         0.947020
-Gwen        0.788079
-Volibear    0.761589
-Viego       0.576159
-Braum       0.423841
-Kalista     0.390728
-dtype: float64
-
-=== Cluster 10 ===
-Udyr           0.984308
-Sett           0.831669
-DrMundo        0.815977
-Naafiri        0.784593
-LeeSin         0.681883
-Vi             0.650499
-TwistedFate    0.529244
-Braum          0.526391
-Zyra           0.510699
-Aatrox         0.452211
-dtype: float64
-
-=== Cluster 11 ===
-Swain       0.977011
-Janna       0.975096
-Ashe        0.957854
-Vi          0.823755
-JarvanIV    0.821839
-KSante      0.816092
-Zyra        0.775862
-Braum       0.599617
-Udyr        0.570881
-LeeSin      0.496169
-dtype: float64</code></pre>
+===== COMP 11 =====
+  Aatrox: 0.75
+  Ryze: 0.71
+  Udyr: 0.65
+  JarvanIV: 0.62
+  Akali: 0.56
+  Darius: 0.55
+  Senna: 0.49
+  Kennen: 0.49
+  Kobuko: 0.44
+  KSante: 0.41</code></pre>
 </div>
 </div>
-<div id="cell-13" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Show clusters via TSNE</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>tsne <span class="op">=</span> TSNE(n_components <span class="op">=</span> <span class="dv">2</span>, perplexity <span class="op">=</span> <span class="dv">30</span>, random_state <span class="op">=</span> <span class="dv">42</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>emb <span class="op">=</span> tsne.fit_transform(X)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">7</span>))</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(emb[:,<span class="dv">0</span>], emb[:,<span class="dv">1</span>], c <span class="op">=</span> labels, s <span class="op">=</span> <span class="dv">3</span>, cmap <span class="op">=</span> <span class="st">'tab20'</span>)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"t-SNE of TFT Boards (colored by PCA+Hierarchical clusters)"</span>)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="main_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
-</figure>
+<div id="cell-15" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#HDBSCAN</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>clusterer <span class="op">=</span> hdbscan.HDBSCAN(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    min_cluster_size<span class="op">=</span><span class="dv">150</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    min_samples<span class="op">=</span><span class="dv">20</span>, </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    metric<span class="op">=</span><span class="st">'jaccard'</span>, </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    cluster_selection_epsilon<span class="op">=</span><span class="fl">0.0</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    cluster_selection_method<span class="op">=</span><span class="st">'leaf'</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Note: We Are using X. Removal of duplicates made dataset manageable</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> clusterer.fit_predict(X)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Look at Cluster sizs</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pd.Series(labels).value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<div id="cell-16" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>champ_names <span class="op">=</span> mlb.classes_</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> describe_clusters(X_bin, labels, champ_names, top_n <span class="op">=</span> <span class="dv">10</span>):</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    df_bin <span class="op">=</span> pd.DataFrame(X_bin, columns<span class="op">=</span>champ_names)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> {}</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> cluster_id <span class="kw">in</span> <span class="bu">sorted</span>(<span class="bu">set</span>(labels)):</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> cluster_id <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Noise (cluster -1) ==="</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">=== Cluster </span><span class="sc">{</span>cluster_id<span class="sc">}</span><span class="ss"> ==="</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>        rows <span class="op">=</span> df_bin[labels <span class="op">==</span> cluster_id]</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        freq <span class="op">=</span> rows.mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(freq.head(top_n))</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        results[cluster_id] <span class="op">=</span> freq.head(top_n)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> results</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>cluster_summary <span class="op">=</span> describe_clusters(X, labels, champ_names)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<div id="cell-17" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Show clusters via TSNE</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>tsne <span class="op">=</span> TSNE(n_components <span class="op">=</span> <span class="dv">2</span>, perplexity <span class="op">=</span> <span class="dv">30</span>, random_state <span class="op">=</span> <span class="dv">42</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>emb <span class="op">=</span> tsne.fit_transform(X)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">7</span>))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(emb[:,<span class="dv">0</span>], emb[:,<span class="dv">1</span>], c <span class="op">=</span> labels, s <span class="op">=</span> <span class="dv">3</span>, cmap <span class="op">=</span> <span class="st">'tab20'</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"t-SNE of TFT Boards (colored by PCA+Hierarchical clusters)"</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 

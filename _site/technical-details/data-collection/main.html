@@ -196,6 +196,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#data-collection-from-riot-games-api" id="toc-data-collection-from-riot-games-api" class="nav-link" data-scroll-target="#data-collection-from-riot-games-api">Data Collection from Riot Games API</a></li>
   </ul></li>
+  <li><a href="#riot-api-script" id="toc-riot-api-script" class="nav-link" data-scroll-target="#riot-api-script">RIOT API Script</a></li>
+  <li><a href="#once-the-scrape-is-complete-get-count-of-files-and-check-they-are-located-correctly." id="toc-once-the-scrape-is-complete-get-count-of-files-and-check-they-are-located-correctly." class="nav-link" data-scroll-target="#once-the-scrape-is-complete-get-count-of-files-and-check-they-are-located-correctly.">Once the scrape is complete, get count of files and check they are located correctly.</a></li>
   </ul>
 </nav>
     </div>
@@ -252,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>After some inital evaluation, I wanted to include the next lower rank (Master) to better diversify the playerbase (as Challenger + Grandmaster accounted for &lt;1% of the playerbase while Master is 2.2%. However, when I ran the script the RIOT API had no data to pull due to the new season coming out. When this happens, the ranks are reset preventing me from pulling the Master rank players.</p>
 <p>This script is still configured to pull Master player data. This scripts only outputs will be the JSON files pulled from the API. All files are located in data/raw-data</p>
 <div id="cell-5" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import python packges script uses</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Import python packges script uses</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
@@ -263,9 +265,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-6" class="cell" data-execution_count="20">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This is a test to use your API key</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#If this script fails or STATS doesnt equal 200, then the API scrapping script wont work</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#NOTE: This code block was made with Chat-GPT 5.0</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#This is a test to see if API key works</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>API_KEY <span class="op">=</span> <span class="st">"PLACEHOLDER"</span> <span class="co">#Note: when published make PLACEHODLER</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Fully play a game of TFT. At the end, there is a match ID.</span></span>
@@ -274,143 +276,133 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="ss">f"https://americas.api.riotgames.com/tft/match/v1/matches/</span><span class="sc">{</span>match_id<span class="sc">}</span><span class="ss">"</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> requests.get(url, params<span class="op">=</span>{<span class="st">"api_key"</span>: API_KEY})</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"STATUS:"</span>, res.status_code)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(res.text[:<span class="dv">3000</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#If STATUS = 200, then API key is good.</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"STATUS:"</span>, res.status_code)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(res.text[:<span class="dv">3000</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>STATUS: 200
 {"metadata":{"data_version":"6","match_id":"NA1_5419735432","participants":["z7tXLLhq0AA5E2G4Jdzq88KOlSkOndkZ56mWJnwqAzT5IV_6EOYhU1_ZySsxZtyudA53apw2vs_p5Q"]},"info":{"endOfGameResult":"GameComplete","gameCreation":1763881823000,"gameId":5419735432,"game_datetime":1763883928853,"game_length":2086.93115234375,"game_version":"Linux Version 15.23.728.3286 (Nov 21 2025/16:26:55) [PUBLIC] &lt;Releases/15.23&gt;","mapId":22,"participants":[{"companion":{"content_ID":"5897ad9f-4665-4372-8f3e-6c878adb8918","item_ID":1,"skin_ID":1,"species":"PetTFTAvatar"},"gold_left":38,"last_round":37,"level":9,"missions":{"PlayerScore2":207},"placement":1,"players_eliminated":3,"puuid":"z7tXLLhq0AA5E2G4Jdzq88KOlSkOndkZ56mWJnwqAzT5IV_6EOYhU1_ZySsxZtyudA53apw2vs_p5Q","riotIdGameName":"vornelix","riotIdTagline":"819","time_eliminated":2078.66748046875,"total_damage_to_players":267,"traits":[{"name":"TFT15_Bastion","num_units":2,"style":1,"tier_current":1,"tier_total":3},{"name":"TFT15_Captain","num_units":1,"style":3,"tier_current":1,"tier_total":1},{"name":"TFT15_Edgelord","num_units":2,"style":1,"tier_current":1,"tier_total":3},{"name":"TFT15_ElTigre","num_units":1,"style":3,"tier_current":1,"tier_total":1},{"name":"TFT15_GemForce","num_units":2,"style":0,"tier_current":0,"tier_total":4},{"name":"TFT15_Luchador","num_units":2,"style":1,"tier_current":1,"tier_total":2},{"name":"TFT15_Prodigy","num_units":1,"style":0,"tier_current":0,"tier_total":4},{"name":"TFT15_Protector","num_units":1,"style":0,"tier_current":0,"tier_total":3},{"name":"TFT15_Rosemother","num_units":1,"style":3,"tier_current":1,"tier_total":1},{"name":"TFT15_SoulFighter","num_units":1,"style":0,"tier_current":0,"tier_total":5},{"name":"TFT15_Spellslinger","num_units":1,"style":0,"tier_current":0,"tier_total":3},{"name":"TFT15_StarGuardian","num_units":3,"style":2,"tier_current":2,"tier_total":12},{"name":"TFT15_Strategist","num_units":1,"style":0,"tier_current":0,"tier_total":4},{"name":"TFT15_TheCrew","num_units":1,"style":0,"tier_current":0,"tier_total":7}],"units":[{"character_id":"TFT15_Rell","itemNames":["TFT_Item_SpectralGauntlet","TFT_Item_TearOfTheGoddess"],"name":"","rarity":0,"tier":3},{"character_id":"TFT15_Janna","itemNames":["TFT_Item_FrozenHeart"],"name":"","rarity":1,"tier":2},{"character_id":"TFT15_Ahri","itemNames":[],"name":"","rarity":2,"tier":1},{"character_id":"TFT15_Ahri","itemNames":["TFT_Item_InfinityEdge","TFT_Item_NeedlesslyLargeRod","TFT_Item_ForceOfNature"],"name":"","rarity":2,"tier":2},{"character_id":"TFT15_Samira","itemNames":[],"name":"","rarity":4,"tier":2},{"character_id":"TFT15_Volibear","itemNames":[],"name":"","rarity":4,"tier":2},{"character_id":"TFT15_Braum","itemNames":["TFT_Item_BFSword","TFT_Item_GuinsoosRageblade","TFT_Item_RunaansHurricane"],"name":"","rarity":6,"tier":2},{"character_id":"TFT15_Seraphine","itemNames":["TFT_Item_JeweledGauntlet","TFT_Item_Crownguard"],"name":"","rarity":6,"tier":1},{"character_id":"TFT15_TwistedFate","itemNames":[],"name":"","rarit</code></pre>
 </div>
 </div>
-<div id="cell-7" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Below is the entire raw data extraction script.</span></span>
+</section>
+</section>
+<section id="riot-api-script" class="level1">
+<h1>RIOT API Script</h1>
+<div id="cell-8" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>api_key <span class="op">=</span> <span class="st">"PLACEHOLDER"</span> <span class="co">#Note: when publish to Github, it should be PLACEHOLDER </span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#CONFIG vars</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>API_KEY <span class="op">=</span> <span class="st">"PLACEHOLDER"</span> <span class="co">#when publish to Github, it should be PLACEHOLDER</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Define what reigon we are pulling from</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>REGION <span class="op">=</span> <span class="st">"americas"</span> </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>PLATFORM <span class="op">=</span> <span class="st">"na1"</span>   </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Define how many matches per player, and where the JSON files go.</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>MATCHES_PER_PLAYER <span class="op">=</span> <span class="dv">25</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>save_dir <span class="op">=</span> Path(<span class="st">"data/raw-data"</span>)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>save_dir.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Set up scrapper log to document history</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>logging.basicConfig(filename<span class="op">=</span><span class="st">"tft_scraper.log"</span>,level<span class="op">=</span>logging.INFO, <span class="bu">format</span><span class="op">=</span><span class="st">"</span><span class="sc">%(asctime)s</span><span class="st"> [</span><span class="sc">%(levelname)s</span><span class="st">] </span><span class="sc">%(message)s</span><span class="st">"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Set matches per player, and where the JSON files go.</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>matches <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>save_dir <span class="op">=</span> Path(<span class="st">"data/raw-data"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>save_dir.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Set up scrapper log to document history</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>logging.basicConfig(filename<span class="op">=</span><span class="st">"tft_scraper.log"</span>,level<span class="op">=</span>logging.INFO, <span class="bu">format</span><span class="op">=</span><span class="st">"</span><span class="sc">%(asctime)s</span><span class="st"> [</span><span class="sc">%(levelname)s</span><span class="st">] </span><span class="sc">%(message)s</span><span class="st">"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Request Wrapper with 429 status code</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_riot(url, params<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> params <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        params <span class="op">=</span> {}</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    params[<span class="st">"api_key"</span>] <span class="op">=</span> API_KEY</span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Request Wrapper with 429 status code</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> riot_get(url, params<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> params <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        params <span class="op">=</span> {}</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    params[<span class="st">"api_key"</span>] <span class="op">=</span> API_KEY</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> requests.get(url, params<span class="op">=</span>params)</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> r.status_code <span class="op">==</span> <span class="dv">429</span>:</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>            retry <span class="op">=</span> <span class="bu">int</span>(r.headers.get(<span class="st">"Retry-After"</span>, <span class="dv">1</span>))</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>            logging.warning(<span class="ss">f"429 hit. Sleeping </span><span class="sc">{</span>retry<span class="sc">}</span><span class="ss">s."</span>)</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>            time.sleep(retry)</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> r</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co">#Get Master PUUID</span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_master_puuids():</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f"https://</span><span class="sc">{</span>PLATFORM<span class="sc">}</span><span class="ss">.api.riotgames.com/tft/league/v1/master"</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> riot_get(url)</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> r.json()</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    entries <span class="op">=</span> data.get(<span class="st">"entries"</span>, [])</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [e[<span class="st">"puuid"</span>] <span class="cf">for</span> e <span class="kw">in</span> entries <span class="cf">if</span> e.get(<span class="st">"puuid"</span>)]</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co">#Get Challenger PUUID</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_challenger_puuids():</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f"https://</span><span class="sc">{</span>PLATFORM<span class="sc">}</span><span class="ss">.api.riotgames.com/tft/league/v1/challenger"</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> riot_get(url)</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> r.json()</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    entries <span class="op">=</span> data.get(<span class="st">"entries"</span>, [])</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [e[<span class="st">"puuid"</span>] <span class="cf">for</span> e <span class="kw">in</span> entries <span class="cf">if</span> e.get(<span class="st">"puuid"</span>)]</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co">#Get Grandmaster PUUID</span></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_grandmaster_puuids():</span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f"https://</span><span class="sc">{</span>PLATFORM<span class="sc">}</span><span class="ss">.api.riotgames.com/tft/league/v1/grandmaster"</span></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> riot_get(url)</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> r.json()</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    entries <span class="op">=</span> data.get(<span class="st">"entries"</span>, [])</span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [e[<span class="st">"puuid"</span>] <span class="cf">for</span> e <span class="kw">in</span> entries <span class="cf">if</span> e.get(<span class="st">"puuid"</span>)]</span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="co">#For a given PUUID, get MATCH IDS </span></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_match_ids(puuid, count<span class="op">=</span>MATCHES_PER_PLAYER):</span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f"https://</span><span class="sc">{</span>REGION<span class="sc">}</span><span class="ss">.api.riotgames.com/tft/match/v1/matches/by-puuid/</span><span class="sc">{</span>puuid<span class="sc">}</span><span class="ss">/ids"</span></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> {<span class="st">"count"</span>: count, <span class="st">"queue"</span>: <span class="dv">1100</span>}  </span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> riot_get(url, params)</span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> r.status_code <span class="op">!=</span> <span class="dv">200</span>:</span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>        logging.warning(<span class="ss">f"Failed match list for PUUID </span><span class="sc">{</span>puuid<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> []</span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r.json()</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> requests.get(url, params<span class="op">=</span>params)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> r.status_code <span class="op">==</span> <span class="dv">429</span>:</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>            retry <span class="op">=</span> <span class="bu">int</span>(r.headers.get(<span class="st">"Retry-After"</span>, <span class="dv">1</span>))</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>            logging.warning(<span class="ss">f"429 hit. Sleeping </span><span class="sc">{</span>retry<span class="sc">}</span><span class="ss">s."</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>            time.sleep(retry)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> r</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#Get Master PUUID</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_master_puuids():</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f"https://na1.api.riotgames.com/tft/league/v1/master"</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> get_riot(url)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> r.json()</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    entries <span class="op">=</span> data.get(<span class="st">"entries"</span>, [])</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [e[<span class="st">"puuid"</span>] <span class="cf">for</span> e <span class="kw">in</span> entries <span class="cf">if</span> e.get(<span class="st">"puuid"</span>)]</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co">#Get Challenger PUUID</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_challenger_puuids():</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f"https://na1.api.riotgames.com/tft/league/v1/challenger"</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> get_riot(url)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> r.json()</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    entries <span class="op">=</span> data.get(<span class="st">"entries"</span>, [])</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [e[<span class="st">"puuid"</span>] <span class="cf">for</span> e <span class="kw">in</span> entries <span class="cf">if</span> e.get(<span class="st">"puuid"</span>)]</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co">#Get Grandmaster PUUID</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_grandmaster_puuids():</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f"https://na1.api.riotgames.com/tft/league/v1/grandmaster"</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> get_riot(url)</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> r.json()</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    entries <span class="op">=</span> data.get(<span class="st">"entries"</span>, [])</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [e[<span class="st">"puuid"</span>] <span class="cf">for</span> e <span class="kw">in</span> entries <span class="cf">if</span> e.get(<span class="st">"puuid"</span>)]</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co">#For a given PUUID, get MATCH IDS </span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_match_ids(puuid, count <span class="op">=</span> matches):</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f"https://americas.api.riotgames.com/tft/match/v1/matches/by-puuid/</span><span class="sc">{</span>puuid<span class="sc">}</span><span class="ss">/ids"</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> {<span class="st">"count"</span>: count, <span class="st">"queue"</span>: <span class="dv">1100</span>}  </span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> get_riot(url, params)</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> r.status_code <span class="op">!=</span> <span class="dv">200</span>:</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>        logging.warning(<span class="ss">f"Failed match list for PUUID </span><span class="sc">{</span>puuid<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> []</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r.json()</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="co">#Fetch a match JSON and save it</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> save_match(match_id):</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>    out_path <span class="op">=</span> save_dir <span class="op">/</span> <span class="ss">f"</span><span class="sc">{</span>match_id<span class="sc">}</span><span class="ss">.json"</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> out_path.exists():</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
 <span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="co">#Fetch a match JSON and save it</span></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fetch_and_save_match(match_id):</span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    out_path <span class="op">=</span> save_dir <span class="op">/</span> <span class="ss">f"</span><span class="sc">{</span>match_id<span class="sc">}</span><span class="ss">.json"</span></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> out_path.exists():</span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f"https://</span><span class="sc">{</span>REGION<span class="sc">}</span><span class="ss">.api.riotgames.com/tft/match/v1/matches/</span><span class="sc">{</span>match_id<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> riot_get(url)</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> r.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(out_path, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>            json.dump(r.json(), f, indent<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>        logging.info(<span class="ss">f"Saved </span><span class="sc">{</span>match_id<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>        logging.warning(<span class="ss">f"Match </span><span class="sc">{</span>match_id<span class="sc">}</span><span class="ss"> failed with status </span><span class="sc">{</span>r<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f"https://americas.api.riotgames.com/tft/match/v1/matches/</span><span class="sc">{</span>match_id<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> get_riot(url)</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> r.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(out_path, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>            json.dump(r.json(), f, indent<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>        logging.info(<span class="ss">f"Saved </span><span class="sc">{</span>match_id<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>        logging.warning(<span class="ss">f"Match </span><span class="sc">{</span>match_id<span class="sc">}</span><span class="ss"> failed with status </span><span class="sc">{</span>r<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>    logging.info(<span class="st">"Starting TFT scraper"</span>)</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>    master <span class="op">=</span> get_master_puuids()</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>    grandmaster <span class="op">=</span> get_grandmaster_puuids()</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>    challenger <span class="op">=</span> get_challenger_puuids()</span>
 <span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="co">#Set up API Scrapper</span></span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>    logging.info(<span class="st">"Starting TFT scraper"</span>)</span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>    <span class="co">#identify player ranks</span></span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>    master <span class="op">=</span> get_master_puuids()</span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>    grandmaster <span class="op">=</span> get_grandmaster_puuids()</span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>    challenger <span class="op">=</span> get_challenger_puuids()</span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>    logging.info(<span class="ss">f"Master count: </span><span class="sc">{</span><span class="bu">len</span>(master)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>    logging.info(<span class="ss">f"Challenger count: </span><span class="sc">{</span><span class="bu">len</span>(challenger)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>    logging.info(<span class="ss">f"Grandmaster count: </span><span class="sc">{</span><span class="bu">len</span>(grandmaster)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Rand samp 250 Master, 250 Grand Master players, and 250 Challenger players</span></span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>    m_sample <span class="op">=</span> random.sample(master, <span class="bu">min</span>(<span class="dv">250</span>, <span class="bu">len</span>(master)))</span>
-<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>    gm_sample <span class="op">=</span> random.sample(grandmaster, <span class="bu">min</span>(<span class="dv">250</span>, <span class="bu">len</span>(grandmaster)))</span>
-<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>    challenger_sample <span class="op">=</span> random.sample(challenger, <span class="bu">min</span>(<span class="dv">250</span>, <span class="bu">len</span>(challenger)))</span>
-<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>    all_puuids <span class="op">=</span> m_sample <span class="op">+</span> gm_sample <span class="op">+</span> challenger_sample</span>
-<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>    random.shuffle(all_puuids)</span>
-<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>    <span class="co">#For each PUUID: fetch match list</span></span>
-<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, puuid <span class="kw">in</span> <span class="bu">enumerate</span>(all_puuids, start<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>        logging.info(<span class="ss">f"Player </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="bu">len</span>(all_puuids)<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>puuid<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>        match_ids <span class="op">=</span> get_match_ids(puuid)</span>
-<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> m <span class="kw">in</span> match_ids:</span>
-<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a>            fetch_and_save_match(m)</span>
-<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>    logging.info(<span class="st">"Scrape complete."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>    logging.info(<span class="ss">f"Master count: </span><span class="sc">{</span><span class="bu">len</span>(master)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>    logging.info(<span class="ss">f"Challenger count: </span><span class="sc">{</span><span class="bu">len</span>(challenger)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>    logging.info(<span class="ss">f"Grandmaster count: </span><span class="sc">{</span><span class="bu">len</span>(grandmaster)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>    m_sample <span class="op">=</span> random.sample(master, <span class="bu">min</span>(<span class="dv">250</span>, <span class="bu">len</span>(master)))</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>    gm_sample <span class="op">=</span> random.sample(grandmaster, <span class="bu">min</span>(<span class="dv">250</span>, <span class="bu">len</span>(grandmaster)))</span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>    chall_sample <span class="op">=</span> random.sample(challenger, <span class="bu">min</span>(<span class="dv">250</span>, <span class="bu">len</span>(challenger)))</span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>    all_puuids <span class="op">=</span> m_sample <span class="op">+</span> gm_sample <span class="op">+</span> chall_sample</span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>    random.shuffle(all_puuids)</span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, puuid <span class="kw">in</span> <span class="bu">enumerate</span>(all_puuids, start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>        logging.info(<span class="ss">f"Player </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="bu">len</span>(all_puuids)<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>puuid<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>        match_ids <span class="op">=</span> get_match_ids(puuid)</span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> m <span class="kw">in</span> match_ids:</span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>            fetch_and_save_match(m)</span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>    logging.info(<span class="st">"Scrape complete."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-8" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Once the scrape is complete, get count of files and there are located correctly.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="cell-9" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Where are json files located?</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>json_dir <span class="op">=</span> <span class="st">'data/raw-data'</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>json_files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(json_dir) <span class="cf">if</span> f.endswith(<span class="st">'.json'</span>)]</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#how many files do we have?</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(json_files))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="once-the-scrape-is-complete-get-count-of-files-and-check-they-are-located-correctly." class="level1">
+<h1>Once the scrape is complete, get count of files and check they are located correctly.</h1>
+<div id="cell-10" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>json_dir <span class="op">=</span> <span class="st">'data/raw-data'</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>json_files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(json_dir) <span class="cf">if</span> f.endswith(<span class="st">'.json'</span>)]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(json_files))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>6388</code></pre>
 </div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

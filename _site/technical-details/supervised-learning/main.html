@@ -205,6 +205,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
   </ul></li>
   <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
+  <li><a href="#total_items-is-most-significant-by-far.-follow-by-level-and-num_1star." id="toc-total_items-is-most-significant-by-far.-follow-by-level-and-num_1star." class="nav-link" data-scroll-target="#total_items-is-most-significant-by-far.-follow-by-level-and-num_1star.">Total_items is most significant by far. Follow by level and num_1star.</a></li>
+  <li><a href="#dsq2-does-investing-in-high-cost-units-4-5-affect-placement" id="toc-dsq2-does-investing-in-high-cost-units-4-5-affect-placement" class="nav-link" data-scroll-target="#dsq2-does-investing-in-high-cost-units-4-5-affect-placement">DSQ2: Does investing in high-cost units (4-5) affect placement?</a></li>
   </ul>
 </nav>
     </div>
@@ -300,10 +302,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="code" class="level1">
 <h1>Code</h1>
-<p>Provide the source code used for this section of the project here.</p>
-<p>If you’re using a package for code organization, you can import it at this point. However, make sure that the <strong>actual workflow steps</strong>—including data processing, analysis, and other key tasks—are conducted and clearly demonstrated on this page. The goal is to show the technical flow of your project, highlighting how the code is executed to achieve your results.</p>
-<p>If relevant, link to additional documentation or external references that explain any complex components. This section should give readers a clear view of how the project is implemented from a technical perspective.</p>
-<p>Remember, this page is a technical narrative, NOT just a notebook with a collection of code cells, include in-line Prose, to describe what is going on.</p>
 <div id="cell-3" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Questions: Which game factors most strongly predict placement?</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Does investing in high cost unit affect placement?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -544,7 +542,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> dfTFT[<span class="st">"placement"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-10" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#use train_test_split </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#use train_test_split to train model</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, Y_train, Y_test <span class="op">=</span> train_test_split(</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    X, Y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -561,7 +559,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="cell-12" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Despite omitted varaible bias, MAE is acceptable.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Despite deliberate omitted varaible bias, MAE is acceptable.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-13" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot results to see which features are most significant</span></span>
@@ -584,41 +582,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-14" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#DSQ2: Does investing in high-cost units (4-5) affect placement?</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#use Ttest </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="total_items-is-most-significant-by-far.-follow-by-level-and-num_1star." class="level1">
+<h1>Total_items is most significant by far. Follow by level and num_1star.</h1>
+</section>
+<section id="dsq2-does-investing-in-high-cost-units-4-5-affect-placement" class="level1">
+<h1>DSQ2: Does investing in high-cost units (4-5) affect placement?</h1>
+<div id="cell-16" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Apply Ttest</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>dfTFT[[<span class="st">"num_cost4"</span>, <span class="st">"num_cost5"</span>, <span class="st">"placement"</span>]].corr()</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>top4_4cost <span class="op">=</span> dfTFT[dfTFT[<span class="st">"top4"</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">"num_cost4"</span>]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>bot4_4cost <span class="op">=</span> dfTFT[dfTFT[<span class="st">"top4"</span>] <span class="op">==</span> <span class="dv">0</span>][<span class="st">"num_cost4"</span>]</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>stats.ttest_ind(top4_4cost, bot4_4cost)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[1], line 3</span>
+<span class="ansi-green-fg ansi-bold">      1</span> <span style="font-style:italic;color:rgb(95,135,135)">#Apply Ttest</span>
+<span class="ansi-green-fg">----&gt; 3</span> dfTFT[[<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">num_cost4</span><span style="color:rgb(175,0,0)">"</span>, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">num_cost5</span><span style="color:rgb(175,0,0)">"</span>, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">placement</span><span style="color:rgb(175,0,0)">"</span>]]<span style="color:rgb(98,98,98)">.</span>corr()
+<span class="ansi-green-fg ansi-bold">      4</span> top4_4cost <span style="color:rgb(98,98,98)">=</span> dfTFT[dfTFT[<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">top4</span><span style="color:rgb(175,0,0)">"</span>] <span style="color:rgb(98,98,98)">==</span> <span style="color:rgb(98,98,98)">1</span>][<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">num_cost4</span><span style="color:rgb(175,0,0)">"</span>]
+<span class="ansi-green-fg ansi-bold">      5</span> bot4_4cost <span style="color:rgb(98,98,98)">=</span> dfTFT[dfTFT[<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">top4</span><span style="color:rgb(175,0,0)">"</span>] <span style="color:rgb(98,98,98)">==</span> <span style="color:rgb(98,98,98)">0</span>][<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">num_cost4</span><span style="color:rgb(175,0,0)">"</span>]
+
+<span class="ansi-red-fg">NameError</span>: name 'dfTFT' is not defined</pre>
 </div>
-<div id="cell-15" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dfTFT[[<span class="st">"num_cost4"</span>, <span class="st">"num_cost5"</span>, <span class="st">"placement"</span>]].corr()</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>top4_4cost <span class="op">=</span> dfTFT[dfTFT[<span class="st">"top4"</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">"num_cost4"</span>]</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>bot4_4cost <span class="op">=</span> dfTFT[dfTFT[<span class="st">"top4"</span>] <span class="op">==</span> <span class="dv">0</span>][<span class="st">"num_cost4"</span>]</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>stats.ttest_ind(top4_4cost, bot4_4cost)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
-<pre><code>TtestResult(statistic=nan, pvalue=nan, df=32453.0)</code></pre>
 </div>
 </div>
-<div id="cell-16" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#TtestResult(statistic=nan, pvalue=nan, df=32453.0)</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Ttest is valid if Var = 0</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top4_4cost.var())</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bot4_4cost.var())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-17" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#TtestResult(statistic=nan, pvalue=nan, df=32453.0)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Ttest is valid if Var = 0</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top4_4cost.var())</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bot4_4cost.var())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.0
 0.0</code></pre>
 </div>
 </div>
-<div id="cell-17" class="cell" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>top4_5cost <span class="op">=</span> dfTFT[dfTFT[<span class="st">"top4"</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">"num_cost5"</span>]</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>bot4_5cost <span class="op">=</span> dfTFT[dfTFT[<span class="st">"top4"</span>] <span class="op">==</span> <span class="dv">0</span>][<span class="st">"num_cost5"</span>]</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>stats.ttest_ind(top4_5cost, bot4_5cost)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-18" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>top4_5cost <span class="op">=</span> dfTFT[dfTFT[<span class="st">"top4"</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">"num_cost5"</span>]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>bot4_5cost <span class="op">=</span> dfTFT[dfTFT[<span class="st">"top4"</span>] <span class="op">==</span> <span class="dv">0</span>][<span class="st">"num_cost5"</span>]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>stats.ttest_ind(top4_5cost, bot4_5cost)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>TtestResult(statistic=17.90027055298418, pvalue=2.5873532044523514e-71, df=32453.0)</code></pre>
-</div>
-</div>
-<div id="cell-18" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top4_5cost.mean(), bot4_5cost.mean())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>2.3569757419037063 2.144698698575217</code></pre>
 </div>
 </div>
 

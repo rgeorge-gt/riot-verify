@@ -195,6 +195,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#what-to-address" id="toc-what-to-address" class="nav-link active" data-scroll-target="#what-to-address">What to address</a></li>
   <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
+  <li><a href="#begin-by-extracting-all-useful-data-from-the-json-files" id="toc-begin-by-extracting-all-useful-data-from-the-json-files" class="nav-link" data-scroll-target="#begin-by-extracting-all-useful-data-from-the-json-files">Begin by extracting all useful data from the JSON files</a></li>
+  <li><a href="#then-combine-them-into-one-pandas-data-frame." id="toc-then-combine-them-into-one-pandas-data-frame." class="nav-link" data-scroll-target="#then-combine-them-into-one-pandas-data-frame.">Then combine them into one pandas data frame.</a></li>
+  <li><a href="#this-might-be-error-on-my-api-script.-but-i-dont-have-time-to-pull-new-data-or-fix-this." id="toc-this-might-be-error-on-my-api-script.-but-i-dont-have-time-to-pull-new-data-or-fix-this." class="nav-link" data-scroll-target="#this-might-be-error-on-my-api-script.-but-i-dont-have-time-to-pull-new-data-or-fix-this.">This might be error on my API script. But I dont have time to pull new data or fix this.</a></li>
+  <li><a href="#when-looking-at-data-champions-have-in-front-of-name-tft7_-or-tft7b_." id="toc-when-looking-at-data-champions-have-in-front-of-name-tft7_-or-tft7b_." class="nav-link" data-scroll-target="#when-looking-at-data-champions-have-in-front-of-name-tft7_-or-tft7b_.">When looking at data, champions have in front of name TFT7_ or TFT7b_.</a></li>
+  <li><a href="#this-indicates-that-they-are-from-set-7." id="toc-this-indicates-that-they-are-from-set-7." class="nav-link" data-scroll-target="#this-indicates-that-they-are-from-set-7.">This indicates that they are from Set 7.</a></li>
+  <li><a href="#this-is-better-but-notice-some-are-in-lowercase-like-lulu-rammus-kogmaw" id="toc-this-is-better-but-notice-some-are-in-lowercase-like-lulu-rammus-kogmaw" class="nav-link" data-scroll-target="#this-is-better-but-notice-some-are-in-lowercase-like-lulu-rammus-kogmaw">This is better, but notice some are in lowercase like lulu, rammus, kogmaw</a></li>
+  <li><a href="#need-to-address-this-kogmaw-and-kogmaw-might-be-treated-as-seperate-entities-when-i-perform-other-functions." id="toc-need-to-address-this-kogmaw-and-kogmaw-might-be-treated-as-seperate-entities-when-i-perform-other-functions." class="nav-link" data-scroll-target="#need-to-address-this-kogmaw-and-kogmaw-might-be-treated-as-seperate-entities-when-i-perform-other-functions.">Need to address this, kogmaw and KogMaw might be treated as seperate entities when I perform other functions.</a></li>
   </ul>
 </nav>
     </div>
@@ -221,13 +228,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <!-- After digesting the instructions, you can delete this cell, these are assignment instructions and do not need to be included in your final submission.  -->
-<p>The purpose of this data cleaning page was to take the JSON files created in the data-collecting step, combine and flatten the data into a singular Pandas data frame. Data cleaning was an interative process I needed to add and alter throughout the Project. Once the Pandas dataframe was build, i needed to remove parts of the dataset, and create additional calculated fields that would be used in the EDA, supervised, and unsupervised learning sections.This final data frame was then saved as a csv file for both documentation and later use in the EDA step.</p>
-<p>The raw JSON file consists of multi-level nested dictionaries and lists. To flatten these into a dataframe, I used Python.</p>
+<p><strong>Introduction</strong> The purpose of this data cleaning page was to take the JSON files created in the data-collecting step, combine and flatten the data into a singular Pandas data frame. Data cleaning was an interative process I needed to add and alter throughout the Project. Once the Pandas dataframe was build, i needed to remove parts of the dataset, and create additional calculated fields that would be used in the EDA, supervised, and unsupervised learning sections.This final data frame was then saved as a csv file for both documentation and later use in the EDA step.</p>
+<p><strong>Process</strong> The raw JSON file consists of multi-level nested dictionaries and lists. To flatten these into a dataframe, I used Python.</p>
 <p>Once the JSON files had been combined, the shape was (50825, 23). 8662 unique player IDs across 6388 game were captured which is still robust despite my limitations.</p>
-<p>I first looked at the data types using the line, dfRaw.dtypes Data types were object, int64, and float 64. Time fields game_length and time_eliminated being float was acceptable as time was measured in seconds. The only datatype I wanted to address was units which was a list.</p>
-<p>Missing data was indentified using this code line: dfRaw.notnull().mean() * 100 Which provided how many of a fields data was null.</p>
-<p>My result was 100% except for the field augments which was 0. As aguments had no data, it was removed. This was likely due an error on the data-collection process. I was unable to resolve this due to the Riot API having no data to pull when I reran due to the release of Build 16. The rest of my fields had no null values.</p>
-<p><strong>Outlier Detection and Treatment</strong> and <strong>Normalization and Scaling</strong> were not performed in this script. I prefer not to treat Outliers or perform normalization unless necessary. Data should be first analyzed raw. Inital looks at outliers, normalization, scaling,skew and kurtosis are evaluated in the EDA section, and then performed during the modeling section. In addition, I want my final cleaned dataset to not alter the data that exists.</p>
+<p>I first looked at the data types. Data types were object, int64, and float 64. Time fields game_length and time_eliminated being float was acceptable as time was measured in seconds.</p>
+<p>Missing data was identified using this code line: dfRaw.notnull().mean() * 100 Which provided how many of a fields data was null.</p>
+<p>My result was 100% except for the field augments which was 0. As augments had no data, it was removed. This was likely due an error on the data-collection process. I was unable to resolve this due to the Riot API having no data to pull when I reran due to the release of Build 16. The rest of my fields had no null values.</p>
+<p>Outlier Detection and Treatment and Normalization and Scaling were not performed at this time. I wanted my final cleaned dataset to not alter the data that exists. Instead, looking at outliers, normalization, scaling, skew and kurtosis are evaluated in the EDA section, and then performed during the modeling section.</p>
+<p>The final dataset was saved as csv file for usage in EDA, unsupervised and supervised learning sections.</p>
 <ul>
 <li><strong>Visualizations</strong>: Use before-and-after visualizations to illustrate the impact of your cleaning steps, making the process more intuitive and transparent. By the end of this phase, your cleaned data should be well-documented and ready for further stages, such as <strong>Exploratory Data Analysis (EDA)</strong> and <strong>Machine Learning</strong>.</li>
 </ul>
@@ -285,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>If relevant, link to additional documentation or external references that explain any complex components. This section should give readers a clear view of how the project is implemented from a technical perspective.</p>
 <p>Remember, this page is a technical narrative, NOT just a notebook with a collection of code cells, include in-line Prose, to describe what is going on.</p>
 <div id="cell-3" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import packages used in this notebook</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Import packages used in this notebook</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -294,111 +302,105 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-4" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Begin by extracting all useful data from the JSON files</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Then combine them into one pandas data frame.</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>json_dir <span class="op">=</span> <span class="st">'data/raw-data'</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Get counts </span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#get count of tier</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_stars(units, tier_level):</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(units, <span class="bu">list</span>):</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(<span class="dv">1</span> <span class="cf">for</span> u <span class="kw">in</span> units <span class="cf">if</span> u.get(<span class="st">"tier"</span>) <span class="op">==</span> tier_level)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#get total unit cost</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_cost(units, cost):</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(units, <span class="bu">list</span>):</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(<span class="dv">1</span> <span class="cf">for</span> u <span class="kw">in</span> units <span class="cf">if</span> u.get(<span class="st">"rarity"</span>) <span class="op">==</span> cost <span class="op">-</span> <span class="dv">1</span>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">#get items</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_items(units):</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(units, <span class="bu">list</span>):</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(<span class="bu">len</span>(u.get(<span class="st">"itemNames"</span>, [])) <span class="cf">for</span> u <span class="kw">in</span> units)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">#get unit costs. Cost = rarity - 1</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> extract_unit_costs(units):</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(units, <span class="bu">list</span>):</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> []</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [u.get(<span class="st">"rarity"</span>, <span class="op">-</span><span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span> <span class="cf">for</span> u <span class="kw">in</span> units]</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> os.listdir(json_dir):</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> filename.endswith(<span class="st">".json"</span>):</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        filepath <span class="op">=</span> os.path.join(json_dir, filename)</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="bu">open</span>(filepath, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>                data <span class="op">=</span> json.load(f)</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Error reading </span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        match_id <span class="op">=</span> data[<span class="st">"metadata"</span>][<span class="st">"match_id"</span>]</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        info <span class="op">=</span> data[<span class="st">"info"</span>]</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        game_length <span class="op">=</span> info.get(<span class="st">"game_length"</span>)</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        game_version <span class="op">=</span> info.get(<span class="st">"game_version"</span>)</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> p <span class="kw">in</span> info[<span class="st">"participants"</span>]:</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>            <span class="co">#start extracting the rows of csv file</span></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>            units <span class="op">=</span> p.get(<span class="st">"units"</span>, [])</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>            traits <span class="op">=</span> p.get(<span class="st">"traits"</span>, [])</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>            <span class="co">#basic gameplay info</span></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>            rows.append({</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>                <span class="st">"match_id"</span>: match_id,</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>                <span class="st">"puuid"</span>: p[<span class="st">"puuid"</span>],</span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>                <span class="st">"placement"</span>: p.get(<span class="st">"placement"</span>),</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>                <span class="st">"level"</span>: p.get(<span class="st">"level"</span>),</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>                <span class="st">"time_eliminated"</span>: p.get(<span class="st">"time_eliminated"</span>),</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>                <span class="st">"total_damage"</span>: p.get(<span class="st">"total_damage_to_players"</span>),</span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>                <span class="st">"game_length"</span>: game_length,</span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>                <span class="st">"game_version"</span>: game_version,</span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gold_left"</span>: p.get(<span class="st">"gold_left"</span>),</span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>                <span class="co">#Unit, Trait</span></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>                <span class="st">"traits"</span>: traits,</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>                <span class="st">"units"</span>: units,</span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>                <span class="st">"num_traits"</span>: <span class="bu">len</span>(traits),</span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>                <span class="st">"num_units"</span>: <span class="bu">len</span>(units),</span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>                <span class="co">#Get count of the units star level</span></span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>                <span class="st">"num_1star"</span>: count_stars(units, <span class="dv">1</span>),</span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>                <span class="st">"num_2star"</span>: count_stars(units, <span class="dv">2</span>),</span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>                <span class="st">"num_3star"</span>: count_stars(units, <span class="dv">3</span>),</span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>                <span class="co">#Get base cost of units (1-5)</span></span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>                <span class="st">"num_cost1"</span>: count_cost(units, <span class="dv">1</span>),</span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>                <span class="st">"num_cost2"</span>: count_cost(units, <span class="dv">2</span>),</span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>                <span class="st">"num_cost3"</span>: count_cost(units, <span class="dv">3</span>),</span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>                <span class="st">"num_cost4"</span>: count_cost(units, <span class="dv">4</span>),</span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>                <span class="st">"num_cost5"</span>: count_cost(units, <span class="dv">5</span>),</span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>                <span class="co">#How many Items</span></span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>                <span class="st">"total_items"</span>: count_items(units),</span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>                <span class="co">#Get the Augments</span></span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>                <span class="st">"augments"</span>: p.get(<span class="st">"augments"</span>),})</span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="co">#Create final DataFrame</span></span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(rows)</span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Flattened rows:"</span>, <span class="bu">len</span>(df))</span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+</section>
+<section id="begin-by-extracting-all-useful-data-from-the-json-files" class="level1">
+<h1>Begin by extracting all useful data from the JSON files</h1>
+</section>
+<section id="then-combine-them-into-one-pandas-data-frame." class="level1">
+<h1>Then combine them into one pandas data frame.</h1>
 <div id="cell-5" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>json_dir <span class="op">=</span> <span class="st">'data/raw-data'</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a lot of counting if statements</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#get count of tier</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_stars(units, level):</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(<span class="dv">1</span> <span class="cf">for</span> u <span class="kw">in</span> units <span class="cf">if</span> u.get(<span class="st">"tier"</span>) <span class="op">==</span> level)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#get total unit cost</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_cost(units, cost):</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(<span class="dv">1</span> <span class="cf">for</span> u <span class="kw">in</span> units <span class="cf">if</span> u.get(<span class="st">"rarity"</span>) <span class="op">==</span> cost <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#get items</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_items(units):</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(<span class="bu">len</span>(u.get(<span class="st">"itemNames"</span>, [])) <span class="cf">for</span> u <span class="kw">in</span> units)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#get unit costs. Cost = rarity - 1</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unit_cost(units):</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [u.get(<span class="st">"rarity"</span>, <span class="op">-</span><span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span> <span class="cf">for</span> u <span class="kw">in</span> units]</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> os.listdir(json_dir):</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> filename.endswith(<span class="st">".json"</span>):</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        filepath <span class="op">=</span> os.path.join(json_dir, filename)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="bu">open</span>(filepath, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>                data <span class="op">=</span> json.load(f)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Error reading </span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>        match_id <span class="op">=</span> data[<span class="st">"metadata"</span>][<span class="st">"match_id"</span>]</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        info <span class="op">=</span> data[<span class="st">"info"</span>]</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        game_length <span class="op">=</span> info.get(<span class="st">"game_length"</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        game_version <span class="op">=</span> info.get(<span class="st">"game_version"</span>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> p <span class="kw">in</span> info[<span class="st">"participants"</span>]:</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>            <span class="co">#Start extracting the rows of csv file</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>            units <span class="op">=</span> p.get(<span class="st">"units"</span>, [])</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>            traits <span class="op">=</span> p.get(<span class="st">"traits"</span>, [])</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>            <span class="co">#Basic Gameplay Info</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>            rows.append({</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>                <span class="st">"match_id"</span>: match_id,</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>                <span class="st">"puuid"</span>: p[<span class="st">"puuid"</span>],</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>                <span class="st">"placement"</span>: p.get(<span class="st">"placement"</span>),</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>                <span class="st">"level"</span>: p.get(<span class="st">"level"</span>),</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>                <span class="st">"time_eliminated"</span>: p.get(<span class="st">"time_eliminated"</span>),</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>                <span class="st">"total_damage"</span>: p.get(<span class="st">"total_damage_to_players"</span>),</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>                <span class="st">"game_length"</span>: game_length,</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>                <span class="st">"game_version"</span>: game_version,</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>                <span class="st">"gold_left"</span>: p.get(<span class="st">"gold_left"</span>),</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>                <span class="co">#Unit, Trait</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>                <span class="st">"traits"</span>: traits,</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>                <span class="st">"units"</span>: units,</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tot_traits"</span>: <span class="bu">len</span>(traits),</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tot_units"</span>: <span class="bu">len</span>(units),</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>                <span class="co">#Count of the units by star level</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tot_1star"</span>: count_stars(units, <span class="dv">1</span>),</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tot_champs"</span>: count_stars(units, <span class="dv">2</span>),</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tot_champs"</span>: count_stars(units, <span class="dv">3</span>),</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>                <span class="co">#Get count of units by cost</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>                <span class="st">"cost1"</span>: count_cost(units, <span class="dv">1</span>),</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tot_cost2"</span>: count_cost(units, <span class="dv">2</span>),</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tot_cost3"</span>: count_cost(units, <span class="dv">3</span>),</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tot_cost4"</span>: count_cost(units, <span class="dv">4</span>),</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tot_cost5"</span>: count_cost(units, <span class="dv">5</span>),</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>                <span class="co">#How many Items</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>                <span class="st">"tot_items"</span>: count_items(units),</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>                <span class="co">#Get the Augments</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>                <span class="st">"augments"</span>: p.get(<span class="st">"augments"</span>),})</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="co">#Create final DataFrame and faltten</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(rows)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-6" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#how many rows does the final df have?</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Merged rows:"</span>, <span class="bu">len</span>(df))</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#display the df</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-6" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#save df as csv </span></span>
+<div id="cell-7" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Save df as csv </span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">"data/raw/RIOT_rawdata.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;plaintext&quot;}}" data-execution_count="2">
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;plaintext&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Read combined csv file from folder raw as a pandas df</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dfRaw <span class="op">=</span> pd.read_csv(<span class="st">"../data-collection/data/raw/RIOT_rawdata.csv"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -563,27 +565,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-8" class="cell" data-execution_count="3">
+<div id="cell-9" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#See intitial shape</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dfRaw.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>(50825, 23)</code></pre>
 </div>
 </div>
-<div id="cell-9" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#How many players are captured?</span></span>
+<div id="cell-10" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#How many games did the API acquire?</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"match_id"</span>].nunique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>6388</code></pre>
 </div>
 </div>
-<div id="cell-10" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"puuid"</span>].nunique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-11" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#How many players did the API acquire?</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"puuid"</span>].nunique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>8662</code></pre>
 </div>
 </div>
-<div id="cell-11" class="cell" data-execution_count="6">
+<div id="cell-12" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Begin by dropping duplicates</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dfRaw <span class="op">=</span> dfRaw.drop_duplicates()</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>dfRaw.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -591,8 +594,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>(50825, 23)</code></pre>
 </div>
 </div>
-<div id="cell-12" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check datatypes</span></span>
+<div id="cell-13" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Check datatypes</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dfRaw.dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>match_id            object
@@ -621,7 +624,7 @@ augments           float64
 dtype: object</code></pre>
 </div>
 </div>
-<div id="cell-13" class="cell" data-execution_count="8">
+<div id="cell-14" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get decriptive stats of int and float fields</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>dfRaw.describe(include<span class="op">=</span>[<span class="st">'int64'</span>,<span class="st">'float64'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
@@ -827,7 +830,7 @@ dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-14" class="cell" data-execution_count="9">
+<div id="cell-15" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Is all data from same version of game?</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">'game_version'</span>].unique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
@@ -844,7 +847,7 @@ dtype: object</code></pre>
       dtype=object)</code></pre>
 </div>
 </div>
-<div id="cell-15" class="cell" data-execution_count="11">
+<div id="cell-16" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#As seen above, the Releases are slightly different. This is important because each release has a diff balance to the game</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#source: https://www.leagueoflegends.com/en-us/news/tags/teamfight-tactics-patch-notes/</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -860,7 +863,7 @@ dtype: object</code></pre>
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="cell-16" class="cell" data-execution_count="12">
+<div id="cell-17" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove 15.20 should be removed because it only has 59 records</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#15.22 is most robust when eval a single release</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#15.23 and 15.21 are kept incase I want to do a version comparison</span></span>
@@ -875,7 +878,7 @@ Name: count, dtype: int64</code></pre>
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="cell-17" class="cell" data-execution_count="13">
+<div id="cell-18" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check percentage of nulls in each row</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>dfRaw.notnull().mean() <span class="op">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
@@ -906,13 +909,14 @@ Release_Version    100.0
 dtype: float64</code></pre>
 </div>
 </div>
-<div id="cell-18" class="cell" data-execution_count="14">
+<div id="cell-19" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Auguments is only case of null data. But Auguments has 0 data popualted so get rid of it.</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>dfRaw <span class="op">=</span> dfRaw.drop([<span class="st">"augments"</span>],axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#This might be error on my API script. But I dont have time to pull new data or fix this.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>dfRaw <span class="op">=</span> dfRaw.drop([<span class="st">"augments"</span>],axis <span class="op">=</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-19" class="cell" data-execution_count="15">
+</section>
+<section id="this-might-be-error-on-my-api-script.-but-i-dont-have-time-to-pull-new-data-or-fix-this." class="level1">
+<h1>This might be error on my API script. But I dont have time to pull new data or fix this.</h1>
+<div id="cell-21" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#How much of the dataset is created by bots?</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Bots are identified by having bot in puuid</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -924,15 +928,15 @@ dtype: float64</code></pre>
 <pre><code>Total bots: 11</code></pre>
 </div>
 </div>
-<div id="cell-20" class="cell" data-execution_count="16">
+<div id="cell-22" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove bot data</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>dfRaw <span class="op">=</span> dfRaw[dfRaw[<span class="st">'puuid'</span>] <span class="op">!=</span> <span class="st">"bot"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-21" class="cell">
+<div id="cell-23" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Begin creating useful fields for modeling</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-22" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#traits and units need to be converted</span></span>
+<div id="cell-24" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Traits and Units need to be converted into Python Objects</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"traits"</span>] <span class="op">=</span> dfRaw[<span class="st">"traits"</span>].<span class="bu">apply</span>(ast.literal_eval)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"units"</span>] <span class="op">=</span> dfRaw[<span class="st">"units"</span>].<span class="bu">apply</span>(ast.literal_eval)</span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1096,7 +1100,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-23" class="cell" data-execution_count="18">
+<div id="cell-25" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Find count of traits and units</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"total_traits"</span>] <span class="op">=</span> dfRaw[<span class="st">"traits"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> t: <span class="bu">len</span>(t))</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"total_units"</span>] <span class="op">=</span> dfRaw[<span class="st">"units"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> u: <span class="bu">len</span>(u))</span>
@@ -1262,40 +1266,18 @@ dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-24" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Find Star levels (sum of star tiers)</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># def unit_star_sum(units):</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     try:</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co">#         return sum([u.get("tier", 1) for u in units])</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     except:</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co">#         return np.nan</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co"># dfRaw["total_star_level"] = dfRaw["units"].apply(unit_star_sum)</span></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># #Find total items</span></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co"># def count_items(units):</span></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="co">#     total = 0</span></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="co">#     for u in units:</span></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="co">#         items = u.get("itemNames", [])</span></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="co">#         if isinstance(items, list):</span></span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="co">#             total += len(items)</span></span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="co">#     return total</span></span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="co"># dfRaw["num_items"] = dfRaw["units"].apply(count_items)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="cell-25" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create binary that shows if placed 1st</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"top1"</span>] <span class="op">=</span> (dfRaw[<span class="st">"placement"</span>] <span class="op">==</span> <span class="dv">1</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co">#create binary that shows if placed top 4</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"top4"</span>] <span class="op">=</span> (dfRaw[<span class="st">"placement"</span>] <span class="op">&lt;=</span> <span class="dv">4</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co">#create binary that shows if placed bottom 4 (5-8)</span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"bottom4"</span>] <span class="op">=</span> (dfRaw[<span class="st">"placement"</span>] <span class="op">&gt;=</span> <span class="dv">5</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co">#check results</span></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>dfRaw.head(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-26" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create binary that shows if placed 1st</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"top1"</span>] <span class="op">=</span> (dfRaw[<span class="st">"placement"</span>] <span class="op">==</span> <span class="dv">1</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#create binary that shows if placed top 4</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"top4"</span>] <span class="op">=</span> (dfRaw[<span class="st">"placement"</span>] <span class="op">&lt;=</span> <span class="dv">4</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co">#create binary that shows if placed bottom 4 (5-8)</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"bottom4"</span>] <span class="op">=</span> (dfRaw[<span class="st">"placement"</span>] <span class="op">&gt;=</span> <span class="dv">5</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co">#check results</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>dfRaw.head(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <div>
 
@@ -1455,50 +1437,44 @@ dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-26" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Find the number of units that are 1,2,or 3 star.</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># def count_stars(unit_list, star_level):</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     if not isinstance(unit_list, list):</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co">#         return 0</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     return sum(1 for u in unit_list if u.get("tier") ==  star_level)</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co"># dfRaw["1star_unit_count"] = dfRaw["units"].apply(lambda x: count_stars(x,1))</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co"># dfRaw["2star_unit_count"] = dfRaw["units"].apply(lambda x: count_stars(x,2))</span></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="co"># dfRaw["3star_unit_count"] = dfRaw["units"].apply(lambda x: count_stars(x,3))</span></span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="co"># dfRaw.head(5)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="when-looking-at-data-champions-have-in-front-of-name-tft7_-or-tft7b_." class="level1">
+<h1>When looking at data, champions have in front of name TFT7_ or TFT7b_.</h1>
+</section>
+<section id="this-indicates-that-they-are-from-set-7." class="level1">
+<h1>This indicates that they are from Set 7.</h1>
+<p>Set 7 and Set 15 are completly different versions. Our results will be invalid if both are used. So, remove Set 7 data.</p>
+<div id="cell-28" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#When looking at data, champions have in front of name TFT7_ or TFT7b_. </span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">#This indicates that they are from Set 7.</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Set 7 and Set 15 are completly different versions. So we need to get rid of all Set 7.</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_champ(row):</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(row, <span class="bu">list</span>):</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [u[<span class="st">"character_id"</span>] <span class="cf">for</span> u <span class="kw">in</span> row]</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> []</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Using field units and get_champions, make field raw_champions</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"raw_champions"</span>] <span class="op">=</span> dfRaw[<span class="st">"units"</span>].<span class="bu">apply</span>(get_champions)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>set7_champs <span class="op">=</span> (</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    dfRaw[<span class="st">"raw_champions"</span>].explode().dropna().unique())</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="co">#Identify Set 7</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>set7_champs <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> set7_champs <span class="cf">if</span> c.startswith((<span class="st">"TFT7_"</span>, <span class="st">"TFT7b_"</span>))]</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove Set 7.</span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>dfRaw <span class="op">=</span> dfRaw[</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">~</span>dfRaw[<span class="st">"raw_champions"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> lst: <span class="bu">any</span>(c <span class="kw">in</span> set7_champs <span class="cf">for</span> c <span class="kw">in</span> lst))</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>].copy()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-27" class="cell" data-execution_count="20">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#When looking at data, champions have in front of name TFT7_ or TFT7b_. </span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">#This indicates that they are from Set 7.</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Set 7 and Set 15 are completly different versions. So we need to get rid of all Set 7.</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_champions(row):</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(row, <span class="bu">list</span>):</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [u[<span class="st">"character_id"</span>] <span class="cf">for</span> u <span class="kw">in</span> row]</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> []</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Using field units and get_champions, make field raw_champions</span></span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"raw_champions"</span>] <span class="op">=</span> dfRaw[<span class="st">"units"</span>].<span class="bu">apply</span>(get_champions)</span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>set7_champs <span class="op">=</span> (</span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    dfRaw[<span class="st">"raw_champions"</span>].explode().dropna().unique())</span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="co">#Identify Set 7</span></span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>set7_champs <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> set7_champs <span class="cf">if</span> c.startswith((<span class="st">"TFT7_"</span>, <span class="st">"TFT7b_"</span>))]</span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove Set 7.</span></span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>dfRaw <span class="op">=</span> dfRaw[</span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">~</span>dfRaw[<span class="st">"raw_champions"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> lst: <span class="bu">any</span>(c <span class="kw">in</span> set7_champs <span class="cf">for</span> c <span class="kw">in</span> lst))</span>
-<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>].copy()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="cell-28" class="cell" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Now get rid of the TFT15_ in front of the names.</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_names(lst):</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [c.replace(<span class="st">"TFT15_"</span>, <span class="st">""</span>).replace(<span class="st">"tft15_"</span>, <span class="st">""</span>) <span class="cf">for</span> c <span class="kw">in</span> lst]</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"champion_list"</span>] <span class="op">=</span> dfRaw[<span class="st">"raw_champions"</span>].<span class="bu">apply</span>(clean_names)</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co">#check Champions</span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"champion_list"</span>].explode().dropna().unique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-29" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Now get rid of the TFT15_ in front of the champions names.</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_names(lst):</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [c.replace(<span class="st">"TFT15_"</span>, <span class="st">""</span>).replace(<span class="st">"tft15_"</span>, <span class="st">""</span>) <span class="cf">for</span> c <span class="kw">in</span> lst]</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"champion_list"</span>] <span class="op">=</span> dfRaw[<span class="st">"raw_champions"</span>].<span class="bu">apply</span>(clean_names)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co">#check Champions</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"champion_list"</span>].explode().dropna().unique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>array(['Aatrox', 'DrMundo', 'Vi', 'Udyr', 'Sett', 'Braum', 'leesin',
        'TwistedFate', 'Zyra', 'Kayle', 'Zac', 'Gangplank', 'Viego',
@@ -1513,40 +1489,46 @@ dtype: float64</code></pre>
        'Rammus', 'Ekko', 'lulu'], dtype=object)</code></pre>
 </div>
 </div>
-<p>This is better, but notice some are in lowercase like lulu, rammus, kogmaw Need to address this, kogmaw and KogMaw might be treated as seperate entities when I do EDA.</p>
-<div id="cell-30" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#These are the set 15 champions</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co">#source: https://tftactics.gg/champions/</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>set15 <span class="op">=</span> [<span class="st">'Aatrox'</span>,<span class="st">'Ahri'</span>,<span class="st">'Akali'</span>,<span class="st">'Ashe'</span>,</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Braum'</span>,<span class="st">'Caitlyn'</span>,<span class="st">'Darius'</span>,<span class="st">'DrMundo'</span>,</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Ezreal'</span>,<span class="st">'Gangplank'</span>,<span class="st">'Garen'</span>,<span class="st">'Gnar'</span>,<span class="st">'Gwen'</span>,</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Janna'</span>,<span class="st">'JarvanIV'</span>,<span class="st">'Jayce'</span>,<span class="st">'Jhin'</span>,<span class="st">'Jinx'</span>,</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Kalista'</span>,<span class="st">'Karma'</span>,<span class="st">'Katarina'</span>,<span class="st">'Kayle'</span>,<span class="st">'Kennen'</span>,</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Kobuko'</span>,<span class="st">'KogMaw'</span>,<span class="st">'KSante'</span>,<span class="st">'LeeSin'</span>,<span class="st">'Leona'</span>,<span class="st">'Lucian'</span>,</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Lulu'</span>,<span class="st">'Lux'</span>,<span class="st">'Malphite'</span>,<span class="st">'Malzahar'</span>,<span class="st">'Naafiri'</span>,<span class="st">'Neeko'</span>,</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Poppy'</span>,<span class="st">'Rakan'</span>,<span class="st">'Rammus'</span>,<span class="st">'Rell'</span>,<span class="st">'Ryze'</span>,<span class="st">'Samira'</span>,<span class="st">'Senna'</span>,</span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Seraphine'</span>,<span class="st">'Sett'</span>,<span class="st">'Shen'</span>,<span class="st">'Sivir'</span>,<span class="st">'Smolder'</span>,<span class="st">'Swain'</span>,</span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Syndra'</span>,<span class="st">'TwistedFate'</span>,<span class="st">'Udyr'</span>,<span class="st">'Varus'</span>,<span class="st">'Viego'</span>,<span class="st">'Vi'</span>,</span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Volibear'</span>,<span class="st">'Xayah'</span>,<span class="st">'XinZhao'</span>,<span class="st">'Yasuo'</span>,<span class="st">'Yone'</span>,<span class="st">'Yuumi'</span>,</span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Zac'</span>,<span class="st">'Ziggs'</span>,<span class="st">'Zyra'</span>]</span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>mapping <span class="op">=</span> {c.lower(): c <span class="cf">for</span> c <span class="kw">in</span> set15}</span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a><span class="co">#normalize for cases</span></span>
-<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> normalize(lst):</span>
-<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>    cleaned <span class="op">=</span> []</span>
-<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> lst:</span>
-<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">isinstance</span>(c, <span class="bu">str</span>):</span>
-<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>            key <span class="op">=</span> c.lower()</span>
-<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> key <span class="kw">in</span> mapping:</span>
-<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>                cleaned.append(mapping[key])</span>
-<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cleaned</span>
-<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"champion_list"</span>] <span class="op">=</span> dfRaw[<span class="st">"champion_list"</span>].<span class="bu">apply</span>(normalize)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="this-is-better-but-notice-some-are-in-lowercase-like-lulu-rammus-kogmaw" class="level1">
+<h1>This is better, but notice some are in lowercase like lulu, rammus, kogmaw</h1>
+</section>
+<section id="need-to-address-this-kogmaw-and-kogmaw-might-be-treated-as-seperate-entities-when-i-perform-other-functions." class="level1">
+<h1>Need to address this, kogmaw and KogMaw might be treated as seperate entities when I perform other functions.</h1>
+<div id="cell-31" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#These are the set 15 champions</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#source: https://tftactics.gg/champions/</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>set15 <span class="op">=</span> [<span class="st">'Aatrox'</span>,<span class="st">'Ahri'</span>,<span class="st">'Akali'</span>,<span class="st">'Ashe'</span>,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Braum'</span>,<span class="st">'Caitlyn'</span>,<span class="st">'Darius'</span>,<span class="st">'DrMundo'</span>,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Ezreal'</span>,<span class="st">'Gangplank'</span>,<span class="st">'Garen'</span>,<span class="st">'Gnar'</span>,<span class="st">'Gwen'</span>,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Janna'</span>,<span class="st">'JarvanIV'</span>,<span class="st">'Jayce'</span>,<span class="st">'Jhin'</span>,<span class="st">'Jinx'</span>,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Kalista'</span>,<span class="st">'Karma'</span>,<span class="st">'Katarina'</span>,<span class="st">'Kayle'</span>,<span class="st">'Kennen'</span>,</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Kobuko'</span>,<span class="st">'KogMaw'</span>,<span class="st">'KSante'</span>,<span class="st">'LeeSin'</span>,<span class="st">'Leona'</span>,<span class="st">'Lucian'</span>,</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Lulu'</span>,<span class="st">'Lux'</span>,<span class="st">'Malphite'</span>,<span class="st">'Malzahar'</span>,<span class="st">'Naafiri'</span>,<span class="st">'Neeko'</span>,</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Poppy'</span>,<span class="st">'Rakan'</span>,<span class="st">'Rammus'</span>,<span class="st">'Rell'</span>,<span class="st">'Ryze'</span>,<span class="st">'Samira'</span>,<span class="st">'Senna'</span>,</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Seraphine'</span>,<span class="st">'Sett'</span>,<span class="st">'Shen'</span>,<span class="st">'Sivir'</span>,<span class="st">'Smolder'</span>,<span class="st">'Swain'</span>,</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Syndra'</span>,<span class="st">'TwistedFate'</span>,<span class="st">'Udyr'</span>,<span class="st">'Varus'</span>,<span class="st">'Viego'</span>,<span class="st">'Vi'</span>,</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Volibear'</span>,<span class="st">'Xayah'</span>,<span class="st">'XinZhao'</span>,<span class="st">'Yasuo'</span>,<span class="st">'Yone'</span>,<span class="st">'Yuumi'</span>,</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">'Zac'</span>,<span class="st">'Ziggs'</span>,<span class="st">'Zyra'</span>]</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>mapping <span class="op">=</span> {c.lower(): c <span class="cf">for</span> c <span class="kw">in</span> set15}</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a><span class="co">#normalize for cases</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> norm(lst):</span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>    cleaned <span class="op">=</span> []</span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> lst:</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">isinstance</span>(c, <span class="bu">str</span>):</span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>            key <span class="op">=</span> c.lower()</span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> key <span class="kw">in</span> mapping:</span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>                cleaned.append(mapping[key])</span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cleaned</span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"champion_list"</span>] <span class="op">=</span> dfRaw[<span class="st">"champion_list"</span>].<span class="bu">apply</span>(norm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-31" class="cell" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>(dfRaw[<span class="st">"champion_list"</span>].explode().dropna().unique())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-32" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Check the champions.</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>(dfRaw[<span class="st">"champion_list"</span>].explode().dropna().unique())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>['Aatrox',
  'Ahri',
@@ -1613,27 +1595,35 @@ dtype: float64</code></pre>
  'Zyra']</code></pre>
 </div>
 </div>
-<div id="cell-32" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#See final shape</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>dfRaw.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-33" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#See final shape</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>dfRaw.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>(48692, 30)</code></pre>
 </div>
 </div>
-<div id="cell-33" class="cell" data-execution_count="25">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"puuid"</span>].nunique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-34" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#How many players are left?</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"puuid"</span>].nunique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>6994</code></pre>
 </div>
 </div>
-<div id="cell-34" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Save final dataframe as a csv file to data/processed-data</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co">#This csv file will be used for EDA</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>out_dir <span class="op">=</span> Path(<span class="st">"../data/processed-data"</span>)</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>out_dir.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>out_path <span class="op">=</span> out_dir <span class="op">/</span> <span class="st">"TFT_processed-data.csv"</span></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>dfRaw.to_csv(out_path, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-35" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#How many matches are left?</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>dfRaw[<span class="st">"puuid"</span>].nunique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-36" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Save final dataframe as a csv file to data/processed-data</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co">#This csv file will be used for EDA</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Set where csv file is going</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>out_dir <span class="op">=</span> Path(<span class="st">"../data/processed-data"</span>)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>out_dir.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>out_path <span class="op">=</span> out_dir <span class="op">/</span> <span class="st">"TFT_processed-data.csv"</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Export dataframe to CSV at location defined by out_dir</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>dfRaw.to_csv(out_path, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
