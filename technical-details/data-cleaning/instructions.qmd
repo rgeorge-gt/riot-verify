@@ -1,30 +1,28 @@
-# Instructions 
+**Introduction**
+The purpose of this data cleaning page was to take the JSON files created in the data-collecting step, combine and flatten the data into a singular Pandas data frame. Data cleaning was an interative process I needed to add and alter throughout the Project. Once the Pandas dataframe was build, i needed to remove parts of the dataset, and create additional calculated fields that would be used in the EDA, supervised, and unsupervised learning sections.This final data frame was then saved as a csv file for both documentation and later use in the EDA step. 
 
-`Note`: You should remove these instructions once you have read and understood them. They should not be included in your final submission.
 
-`Remember:` Exactly what do you on this page will be specific you your project and data. Some things might "make more sense" on other pages, depending on your workflow, for example, you might feel that normalization and scaling should be included in a later section, dealing with machine learning, rather than here, that is totally fine. Organize your project in the way that makes the most sense to you.  
+**Process**
+The raw JSON file consists of multi-level nested dictionaries and lists. To flatten these into a dataframe, I used Python.
 
-## Suggested page structure
+Once the JSON files had been combined, the shape was (50825, 23). 8662 unique player IDs across 6388 game were captured which is still robust despite my limitations.
 
-Here’s one suggested structure for organizing your technical pages. You can adjust this as needed:
+I first looked at the data types.
+Data types were object, int64, and float 64. 
+Time fields game_length and time_eliminated being float was acceptable as time was measured in seconds.
 
-`Audience`:Remember that these are written for a technical audience. Assume they have completed the DSAN program, but would appreciate refreshers of the important concepts. 
+Missing data was identified using this code line:
+dfRaw.notnull().mean() * 100 
+Which provided how many of a fields data was null. 
 
-- **Introduction and Motivation:** Briefly outline your plan. What are you doing on this page, and why? Provide context and explain the goals of your analysis.
+My result was 100% except for the field augments which was 0. As augments had no data, it was removed.
+This was likely due an error on the data-collection process. I was unable to resolve this due to the Riot API having no data to pull when I reran due to the release of Build 16. The rest of my fields had no null values.
 
-The purpose of this script is to take the raw data I collected in the folder data-collection and perform data cleansing.
+Outlier Detection and Treatment and Normalization and Scaling were not performed at this time. I wanted my final cleaned dataset to not alter the data that exists. Instead, looking at outliers, normalization, scaling, skew and kurtosis are evaluated in the EDA section, and then performed during the modeling section. 
 
-- **Overview of Methods:** Give a concise explanation of the methods used. For example, if using K-Means clustering, describe what it is, how it works, the inputs and outputs, and key hyperparameters.
-- **Code:** Include the code you used to implement your workflow.
-Code is located in technical-details/data-cleaning/main.ipynb.
-- **Summary and Interpretation of Results:** Summarize your findings, interpret the results, and discuss their technical implications.
+The final dataset was saved as csv file for usage in EDA, unsupervised and supervised learning sections.
 
-## General comments:
-
-- **Iterative Process**: Data cleaning is often not a one-time process. As your analysis progresses, you may need to revisit the cleaning phase, and re-run the code, to adjust to new insights or requirements.
-- **Clarity and Reproducibility**: Ensure your documentation is clear and thorough. Others should be able to follow your steps and achieve the same results.
 - **Visualizations**: Use before-and-after visualizations to illustrate the impact of your cleaning steps, making the process more intuitive and transparent.
-
 By the end of this phase, your cleaned data should be well-documented and ready for further stages, such as **Exploratory Data Analysis (EDA)** and **Machine Learning**.
 
 ## What to address 

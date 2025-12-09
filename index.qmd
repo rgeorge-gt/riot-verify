@@ -5,86 +5,60 @@ author: "Robert George"
 
 ## Project Introduction
 
-**Title: ** Statistical Analysis of TeamFight Tactics Top level Gameplay
+
 
 ![](images/Teamfight_Tactics_logo.png)
+**Title: ** Statistical Analysis of TeamFight Tactics Top level Gameplay
+**Motivation: ** 
+My interest in the intersection of data science and the video-game industry inspired this project. In November 2025, Riot Games announced an opening for a Teamfight Tactics (TFT) Insights Analyst internship. After downloading TFT and spending time learning the game, I enjoyed the gameplay and its gameplay mechanics. How to build a good team, and how that team grows over the course of a match. Should I spend gold rerolling so I can get 2 or 3 star units? RNG creating uncertainty in outcome and increasing replayability but not at the expense of skill. 
 
-**Motivation: ** The motivation came from my intrest in the application of data science in the video game industry. In November 2025, Riot Games posted an opening for a Teamfight Tactics (TFT) Insights Analyst summer internship. After downloading TFT and playing the game, I enjoyed the various strategic elements of the gameplay and decided on it being the topic of my DSAN 5000 final project. 
-
-I hope this work demonstrates how data science can support decision-making in esports analytics—a field that continues to grow in relevance both academically and professionally.
+This project uses TFT as a case study for applying statistical and data analytics to video games systems. I hope this work demonstrates how data science can support decision-making in esports analytics—an area that continues to grow in both academic relevance and industry demand.
 
 ## Research Questions
 
 - What game factors most strongly predict a player’s final placement (either 1st place or top 4)?
-- Does the number of high cost units (4-5) have a statistically singinifcant impact on placement?
-- What champions are grouped together? Do they share traits (ie Jinx + Ahiri because both are Star Guardian)
-- 
-- 
+- Does the number of high cost units (4-5) or 2/3 star units have a statistically significant impact on placement?
+- What are teams comps used by top level players?
+- What champions are most frequently seen at top level play? By extension, which are most common at top 4?
 
 ## Literature Review 1 
 **Title:** Predicting Teamfight Tactics Results with Machine Learning Techniques. 
 https://researchportal.hkr.se/en/studentTheses/predicting-teamfight-tactics-results-with-machine-learning-techni-5/
 
-**Summary:** This undergraduate thesis investigates whether machine learning models traditionally used to predict outcomes in professional sports translates to esports. Teamfight Tactics is used as the test case, and the authors construct feature sets based on board state, itemization, synergies, and unit upgrades to determine their predictive power.
+**Summary:** This undergraduate thesis evaluates whether machine-learning models commonly applied in traditional sports analytics can effectively predict outcomes within esports, using Teamfight Tactics as a test environment. The authors construct predictive models using features such as champions on the board, unit star levels, synergies, and item configurations. The study also highlights structural differences between esports and physical sports, particularly the rapidly shifting rulesets and high-dimensional gameplay data unique to TFT.
 
 **Key Findings:**
 
-- Determined that there is a pattern in a team that leads to higher win rates.
-- Esports data contains high dimensonality and a large number of data points. 
+- TFT datasets exhibit high dimensionality, meaning that a large number of interdependent variables must be considered for accurate prediction.
+- Predictive performance improved when features captured strategic structure (synergies, items) rather than simple counts of units.
 
-**Takeaway:** 
+**Takeaway:** This study demonstrates that TFT outcomes can be partially predicted by features representing team composition and champion quality. Also, the study states of the high dimensionality within the dataset.
 
 ## Literature Review 2
 **Title:** E-Sports Analytics: A Primer and Resource for Student Research Projects and Lesson Plans
 https://files.eric.ed.gov/fulltext/EJ1242004.pdf
 
-**Summary:** This article provides an overview of esports analytics as an emerging academic domain. It outlines common analytical techniques used in competitive games—such as classification, clustering, and player behavioral modeling—and discusses the challenges caused by dynamic rulesets and patch updates.
+**Summary:** This paper provides an overview of esports analytics as an emerging academic domain. It outlines common analytical techniques used in competitive games—such as classification, clustering, and player behavioral modeling—and discusses the challenges caused by dynamic rulesets and patch updates.
 
 **Key Findings:**
 
-- 
+- Traditional statistical and machine-learning techniques are relevant to esports datasets such as TFT, but must account for sudden changes in gameplay mechanics.
 -  
 
-**Takeaway:** 
+**Takeaway:** This paper reinforces the value of analyzing TFT using structured statistical methods while acknowledging the complexity introduced by multiple game patches. It supports the inclusion of patch-specific analysis in my research questions
 
 ## Literature Review 3
 **Title:** ”Getting Mortdogged”; How high-ranking players experience randomness in Teamfight Tactics (TFT)
 https://uu.diva-portal.org/smash/get/diva2%3A1805620/FULLTEXT01.pdf
 
-**Summary:** This bachelor thesis explores how top-tier TFT players perceive randomness and probability within the game. Through qualitative interviews, the authors capture how players reason about rolling odds, shop variance, and combat randomness—and how these perceptions influence strategic decisions.
+**Summary:** This bachelor’s thesis examines how high-level TFT players interpret and respond to the inherent randomness embedded in the game design. Through qualitative interviews, the authors analyze how players conceptualize probability, perceive fairness, and adapt strategies to mitigate shop RNG, augment outcomes, item drops, and combat variance.
 
 **Key Findings:**
 
 - AutoBattler video games (such as TFT) lack academic research despite high popularity.
-- Controlled randomness (e.g., random augment selection) enhances replayability, making the game strategically richer without overshadowing skill. 
+- Despite a high degree of randomness, TFT is experienced by high-ranked players as a skill-expressive game; randomness shapes strategic flexibility rather than undermining competitive integrity.
+- Players often develop heuristics for predicting variance trends, demonstrating that even stochastic elements can be incorporated into consistent strategies.
 
-**Takeaway:** 
-
-
-
-
-
-3. **Use LLM Tools for Summarization**  
-   Upload the selected papers to an LLM tool capable of text summarization. Have it condense the main points of each paper into a concise, manageable summary (e.g., condense hundreds of pages into a 10-page summary). Carefully review this summary to absorb the key insights.
-
-4. **Leverage Interactive LLM Tools**  
-   Use tools like NotebookLM or other AI-based text digesters to ask specific, targeted questions about the papers:
-   - Example questions:
-     - "In the papers uploaded, did any of them explore XYZ?"
-     - "Which paper is most closely related to the following project idea: [explain idea]?"
-   These tools will help you quickly extract relevant information without re-reading entire papers.
-
-
-## Additional Ideas for things to include 
-
-- **Audience**: Who is this for? Data professionals, businesses, researchers, or curious readers.
-- **Headline**: A captivating title introducing the data science theme (e.g., "Unlocking Insights Through Data Stories").
-- **Introduction**: A brief, engaging overview of what the website offers (e.g., data-driven stories, insights, or case studies).
-- **Questions You Are Addressing**: What do you hope to learn?
-- **Motivation**: Explain why this topic matters, highlighting the importance of data in solving real-world problems.
-- **Key Topics**: List the main focus areas (e.g., machine learning, data visualization, predictive modeling).
-- **Use Cases/Examples**: A brief teaser of compelling stories or case studies you’ve worked on.
-- **Call to Action**: Invite visitors to explore the content, follow along, or contact you for more information.
-- **Visual/Infographic**: Add a simple graphic or visual element to make the page more dynamic.
+**Takeaway:** This thesis shows the competitive depth of TFT and the importance of analyzing concrete, measurable gameplay features—such as champion choices and unit tiers—rather than viewing outcomes as purely luck-driven. Also, top level players can adapt to randomness to create consistent meta strategies such as specific team compositions.
 
 References:

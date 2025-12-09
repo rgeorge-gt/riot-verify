@@ -1,25 +1,185 @@
-# Instructions 
+# Introduction:
+In this section, I will be using awnsering the following data science questions:
+What are meta comps among top level TFT player boards?
+What are meta comps among players who place top 4?
 
-`Note`: You should remove these instructions once you have read and understood them. They should not be included in your final submission.
+Champions in TFT have unique abilites and share types. A basic strategy is composing a team of unit that share traits because of bonuses given to units that share traits. For example, in Set 15, Ahiri and Jinx are both Star Guardians. When they are on the board together, they each get a unique bonus. The more Star Guardians are on the board, the greater the bonus. This aims to find common team comps at top level play. 
 
-`Remember:` Exactly what do you put on this page will be specific you your project and data. Some things might "make more sense" on one page rather than another, depending on your workflow. Organize your project in a logical way that makes the most sense to you.  
+# Methods
+Originally, I tried HDBSCAN, but realized I had used distance = Euclidean. As my data was purley categorical, euclidean distance results would be useless. When I switched to Jaccard distance, the results were poor. Which made me decide on using Hieracical Clustering. 
 
-## Suggested page structure
+Using my cleaned dataset, I created a new binary dataset that showed how many frequency of unit appearance.
 
-Here’s one suggested structure for organizing your technical pages. You can adjust this as needed:
+My main issue was the size of the dataset. Original shape = (32455, 63) which would cause Jupyter to take to long or outright crash. Before performing PCA, I removed duplicates as they do not improve the results and increase run time. After removing the duplicates, the shape became (10757, 63). This is about a third of what we started but it makes sense. We are only looking at the list of units a player employed without consideration of other variables such as star level, items, or auguments. Despite the games innate RNG, top players are very consistent at building top level meta comps.
 
-`Audience`:Remember that these are written for a technical audience. Assume they have completed the DSAN program, but would appreciate refreshers of the important concepts. 
+After removing duplicates, I ran hierachtic clustering with Jaccard distance. Results lead to over 100 clusters which required me to perform PCA with n_components = 25. pca.explained_variance_ratio_ = 0.826.
 
-- **Introduction and Motivation:** Briefly outline your plan. What are you doing on this page, and why? Provide context and explain the goals of your analysis.
-- **Overview of Methods:** Give a concise explanation of the methods used. For example, if using K-Means clustering, describe what it is, how it works, the inputs and outputs, and key hyperparameters.
-- **Code:** Include the code you used to implement your workflow.
-- **Summary and Interpretation of Results:** Summarize your findings, interpret the results, and discuss their technical implications.
+Since PCA was performed, distance used was euclidean instead of Jaccard.
 
-## What to address 
+After running, I wanted to find the number of cluster relative to t.
+t = 2 → clusters = 228
+t = 3 → clusters = 11
+t = 4 → clusters = 1
+t = 5 → clusters = 1
 
-The following is a list of some of the things you should address on this page. This list is not exhaustive, and you should use your judgment to decide what is most relevant to your project.
+I choose t = 3 and then wanted to look at the number 
 
-This page is designed to give you hands-on experience with key unsupervised learning techniques, including clustering methods and dimensionality reduction, applied to real-world datasets. Please apply algorithms such as K-Means, DBSCAN, Hierarchical clustering, PCA, and t-SNE to your data. Through this process, you’ll deepen your understanding of how unsupervised learning can reveal hidden patterns and structure in data.
+#Methods 
+Hierarchic Clustering:
+  - A clustering algorithm.
+
+HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise)
+  - HDBSCAN is a clustering algorithm build upon DBSCAN. It can dynamically adapt adjust to different densities and form clusters within the data. It is best used for datasets with complex structures or varying densities because it creates a hierarchical tree of clusters that enable users to examine the data at different levels of granularity. Parameters that can be adjusted by the ende user are:
+  The minimum number of points to form a cluster.
+  The minimum number of samples in a neighborhood for a point to be considered a core point.
+
+Principal Component Analysis (PCA):
+  - 
+
+TSNE
+  - 
+
+#Results Section:
+Below are the sizes of the clusters which served as an indicator of usage. 
+
+Below are the 11 clusters produced. 
+The number each to name is the frequency of appearance. The higher the number, the more likely the champion appears on the comp which indicates if they are a staple or a secondary pick. 
+ 
+===== COMP 1 =====
+  Poppy: 0.95
+  Jinx: 0.95
+  Neeko: 0.81
+  Rell: 0.75
+  Kobuko: 0.72
+  KSante: 0.68
+  Xayah: 0.52
+  Seraphine: 0.48
+  Varus: 0.47
+  Braum: 0.46
+
+===== COMP 2 =====
+  Garen: 0.95
+  Rakan: 0.90
+  Ezreal: 0.88
+  Leona: 0.84
+  Yuumi: 0.83
+  Jayce: 0.57
+  Katarina: 0.53
+  Ryze: 0.31
+  Malzahar: 0.29
+  KSante: 0.29
+
+===== COMP 3 =====
+  Shen: 0.89
+  Leona: 0.85
+  Rell: 0.84
+  Swain: 0.83
+  XinZhao: 0.81
+  Braum: 0.66
+  Garen: 0.43
+  Seraphine: 0.38
+  TwistedFate: 0.37
+  Zyra: 0.31
+
+===== COMP 4 =====
+  Samira: 0.93
+  Sett: 0.92
+  Volibear: 0.77
+  Naafiri: 0.73
+  XinZhao: 0.72
+  Lux: 0.54
+  Gwen: 0.48
+  Braum: 0.46
+  Viego: 0.40
+  Shen: 0.38
+
+===== COMP 5 =====
+  DrMundo: 0.93
+  Udyr: 0.91
+  Sett: 0.87
+  Naafiri: 0.80
+  Vi: 0.71
+  LeeSin: 0.71
+  Braum: 0.54
+  TwistedFate: 0.53
+  Zyra: 0.45
+  Aatrox: 0.44
+
+===== COMP 6 =====
+  Swain: 0.91
+  Janna: 0.90
+  Ashe: 0.85
+  Vi: 0.77
+  Zyra: 0.71
+  KSante: 0.69
+  JarvanIV: 0.67
+  Braum: 0.55
+  Udyr: 0.53
+  LeeSin: 0.47
+
+===== COMP 7 =====
+  Janna: 0.83
+  Malphite: 0.81
+  Sivir: 0.60
+  Ziggs: 0.57
+  Shen: 0.57
+  Ryze: 0.46
+  JarvanIV: 0.44
+  Neeko: 0.41
+  KSante: 0.34
+  Kennen: 0.31
+
+===== COMP 8 =====
+  Karma: 0.97
+  Lucian: 0.94
+  JarvanIV: 0.90
+  Ryze: 0.66
+  Swain: 0.51
+  Aatrox: 0.49
+  Senna: 0.46
+  Gwen: 0.44
+  Lux: 0.43
+  Gangplank: 0.41
+
+===== COMP 9 =====
+  Kayle: 0.82
+  Udyr: 0.79
+  Zac: 0.72
+  Jhin: 0.62
+  Aatrox: 0.60
+  Varus: 0.54
+  KSante: 0.54
+  LeeSin: 0.40
+  Malzahar: 0.40
+  Sett: 0.31
+
+===== COMP 10 =====
+  Zac: 0.64
+  Darius: 0.64
+  Malzahar: 0.64
+  Kobuko: 0.58
+  Poppy: 0.50
+  Jayce: 0.46
+  Aatrox: 0.37
+  Rammus: 0.32
+  Seraphine: 0.28
+  KSante: 0.21
+
+===== COMP 11 =====
+  Aatrox: 0.75
+  Ryze: 0.71
+  Udyr: 0.65
+  JarvanIV: 0.62
+  Akali: 0.56
+  Darius: 0.55
+  Senna: 0.49
+  Kennen: 0.49
+  Kobuko: 0.44
+  KSante: 0.41
+
+### Conclusions:
+
+
 
 ### Part 1: Dimensionality Reduction
 
@@ -43,19 +203,3 @@ The objective of this section is to explore and demonstrate the effectiveness of
    - Discuss the trade-offs and scenarios where one technique may perform better than the other.
 
 ### Part 2: Clustering Methods
-
-Apply clustering techniques (K-Means, DBSCAN, and Hierarchical clustering) to a selected dataset. The goal is to understand how each method works, compare their performance, and interpret the results.
-
-1. **Clustering Methods:**
-   - Apply **K-Means**, **DBSCAN**, and **Hierarchical clustering** to your dataset.
-   - Write a technical summary for each method (2–4 paragraphs per method) explaining how it works, its purpose, and any model selection methods used (e.g., Elbow, Silhouette).
-
-2. **Results Section:**
-   - Discuss and visualize the results of each clustering analysis.
-   - Compare the performance of different clustering methods, noting any insights gained from the analysis.
-   - Visualize cluster patterns and how they relate (if at all) to existing labels in the dataset.
-   - Use professional, labeled, and clear visualizations that support your discussion.
-
-3. **Conclusion:**
-   - Summarize the key findings and their real-world implications in a non-technical way. Focus on the most important results and how they could apply to practical situations.
-
