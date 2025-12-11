@@ -5,21 +5,22 @@ This section should be written for a **technical audience**, focusing on detaile
 ## Challenges
 
 - Getting the API key operating correctly was an incredibly tedious process. After getting the API key approval, my TFT account wouldnt synch with my Riot Games account preventing me from using the key. This took about 11 hours to resolve.
-- I originally planned to obtain a simple random sample of 250 Grandmaster, and Challenger rank players (the two highest level player ranks) and their 25 most recent game data. However, the API has run limitations which caused my code to only pull 422 players. 
-- After some inital evaluation, I wanted to include the next lower rank (Master) to better diversify the playerbase (Challenger + Grandmaster accounted for <1% of the playerbase while Master is 2.2%). 
+- I originally planned to obtain a simple random sample of 250 Grandmaster, and Challenger rank players (the two highest level player ranks) and their 25 most recent game data. However, the API had run limitations which caused my code to only pull 422 players. 
+- After some initial evaluation, I wanted to include the next lower rank (Master) to better diversify the playerbase (Challenger + Grandmaster accounted for <1% of the playerbase while Master is 2.2%). 
 - However, when I ran the script the RIOT API had no data to pull due to the new build coming out.
-- Discuss any technical challenges faced during the project, such as data limitations, computational issues, or obstacles encountered during analysis.
-- Explain unexpected results and their technical implications.
-- Identify areas for future work, including potential optimizations, further analysis, or scaling solutions.
-- There are many areas for future work that would be intresting. Comparing game versions to see if balance patches had achieved the deseriable outcome. 
+- There was no augments data pulled. This is an important factor as augments can heavily influence ones team. The lack of this field will leads to some omitted variable bias.
+- There are many areas for future work that would be interesting. Comparing game versions to see if balance patches had achieved the describable outcome. 
 
 ## Benchmarks
 
-- Based on my personal gameplay experience, my expectations for most relevant variables to determine match placement would be game length, damage dealt. These were proven correct when I performed 
-- Outside of those, I had thought the presecne of 3 star units would nearly guarentee upper placement. 
+- Based on my personal gameplay experience, my expectations for most relevant variables to determine match placement would be game length, and damage dealt. These were proven correct but were overcentralizing.
+- Outside of those, I had thought the presence of 3 star units would nearly guarantee first place. 
+- Im not sure what a top tier comp would become, I units either being 2 or 3 star, cost 4-5, and synergy in traits (ie multiple Star Guardians)
 
 ## Conclusion and Future Steps
 
-- Summarize the key technical points and outcomes of the project.
-- Suggest potential improvements or refinements to this part of the project.
-- Based on the results, provide actionable recommendations for further research or optimization efforts.
+- While my dataset was not ideal, it still yielded quite a robust dataset for analytics.
+- The main outcome of this project is to show principles of data science applied to the video game industry.
+- This entire script should be redone. There is a package for Riot Games API that would make this process much simpler.
+- The dataset should include Master players.
+- Traits need to be heavily examined. Quantity of traits on team and trait composition is an important part of team building in TFT. I lacked the time to do so but plan to integrate by EOY.
