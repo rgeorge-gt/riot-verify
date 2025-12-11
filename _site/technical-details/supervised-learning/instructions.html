@@ -97,10 +97,6 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../instructions/overview.html"> 
-<span class="menu-text">Instructions</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../../report/report.html"> 
 <span class="menu-text">Report</span></a>
   </li>  
@@ -155,17 +151,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a>
-  <ul class="collapse">
-  <li><a href="#suggested-page-structure" id="toc-suggested-page-structure" class="nav-link" data-scroll-target="#suggested-page-structure">Suggested page structure</a></li>
-  <li><a href="#what-to-address" id="toc-what-to-address" class="nav-link" data-scroll-target="#what-to-address">What to address</a></li>
-  <li><a href="#data-preprocessing" id="toc-data-preprocessing" class="nav-link" data-scroll-target="#data-preprocessing">Data Preprocessing</a></li>
-  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection">Model Selection</a></li>
-  <li><a href="#training-and-testing-strategy" id="toc-training-and-testing-strategy" class="nav-link" data-scroll-target="#training-and-testing-strategy">Training and Testing Strategy</a></li>
-  <li><a href="#model-evaluation-metrics" id="toc-model-evaluation-metrics" class="nav-link" data-scroll-target="#model-evaluation-metrics">Model Evaluation Metrics</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
-  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
-  </ul></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions:</a></li>
   </ul>
 </nav>
     </div>
@@ -175,74 +164,55 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="instructions" class="level1">
-<h1>Instructions</h1>
-<p><code>Note</code>: You should remove these instruction once you have read and understood them. They should not be included in your final submission.</p>
-<p><code>Remember:</code> Exactly what do you put on this page will be specific you your project and data. Some things might “make more sense” on one page rather than another, depending on your workflow. Organize your project in a logical way that makes the most sense to you.</p>
-<section id="suggested-page-structure" class="level2">
-<h2 class="anchored" data-anchor-id="suggested-page-structure">Suggested page structure</h2>
-<p>Here’s one suggested structure for organizing your technical pages. You can adjust this as needed:</p>
-<p><code>Audience</code>:Remember that these are written for a technical audience. Assume they have completed the DSAN program, but would appreciate refreshers of the important concepts.</p>
-<ul>
-<li><strong>Introduction and Motivation:</strong> Briefly outline your plan. What are you doing on this page, and why? Provide context and explain the goals of your analysis.</li>
-<li><strong>Overview of Methods:</strong> Give a concise explanation of the methods used. For example, if using K-Means clustering, describe what it is, how it works, the inputs and outputs, and key hyperparameters.</li>
-<li><strong>Code:</strong> Include the code you used to implement your workflow.</li>
-<li><strong>Summary and Interpretation of Results:</strong> Summarize your findings, interpret the results, and discuss their technical implications.</li>
-</ul>
-</section>
-<section id="what-to-address" class="level2">
-<h2 class="anchored" data-anchor-id="what-to-address">What to address</h2>
-<p>The following is a list of some of the things you should address on this page. This list is not exhaustive, and you should use your judgment to decide what is most relevant to your project.</p>
-<p>Please do some form of “Feature selection” in your project and include a section on it. Discuss the process you went through to select the features that you used in your model, this should be done for both classification models and regression models. What did you include and why? What did you exclude? What was the reasoning behind your decisions? This section can be included here, or you can make a new page in the dropdown menu for it.</p>
-<p>Please break this page into a “regression” section, “binary classification” section, and a “Multi-class classification” section. For each case you should try multiple methods, including those discussed in class, and compare and contrast their preformance and results.</p>
-</section>
-<section id="data-preprocessing" class="level2">
-<h2 class="anchored" data-anchor-id="data-preprocessing">Data Preprocessing</h2>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>The goal of this project is to identify the most important factors that determine player placement in high-level Teamfight Tactics (TFT) games. Two related research questions were explored:</p>
 <ol type="1">
-<li><strong>Normalization or Standardization</strong>: Apply techniques to scale the data appropriately.</li>
-<li><strong>Feature Selection or Extraction</strong>: Identify and select the most relevant features for your analysis.</li>
-<li><strong>Encoding Categorical Variables</strong>: Convert categorical variables into a suitable format for modeling.</li>
+<li>Which variables have the greatest impact on overall placement among top-ranked players?</li>
+<li>Which variables are most predictive of finishing in first place?</li>
 </ol>
-</section>
-<section id="model-selection" class="level2">
-<h2 class="anchored" data-anchor-id="model-selection">Model Selection</h2>
+<p>To answer these questions, two machine learning models were used:</p>
 <ol type="1">
-<li><strong>Model Rationale</strong>: Explain the reasons for selecting specific models or algorithms.</li>
-<li><strong>Overview of Algorithms</strong>: Provide a brief overview of the algorithms used</li>
+<li>Random Forest Regressor — to predict a player’s numerical placement</li>
+<li>Random Forest Classifier — to predict whether a player finished first (binary outcome)</li>
 </ol>
+<p>Random Forest models were chosen because they handle nonlinear relationships, do not require normalization or scaling, and naturally provide feature importance rankings. This makes them well-suited for gameplay-derived variables that differ widely in scale and distribution.</p>
+<p>The dataset included various gameplay metrics such as gold remaining, number of items used, total champions fielded, and distribution of champion star levels and costs. These features were used to train both models after performing standard train–test splits.</p>
+<p>What are the most significant factors that determine placement at top level play? What are the most significant factors that determine first place?</p>
+<p>To best awnser this, I used Random Forest Regressor. My choices was due to the fact Random Forest Regressor does not require normalization, feature scaling, or linearity assumptions. For determining first place, I decided on Random Forest Classifer given that the outcome Im trying to predict is a binary categorical variable.</p>
 </section>
-<section id="training-and-testing-strategy" class="level2">
-<h2 class="anchored" data-anchor-id="training-and-testing-strategy">Training and Testing Strategy</h2>
-<ol type="1">
-<li><strong>Split Methods</strong>: Detail the splitting methods used (e.g., train-test split, cross-validation).</li>
-<li><strong>Dataset Proportions</strong>: Specify the proportions used for splitting the dataset.</li>
-</ol>
-</section>
-<section id="model-evaluation-metrics" class="level2">
-<h2 class="anchored" data-anchor-id="model-evaluation-metrics">Model Evaluation Metrics</h2>
-<ol type="1">
-<li><strong>Binary Classification Metrics</strong>: Discuss metrics such as accuracy, precision, recall, F1 score, and ROC-AUC.</li>
-<li><strong>Multiclass Classification Metrics</strong>: Include metrics such as confusion matrix and macro/micro F1 score.</li>
-<li><strong>Regression Metrics</strong>: Explain metrics such as RMSE, MAE, and R-squared, parity plots, etc.</li>
-</ol>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<p>Random Forest Regressor: - A Random Forest Regressor is an ensemble learning method that builds many decision trees and averages their predictions. It performs well on nonlinear data and identifies which features contribute most to prediction accuracy.</p>
+<p>Random Forest Classifier: - A Random Forest Classifier uses the same ensemble strategy but outputs categorical predictions. In this case, the model predicted whether a player achieved first place (1) or not (0).</p>
+<p>Feature Definitions The following gameplay features were used:</p>
+<p>gold_left — Gold remaining when the game ends total_items — Number of completed or component items used num_units — Total number of champions deployed num_1star / 2star / 3star — Count of champions by star level num_cost1 / 2 / 3 / 4 / 5 — Count of champions by shop cost</p>
+<p>Several variables were intentionally omitted, including time_eliminated, total_damage, and game_length, because they strongly correlate with placement and would cause leakage, making the model trivially predict outcomes.</p>
+<p>Model Training</p>
+<p>The dataset was split using train_test_split. For the classifier predicting first place, the split used: stratify = y1 Stratify was applied because first place finishes accounted for 12.5% of the total dataset.</p>
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
-<ol type="1">
-<li><strong>Model Performance Summary</strong>: Provide a summary of the model’s performance.</li>
-<li><strong>Visualizations</strong>: Include visualizations of results (e.g., ROC curves, feature importance plots).</li>
-</ol>
+<p>Random Forest Regressor Initial model performance: MAE = 0.548 MSE = 0.536 RMSE = 0.732</p>
+<p>After the train–test split:</p>
+<p>MAE = 1.168 MSE = 2.261 RMSE = 1.504</p>
+<p>Despite omitted variable bias, these values indicate reasonably strong performance given the inherent randomness of TFT.</p>
+<p>Important Predictors:</p>
+<p>total_items ≈ 0.30 num_2star gold_left num_units num_3star</p>
+<p>The most dominant factor was items.</p>
+<p>Random Forest Classifier</p>
+<p>Below are metrics of validity:</p>
+<p>Accuracy = 0.880 Precision = 0.531 Recall = 0.386 F1 = 0.447 ROC-AUC = 0.878</p>
+<p>Accuracy and ROC-AUC are strong, but Precision, Recall, and F1 are relatively weak, likely due to the rarity of first-place finishes and the difficulty of modeling endgame volatility.</p>
+<p>The most important factors were: gold_left ≈ 0.25 total_items num_units num_2star</p>
 </section>
-<section id="discussion" class="level2">
-<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
-<ol type="1">
-<li><strong>Result Interpretation</strong>: Interpret the results obtained from the analysis.</li>
-<li><strong>Model Performance Comparison</strong>: Compare the performance of different models.</li>
-<li><strong>Insights Gained</strong>: Share insights learned from the analysis.</li>
-</ol>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions:</h2>
+<p>Across both models, four features consistently emerged as the most important:</p>
+<p>Items Gold left over Number of 2-star champions Total units deployed</p>
+<p>Interestingly, the total number of champions was less predictive than itemization and gold economy. This suggests that TFT success at top level play depends more on quality of units (upgrades + items) rather than simply quantity of units.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

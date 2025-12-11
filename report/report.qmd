@@ -1,74 +1,41 @@
 ## Introduction
-Over the past fifteen years, esports has grown from a niche hobby into a global entertainment industry, attracting millions of players and viewers worldwide. Among the many genres that are played at a competitive level, auto battlers have.... Auto battlers blend strategy, probability, and decision-making in ways that challenge players to think several steps ahead—yet once the battle begins, they have no control over the outcome.
+Over the past fifteen years, esports has evolved from a niche hobby into a global entertainment and competitive ecosystem, drawing millions of players, viewers, and investors worldwide. Major publishers, including Capcom, Riot Games, and Bandai Namco, now host international tournament circuits with prize pools rivaling traditional sports. For example, Capcom’s 2024 Capcom Cup awarded $1.5 million to its champion.
 
-Riot Games released Teamfight Tactics (TFT) in 2019, a game that quickly became one of the most played and most watched auto battlers in the world.
+Released in 2019 by Riot Games, Teamfight Tactics (TFT) has become one of the most influential titles in the auto-battler genre. The game challenges players to manage resources efficiently, navigate random elements, and adapt strategically in real time.
 
-As TFT matured, so did its competitive scene, player base, and economic influence. For companies operating in esports—developers, organizers, advertisers, and content platforms—understanding how players behave and how game systems influence retention, spending, and engagement has become increasingly important.
+As TFT’s community and competitive scene expanded, so did the importance of understanding how players make decisions and what factors ultimately determine success. For developers, individual players, esports teams, and marketing strategists, insights into player behavior can guide content updates, balance patches, monetization systems, and engagement strategies.
+
+This report explores the underlying factors that influence competitive performance in TFT and demonstrates how data-driven analysis can reveal meaningful patterns in player outcomes.
 
 ## Purpose
-This report is written for a non-technical audience, including marketing teams, executives, and business stakeholders who want to understand the strategic value behind player behavior in auto battler games such as Teamfight Tactics. The objective is not to explain the mathematical or computational complexities behind the game mechanics, but rather to to demonstrate how data-driven insights in games like TFT can guide smarter business decisions—ranging from content updates and monetization strategies to marketing campaigns and competitive event planning.
+This report aims to identify the gameplay variables that most strongly determine competitive success in Teamfight Tactics. Specifically, this analysis investigates:
 
+1) Which variables most strongly influence overall player placement
+2) Which factors are most predictive of finishing in first place.
+3) What are the most popular comps used at top level play?
+4) What comp consistently places the highest?
+5) What is the most commonly used Champion at Top level play?
 
-##
+For this study, only Grandmaster and Challenge level match data from Version 15.22 was used to ensure that the insights reflect strategic behavior at the highest levels of play rather than general gameplay. 
+
+Although the technical models underpinning the analysis are complex, this report is written for a non-technical audience, including marketing teams, esports stakeholders, and business leaders. The goal is to demonstrate how machine-learning insights can support smarter decisions around game balance, player engagement, and competitive design.
+
+## Key Findings
+- The most successful comp found at top level play lacked a high consistency in the champion selection.
+- The most popular comp consisted of 
+- Across the 11 analyzed comps, the average placement range was less than one placement, indicating an exceptionally well-balanced metagame in Patch 15.22
+- While Braum was the popular unit, he did not appear on the best placing or most common comp.
+
+## Methodology Overview
+
+All of the data was collected from Riot Games TFT API. The 25 most recent matches were collected from a simple random sample of 422 Grandmaster and Challenger ranked players. 
+Random Forest Regression was used to determine which variables most strongly influence overall placement.
+Random Forest Classification was used to predict the likelihood of finishing in first place.
+Evaluation metrics included MAE, MSE, RMSE for regression and Accuracy, Precision, Recall, F1, and ROC-AUC for classification.
 
 ## Conclusions
+The video game industry—particularly in the context of esports—produces vast amounts of data that can be leveraged by developers to create insights into gameplay design, balance patches, and player behavior. By applying machine-learning techniques to high-level TFT match data, this report demonstrates that meaningful insights emerge regarding the highest levels of play. 
 
-## Guidelines for Creating a Good Narrative
+While the models used in this study highlight specific gameplay variables that affect outcomes at the highest level of play, they provide a window of insight into the current competitive balance of TFT. Understanding how top players adapt to meta shifts can assist developers in making informed patch decisions, while helping esports organizations and players themselves optimize strategies for consistent competitive success.
 
-- **Clear Purpose**: Define the core message or objective early on.
-- **Know Your Audience**: Adjust language, tone, and detail based on the audience’s understanding.
-- **Strong Opening**: Start with a hook that sets context and stakes.
-- **Logical Flow**: Structure with a clear beginning, middle, and end.
-- **Key Insights**: Highlight the most important points; avoid unnecessary details or jargon.
-- **Data Support**: Use data to enhance the narrative without overwhelming.
-- **Visuals**: Incorporate charts to simplify ideas and engage the audience.
-- **Actionable Takeaways**: Conclude with recommendations or next steps.
-- **Authenticity**: Use storytelling to make the content engaging and relatable.
-- **Revise**: Edit for clarity and impact, removing unnecessary content.
-  
-## Report Content
-
-These are just examples, you can use any structure that is suitable for your project.
-
-### Case-1: Academic-Oriented Projects
-
-- **Introduction**: Provide an accessible overview and explain the motivation and importance of the research.
-   *Example*: "This study explores how climate change affects local ecosystems, vital for wildlife conservation."
-- **Objective**: Clearly define the research goal and relate it to real-world challenges.
-   *Example*: "We aim to analyze the effects of air pollution on public health in urban areas."
-- **Key Findings**: Present insights without technical terms, focusing on the impact.
-   *Example*: "Air pollution increases the risk of respiratory diseases by 20%."
-- **Methodology Overview**: Briefly explain relevant methods.
-   *Example*: "We analyzed air quality data from 50 cities and surveyed 10,000 residents."
-- **Visualizations**: Use simple graphs and infographics to convey findings.
-   *Example*: A map showing pollution levels and a bar chart of health risks.
-- **Societal Implications**: Highlight the broader impact.
-   *Example*: "This study highlights the need for better air quality policies."
-- **Call to Action**: Offer recommendations based on findings.
-   *Example*: "We recommend city planners invest in green spaces."
-- **Conclusion**: Recap the main findings and societal impact.
-   *Example*: "Understanding pollution's health impacts will help create healthier cities."
-
-### Case-2: Business-Oriented Projects
-
-- **Executive Summary**: Summarize key findings and their relevance to business goals.
-   *Example*: "This report predicts customer churn and offers strategies to reduce churn by 15%."
-- **Objective**: Define the problem or question addressed.
-   *Example*: "This project aims to identify the drivers of customer churn."
-- **Key Insights**: Present the most important, actionable insights.
-   *Example*: "Customers who interact with support twice within 30 days are 25% less likely to churn."
-- **Visualizations**: Use clear graphs to convey key insights.
-   *Example*: A bar chart showing churn likelihood based on engagement.
-- **Business Implications**: Explain how findings impact business outcomes and offer specific recommendations.
-   *Example*: "Focus retention efforts on low-engagement customers."
-- **Recommendations**: Provide clear, actionable steps with projections.
-   *Example*: "Implement an automated retention campaign, reducing churn by 10%."
-- **Conclusion**: Summarize findings and suggest next steps.
-   *Example*: "Addressing churn drivers can reduce loss and improve profitability."
-- **Appendix** (Optional): Additional charts or explanations for further insights.
-
-## Final Tips
-
-- **Simplicity**: Avoid jargon; focus on business-relevant insights.
-- **Visual Focus**: Prioritize charts and graphs over dense text.
-- **Emphasize Impact**: Always link data insights to business outcomes.
+At its core, this project highlights something I’ve come to appreciate deeply: video games are overflowing with analytical potential. Every decision, every roll, every pivot creates a data trail that tells a story. Unlocking that data causes patterns to emerge, and a deeper understanding of the game and the player begins to emerge. As this report shows, the analytics potential within esports is massive, and we are only scratching the surface of what can be done.

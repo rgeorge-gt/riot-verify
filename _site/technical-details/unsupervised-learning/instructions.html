@@ -97,10 +97,6 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../instructions/overview.html"> 
-<span class="menu-text">Instructions</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../../report/report.html"> 
 <span class="menu-text">Report</span></a>
   </li>  
@@ -159,8 +155,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
   <ul class="collapse">
   <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions:</a></li>
-  <li><a href="#part-1-dimensionality-reduction" id="toc-part-1-dimensionality-reduction" class="nav-link" data-scroll-target="#part-1-dimensionality-reduction">Part 1: Dimensionality Reduction</a></li>
-  <li><a href="#part-2-clustering-methods" id="toc-part-2-clustering-methods" class="nav-link" data-scroll-target="#part-2-clustering-methods">Part 2: Clustering Methods</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -173,24 +167,28 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="introduction" class="level1">
 <h1>Introduction:</h1>
-<p>In this section, I will be using awnsering the following data science questions: What are meta comps among top level TFT player boards? What are meta comps among players who place top 4?</p>
-<p>Champions in TFT have unique abilites and share types. A basic strategy is composing a team of unit that share traits because of bonuses given to units that share traits. For example, in Set 15, Ahiri and Jinx are both Star Guardians. When they are on the board together, they each get a unique bonus. The more Star Guardians are on the board, the greater the bonus. This aims to find common team comps at top level play.</p>
+<p>This project explores unsupervised learning techniques to identify common meta compositions (“comps”) used by top-ranked players in Teamfight Tactics (TFT), Set 15. The primary research questions guiding this analysis are:</p>
+<p>What team composition is the most frequently used by top-level TFT players? Which composition places the highest at top-level play?</p>
+<p>In TFT, champions have unique abilities and share traits that activate synergies when fielded together. For example, Ahri and Jinx share the Star Guardian trait, granting increased bonuses when multiple Star Guardians appear in the team. Understanding which champion combinations appear consistently in successful boards may reveal the meta trends that drive competitive play.</p>
 </section>
 <section id="methods" class="level1">
 <h1>Methods</h1>
-<p>Originally, I tried HDBSCAN, but realized I had used distance = Euclidean. As my data was purley categorical, euclidean distance results would be useless. When I switched to Jaccard distance, the results were poor. Which made me decide on using Hieracical Clustering.</p>
-<p>Using my cleaned dataset, I created a new binary dataset that showed how many frequency of unit appearance.</p>
-<p>My main issue was the size of the dataset. Original shape = (32455, 63) which would cause Jupyter to take to long or outright crash. Before performing PCA, I removed duplicates as they do not improve the results and increase run time. After removing the duplicates, the shape became (10757, 63). This is about a third of what we started but it makes sense. We are only looking at the list of units a player employed without consideration of other variables such as star level, items, or auguments. Despite the games innate RNG, top players are very consistent at building top level meta comps.</p>
-<p>After removing duplicates, I ran hierachtic clustering with Jaccard distance. Results lead to over 100 clusters which required me to perform PCA with n_components = 25. pca.explained_variance_ratio_ = 0.826.</p>
-<p>Since PCA was performed, distance used was euclidean instead of Jaccard.</p>
-<p>After running, I wanted to find the number of cluster relative to t. t = 2 → clusters = 228 t = 3 → clusters = 11 t = 4 → clusters = 1 t = 5 → clusters = 1</p>
-<p>I choose t = 3 and then wanted to look at the number</p>
+<p>I had used my cleaned dataset to create a new dataset consisting of 32,455 rows and 63 champion indicator columns, where each column represented the frequency or presence of a champion in the player’s final board. Because analyzing every individual game state introduces high redundancy, duplicate rows were removed, producing a dataset of 10,757 unique compositions.</p>
+<p>This reduction is expected because high-level players tend to converge on optimal meta comps despite the game’s inherent randomness (RNG)</p>
+<p>Initial Attempts Using HDBSCAN</p>
+<p>My initial attemp was to use use HDBSCAN, which is well-suited for clusters of varying densities. However, it was not producing ideal results. As the data is purely categorical, Euclidean distance is unsuitable. Switching to Jaccard distance produced unstable clusters with poor separation.</p>
+<p>Due to these limitations, I had decided to apply hierarchial clustering instead. Like HDBSCAN, it was initially run using Jaccard distance, but the number of clusters exceeded 100, making interpretation difficult. To address this, Principal Component Analysis (PCA) was applied prior to clustering. PCA was applied with n_components = 25 and the retained components explained 82.6% of the variance. After PCA was applied, clustering transitioned to using Euclidean distance.</p>
+<p>After creating a dendrogram, a threshold parameter (t) was evaluated to determine the cut point in the dendrogram. This would determine the number of clusters. The results are shown below:</p>
+<p>t = 2 → clusters = 228 t = 3 → clusters = 11 t = 4 → clusters = 1 t = 5 → clusters = 1</p>
+<p>Based on cluster separation and number of clusters, t = 3 was selected, producing 11 meaningful clusters representing meta team compositions.</p>
 <p>#Methods Hierarchic Clustering: - A clustering algorithm.</p>
 <p>HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) - HDBSCAN is a clustering algorithm build upon DBSCAN. It can dynamically adapt adjust to different densities and form clusters within the data. It is best used for datasets with complex structures or varying densities because it creates a hierarchical tree of clusters that enable users to examine the data at different levels of granularity. Parameters that can be adjusted by the ende user are: The minimum number of points to form a cluster. The minimum number of samples in a neighborhood for a point to be considered a core point.</p>
 <p>Principal Component Analysis (PCA): -</p>
 <p>TSNE -</p>
-<p>#Results Section: Below are the sizes of the clusters which served as an indicator of usage.</p>
-<p>Below are the 11 clusters produced. The number each to name is the frequency of appearance. The higher the number, the more likely the champion appears on the comp which indicates if they are a staple or a secondary pick.</p>
+<p>#Results Section: Below is a table showing the cluster and the number of points in each cluster.</p>
+<p>3 1680 6 1505 5 1363 10 960 1 955 4 852 2 819 9 802 11 744 7 566 8 511</p>
+<p>Clusters 3,6, and 5 are the largest.</p>
+<p>Below are the 11 clusters produced. The values represent frequency of champion appearance within the cluster. A higher value, indicates if they are a staple,secondary, or niche champion pick for each team comp.</p>
 <p>===== COMP 1 ===== Poppy: 0.95 Jinx: 0.95 Neeko: 0.81 Rell: 0.75 Kobuko: 0.72 KSante: 0.68 Xayah: 0.52 Seraphine: 0.48 Varus: 0.47 Braum: 0.46</p>
 <p>===== COMP 2 ===== Garen: 0.95 Rakan: 0.90 Ezreal: 0.88 Leona: 0.84 Yuumi: 0.83 Jayce: 0.57 Katarina: 0.53 Ryze: 0.31 Malzahar: 0.29 KSante: 0.29</p>
 <p>===== COMP 3 ===== Shen: 0.89 Leona: 0.85 Rell: 0.84 Swain: 0.83 XinZhao: 0.81 Braum: 0.66 Garen: 0.43 Seraphine: 0.38 TwistedFate: 0.37 Zyra: 0.31</p>
@@ -202,37 +200,17 @@ ul.task-list li input[type="checkbox"] {
 <p>===== COMP 9 ===== Kayle: 0.82 Udyr: 0.79 Zac: 0.72 Jhin: 0.62 Aatrox: 0.60 Varus: 0.54 KSante: 0.54 LeeSin: 0.40 Malzahar: 0.40 Sett: 0.31</p>
 <p>===== COMP 10 ===== Zac: 0.64 Darius: 0.64 Malzahar: 0.64 Kobuko: 0.58 Poppy: 0.50 Jayce: 0.46 Aatrox: 0.37 Rammus: 0.32 Seraphine: 0.28 KSante: 0.21</p>
 <p>===== COMP 11 ===== Aatrox: 0.75 Ryze: 0.71 Udyr: 0.65 JarvanIV: 0.62 Akali: 0.56 Darius: 0.55 Senna: 0.49 Kennen: 0.49 Kobuko: 0.44 KSante: 0.41</p>
+<p>After looking at these comps, I then found the average place of each cluster.</p>
+<p>cluster 10 4.206250 4 4.497653 8 4.524462 11 4.526882 1 4.689005 2 4.739927 9 4.754364 3 4.783929 5 4.947175 6 5.016611 7 5.169611</p>
 <section id="conclusions" class="level3">
 <h3 class="anchored" data-anchor-id="conclusions">Conclusions:</h3>
-</section>
-<section id="part-1-dimensionality-reduction" class="level3">
-<h3 class="anchored" data-anchor-id="part-1-dimensionality-reduction">Part 1: Dimensionality Reduction</h3>
-<p>The objective of this section is to explore and demonstrate the effectiveness of PCA and t-SNE in reducing the dimensionality of complex data while preserving essential information and improving visualization.</p>
-<ol type="1">
-<li><strong>PCA (Principal Component Analysis):</strong>
-<ul>
-<li>Apply PCA to your dataset.</li>
-<li>Determine the optimal number of principal components.</li>
-<li>Visualize the reduced-dimensional data.</li>
-<li>Analyze and interpret the results.</li>
-</ul></li>
-<li><strong>t-SNE (t-distributed Stochastic Neighbor Embedding):</strong>
-<ul>
-<li>Implement t-SNE on the same dataset.</li>
-<li>Experiment with different perplexity values.</li>
-<li>Visualize the t-SNE output to reveal patterns and clusters.</li>
-<li>Compare the results of t-SNE with those from PCA.</li>
-</ul></li>
-<li><strong>Evaluation and Comparison:</strong>
-<ul>
-<li>Evaluate the effectiveness of PCA and t-SNE in preserving data structure.</li>
-<li>Compare the visualization capabilities of both techniques.</li>
-<li>Discuss the trade-offs and scenarios where one technique may perform better than the other.</li>
-</ul></li>
-</ol>
-</section>
-<section id="part-2-clustering-methods" class="level3">
-<h3 class="anchored" data-anchor-id="part-2-clustering-methods">Part 2: Clustering Methods</h3>
+<p>The most popular competitve comp was Comp 3, a Shen–Leona Vanguard team.</p>
+<p>===== COMP 3 ===== Shen: 0.89 Leona: 0.85 Rell: 0.84 Swain: 0.83 XinZhao: 0.81 Braum: 0.66 Garen: 0.43 Seraphine: 0.38 TwistedFate: 0.37 Zyra: 0.31</p>
+<p>Shen, Leona, Rell, Swain, and Xin Zhao form a stable and highly repeatable core, each appearing in over 80% of compositions in this cluster. Braum serves as a common secondary unit, while Garen, Seraphine, Twisted Fate, and Zyra act as niche and/or situational inclusions.</p>
+<p>Because this cluster is the largest, it represents the most frequently played comp among top-ranked players. However, despite its popularity, Comp 3 had only the fourth-best average placement, indicating that frequency does not necessarily equate to performance.</p>
+<p>The highest placing was comp 10: ===== COMP 10 ===== Zac: 0.64 Darius: 0.64 Malzahar: 0.64 Kobuko: 0.58 Poppy: 0.50 Jayce: 0.46 Aatrox: 0.37 Rammus: 0.32 Seraphine: 0.28 KSante: 0.21</p>
+<p>This comp is a tank/bruiser-oriented lineup anchored by Zac, Darius, Malzahar, and Kobuko. Interestingly, Comp 10 shows comparatively low internal cohesion—its most frequent champions appear only 64% of the time. The lack of a clearly defined, consistent core likely contributes to its lower pick rate, even though it performs extremely well when executed.</p>
+<p>Comparing the most popular and best performing comp leads to some results of the metagame. There is almost no overlap between the top-performing and the most popular comps, with Seraphine being the only shared champion—and only as a low-frequency flex unit in both. Also, the placement range across all clusters is narrow (less than one position), indicating a highly balanced metagame at the top level of competitive play.</p>
 
 
 </section>

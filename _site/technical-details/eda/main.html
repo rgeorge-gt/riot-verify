@@ -135,10 +135,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../instructions/overview.html"> 
-<span class="menu-text">Instructions</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../../report/report.html"> 
 <span class="menu-text">Report</span></a>
   </li>  
@@ -193,16 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a>
-  <ul class="collapse">
-  <li><a href="#suggested-page-structure" id="toc-suggested-page-structure" class="nav-link" data-scroll-target="#suggested-page-structure">Suggested page structure</a></li>
-  <li><a href="#what-to-address" id="toc-what-to-address" class="nav-link" data-scroll-target="#what-to-address">What to address</a></li>
-  </ul></li>
-  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a>
-  <ul class="collapse">
-  <li><a href="#what-to-address-1" id="toc-what-to-address-1" class="nav-link" data-scroll-target="#what-to-address-1">What to address</a></li>
-  </ul></li>
-  <li><a href="#code-1" id="toc-code-1" class="nav-link" data-scroll-target="#code-1">Code</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link active" data-scroll-target="#code">Code</a></li>
   </ul>
 </nav>
     </div>
@@ -229,180 +216,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <!-- After digesting the instructions, you can delete this cell, these are assignment instructions and do not need to be included in your final submission.  -->
-<section id="instructions" class="level1">
-<h1>Instructions</h1>
-<p><code>Note</code>: You should remove these instructions once you have read and understood them. They should not be included in your final submission.</p>
-<p><code>Remember:</code> Exactly what do you put on this page will be specific you your project and data. Some things might “make more sense” on one page rather than another, depending on your workflow. Organize your project in a logical way that makes the most sense to you.</p>
-<section id="suggested-page-structure" class="level2">
-<h2 class="anchored" data-anchor-id="suggested-page-structure">Suggested page structure</h2>
-<p>Here’s one suggested structure for organizing your technical pages. You can adjust this as needed:</p>
-<p><code>Audience</code>:Remember that these are written for a technical audience. Assume they have completed the DSAN program, but would appreciate refreshers of the important concepts.</p>
-<ul>
-<li><strong>Introduction and Motivation:</strong> Briefly outline your plan. What are you doing on this page, and why? Provide context and explain the goals of your analysis.</li>
-<li><strong>Overview of Methods:</strong> Give a concise explanation of the methods used. For example, if using K-Means clustering, describe what it is, how it works, the inputs and outputs, and key hyperparameters.</li>
-<li><strong>Code:</strong> Include the code you used to implement your workflow.</li>
-<li><strong>Summary and Interpretation of Results:</strong> Summarize your findings, interpret the results, and discuss their technical implications.</li>
-</ul>
-</section>
-<section id="what-to-address" class="level2">
-<h2 class="anchored" data-anchor-id="what-to-address">What to address</h2>
-<p>The following is a list of some of the things you should address on this page. This list is not exhaustive, and you should use your judgment to decide what is most relevant to your project.</p>
-<p>The <strong>EDA (Exploratory Data Analysis)</strong> tab in your portfolio serves as a crucial foundation for your project. It provides a thorough overview of the dataset, highlights patterns, identifies potential issues, and prepares the data for further analysis. Follow these instructions to document your EDA effectively:</p>
-<p>The goal of EDA is to gain a deeper understanding of the dataset and its relevance to your project’s objectives. It involves summarizing key data characteristics, identifying patterns, anomalies, and preparing for future analysis phases.</p>
-<p>Here are suggestions for things to include on this page</p>
-<p><strong>Univariate Analysis</strong>:</p>
-<ul>
-<li><strong>Numerical Variables</strong>:
-<ul>
-<li>Provide summary statistics (mean, median, standard deviation).</li>
-<li>Visualize distributions using histograms or density plots.</li>
-</ul></li>
-<li><strong>Categorical Variables</strong>:
-<ul>
-<li>Present frequency counts and visualize distributions using bar charts or pie charts.</li>
-</ul></li>
-<li><strong>Key Insights</strong>:
-<ul>
-<li>Highlight any notable trends or patterns observed.</li>
-</ul></li>
-</ul>
-<p><strong>Bivariate and Multivariate Analysis</strong>:</p>
-<ul>
-<li><strong>Correlation Analysis</strong>:
-<ul>
-<li>Analyze relationships between numerical variables using a correlation matrix.</li>
-<li>Visualize with heatmaps or pair plots and discuss any strong correlations.</li>
-</ul></li>
-<li><strong>Crosstabulations</strong>:
-<ul>
-<li>For categorical variables, use crosstabs to explore relationships and visualize them with grouped bar plots.</li>
-</ul></li>
-<li><strong>Feature Pairings</strong>:
-<ul>
-<li>Analyze relationships between key variables, particularly those related to your target.</li>
-<li>Visualize with scatter plots, box plots, or violin plots.</li>
-</ul></li>
-</ul>
-<p><strong>Data Distribution and Normalization</strong>:</p>
-<ul>
-<li><strong>Skewness and Kurtosis</strong>:</li>
-<li>Analyze and discuss the distribution of variables.</li>
-<li>Apply transformations (e.g., log transformation) if needed for skewed data.</li>
-<li><strong>Normalization</strong>:</li>
-<li>Apply normalization or scaling techniques (e.g., min-max scaling, z-score).</li>
-<li>Document and visualize the impact of normalization.</li>
-</ul>
-<p><strong>Statistical Insights</strong>:</p>
-<ul>
-<li>Conduct basic statistical tests (e.g., T-tests, ANOVA, chi-square) to explore relationships between variables.</li>
-<li>Summarize the statistical results and their implications for your analysis.</li>
-</ul>
-<p><strong>Data Visualization and Storytelling</strong>:</p>
-<ul>
-<li><strong>Visual Summary</strong>:</li>
-<li>Present key insights using charts and visualizations (e.g., Matplotlib, Seaborn, Plotly).</li>
-<li>Ensure all visualizations are well-labeled and easy to interpret.</li>
-<li><strong>Interactive Visualizations (Optional)</strong>:</li>
-<li>Include interactive elements (e.g., Plotly, Bokeh) to allow users to explore the data further.</li>
-</ul>
-<p><strong>Conclusions and Next Steps</strong>:</p>
-<ul>
-<li><strong>Summary of EDA Findings</strong>:</li>
-<li>Highlight the main takeaways from the EDA process (key trends, patterns, data quality issues).</li>
-<li><strong>Implications for Modeling</strong>:</li>
-<li>Discuss how your EDA informs the next steps in your project (e.g., feature selection, data transformations).</li>
-<li>Outline any further data cleaning or preparation required before moving into modeling.</li>
-</ul>
-</section>
-</section>
+<p>#Introduction</p>
+<p>This analyses performs basic EDA to provide a high level picture of the cleaned TFT dataset. First, I am only looking at Version 15.22. Different game versions have balance patches which can affect gameplay in major ways.</p>
+<p>This EDA begins with a basic info and descriptive statistics of the int and float fields. Then a histogram was made to get a general view of the distributions.The results of this showed some high degree of bias so the skew and kurtosis was taken. num_3star, num_cost3, 2.258098, 3.439884 had skew &gt; 1. For kurtosis, game_length = 29 and gold_left = 12. Based on these results, gold_left was an incredibly biased varaible i needed to consider when performing supervised and unsupervised learning. I also made a correlation matrix, and pairplot to see if any notable relationships among data was formed.</p>
+<p>Finally, to get a sense of unit popularity and team comps, I created a bar chart of the top 10 most used champions and a correlation heatmap of units. The most popular units were Braum, KSante, Udyr, Swain, Zyra, JarvanIV, Leona, LeeSin, Vi, and Janna.</p>
+<p>As for the heatmap results, there were some notable correlations in Braum + Swain, Braum + Zyra, Janna + JarvanIV. When I try to determine comps, I wouldlike to see if these champions are frequently seen or the pairings I found are present.</p>
 <section id="code" class="level1">
-<h1>Code</h1>
-<p>Provide the source code used for this section of the project here.</p>
-<p>If you’re using a package for code organization, you can import it at this point. However, make sure that the <strong>actual workflow steps</strong>—including data processing, analysis, and other key tasks—are conducted and clearly demonstrated on this page. The goal is to show the technical flow of your project, highlighting how the code is executed to achieve your results.</p>
-<p>If relevant, link to additional documentation or external references that explain any complex components. This section should give readers a clear view of how the project is implemented from a technical perspective.</p>
-<p>Remember, this page is a technical narrative, NOT just a notebook with a collection of code cells, include in-line Prose, to describe what is going on.</p>
-<p>Copy/paste instructions: - <strong>Introduction and Motivation:</strong> Briefly outline your plan. What are you doing on this page, and why? Provide context and explain the goals of your analysis. - <strong>Overview of Methods:</strong> Give a concise explanation of the methods used. For example, if using K-Means clustering, describe what it is, how it works, the inputs and outputs, and key hyperparameters. - <strong>Code:</strong> Include the code you used to implement your workflow. - <strong>Summary and Interpretation of Results:</strong> Summarize your findings, interpret the results, and discuss their technical implications.</p>
-<section id="what-to-address-1" class="level2">
-<h2 class="anchored" data-anchor-id="what-to-address-1">What to address</h2>
-<p>The following is a list of some of the things you should address on this page. This list is not exhaustive, and you should use your judgment to decide what is most relevant to your project.</p>
-<p>The <strong>EDA (Exploratory Data Analysis)</strong> tab in your portfolio serves as a crucial foundation for your project. It provides a thorough overview of the dataset, highlights patterns, identifies potential issues, and prepares the data for further analysis. Follow these instructions to document your EDA effectively:</p>
-<p>The goal of EDA is to gain a deeper understanding of the dataset and its relevance to your project’s objectives. It involves summarizing key data characteristics, identifying patterns, anomalies, and preparing for future analysis phases.</p>
-<p>Here are suggestions for things to include on this page</p>
-<p><strong>Univariate Analysis</strong>:</p>
-<ul>
-<li><strong>Numerical Variables</strong>:
-<ul>
-<li>Provide summary statistics (mean, median, standard deviation).</li>
-<li>Visualize distributions using histograms or density plots.</li>
-</ul></li>
-<li><strong>Categorical Variables</strong>:
-<ul>
-<li>Present frequency counts and visualize distributions using bar charts or pie charts.</li>
-</ul></li>
-<li><strong>Key Insights</strong>:
-<ul>
-<li>Highlight any notable trends or patterns observed.</li>
-</ul></li>
-</ul>
-<p><strong>Bivariate and Multivariate Analysis</strong>:</p>
-<ul>
-<li><strong>Correlation Analysis</strong>:
-<ul>
-<li>Analyze relationships between numerical variables using a correlation matrix.</li>
-<li>Visualize with heatmaps or pair plots and discuss any strong correlations.</li>
-</ul></li>
-<li><strong>Crosstabulations</strong>:
-<ul>
-<li>For categorical variables, use crosstabs to explore relationships and visualize them with grouped bar plots.</li>
-</ul></li>
-<li><strong>Feature Pairings</strong>:
-<ul>
-<li>Analyze relationships between key variables, particularly those related to your target.</li>
-<li>Visualize with scatter plots, box plots, or violin plots.</li>
-</ul></li>
-</ul>
-<p><strong>Data Distribution and Normalization</strong>:</p>
-<ul>
-<li><strong>Skewness and Kurtosis</strong>:</li>
-<li>Analyze and discuss the distribution of variables.</li>
-<li>Apply transformations (e.g., log transformation) if needed for skewed data.</li>
-<li><strong>Normalization</strong>:</li>
-<li>Apply normalization or scaling techniques (e.g., min-max scaling, z-score).</li>
-<li>Document and visualize the impact of normalization.</li>
-</ul>
-<p><strong>Statistical Insights</strong>:</p>
-<ul>
-<li>Conduct basic statistical tests (e.g., T-tests, ANOVA, chi-square) to explore relationships between variables.</li>
-<li>Summarize the statistical results and their implications for your analysis.</li>
-</ul>
-<p><strong>Data Visualization and Storytelling</strong>:</p>
-<ul>
-<li><strong>Visual Summary</strong>:</li>
-<li>Present key insights using charts and visualizations (e.g., Matplotlib, Seaborn, Plotly).</li>
-<li>Ensure all visualizations are well-labeled and easy to interpret.</li>
-<li><strong>Interactive Visualizations (Optional)</strong>:</li>
-<li>Include interactive elements (e.g., Plotly, Bokeh) to allow users to explore the data further.</li>
-</ul>
-<p><strong>Conclusions and Next Steps</strong>:</p>
-<ul>
-<li><strong>Summary of EDA Findings</strong>:</li>
-<li>Highlight the main takeaways from the EDA process (key trends, patterns, data quality issues).</li>
-<li><strong>Implications for Modeling</strong>:</li>
-<li>Discuss how your EDA informs the next steps in your project (e.g., feature selection, data transformations).</li>
-<li>Outline any further data cleaning or preparation required before moving into modeling.</li>
-</ul>
-</section>
-</section>
-<section id="code-1" class="level1">
 <h1>Code</h1>
 <ul>
 <li><strong>Introduction and Motivation:</strong> The purpose of this notebook is to perform Exploratory Data Analysis (EDA) on the processed TFT gameplay dataset. The various analytics and tests done are done as tests for potential modeling ideas.<br>
 </li>
-<li><strong>Overview of Methods:</strong> Ttest, Chi Square Test,</li>
-<li><strong>Code:</strong> Code is shown below</li>
-<li><strong>Summary and Interpretation of Results:</strong></li>
+<li><strong>Overview of Methods:</strong> Ttest, Bar Graphs, Heatmaps</li>
 </ul>
-<div id="cell-4" class="cell" data-execution_count="1">
+<div id="cell-3" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import packages this file uses</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -410,102 +236,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ast</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-5" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#preset sns style</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style <span class="op">=</span> <span class="st">"whitegrid"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Import singlar combined csv file from raw data step as a pandas df</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>dfTFT <span class="op">=</span> pd.read_csv(<span class="st">"../data/processed-data/TFT_processed-data.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-4" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Import singlar combined csv file from raw data step as a pandas df</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dfTFT <span class="op">=</span> pd.read_csv(<span class="st">"../data/processed-data/TFT_processed-data.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-6" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get info for high level view</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#note, top1, top4, bottom4 are all binarys. </span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dfTFT.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-5" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Only Use Version 15.22. Comparing versions isnt a one to one comparison</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dfTFT <span class="op">=</span> dfTFT[dfTFT[<span class="st">"Release_Version"</span>] <span class="op">==</span> <span class="fl">15.22</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-6" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Note: top1, top4, bottom4 are all binarys. </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dfTFT.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
-RangeIndex: 48692 entries, 0 to 48691
+Index: 32455 entries, 0 to 48667
 Data columns (total 31 columns):
  #   Column           Non-Null Count  Dtype  
 ---  ------           --------------  -----  
- 0   match_id         48692 non-null  object 
- 1   puuid            48692 non-null  object 
- 2   placement        48692 non-null  int64  
- 3   level            48692 non-null  int64  
- 4   time_eliminated  48692 non-null  float64
- 5   total_damage     48692 non-null  int64  
- 6   game_length      48692 non-null  float64
- 7   game_version     48692 non-null  object 
- 8   gold_left        48692 non-null  int64  
- 9   traits           48692 non-null  object 
- 10  units            48692 non-null  object 
- 11  num_traits       48692 non-null  int64  
- 12  num_units        48692 non-null  int64  
- 13  num_1star        48692 non-null  int64  
- 14  num_2star        48692 non-null  int64  
- 15  num_3star        48692 non-null  int64  
- 16  num_cost1        48692 non-null  int64  
- 17  num_cost2        48692 non-null  int64  
- 18  num_cost3        48692 non-null  int64  
- 19  num_cost4        48692 non-null  int64  
- 20  num_cost5        48692 non-null  int64  
- 21  total_items      48692 non-null  int64  
- 22  Release_Version  48692 non-null  float64
- 23  total_traits     48692 non-null  int64  
- 24  total_units      48692 non-null  int64  
- 25  top1             48692 non-null  int64  
- 26  top4             48692 non-null  int64  
- 27  bottom4          48692 non-null  int64  
- 28  champions        48692 non-null  object 
- 29  raw_champions    48692 non-null  object 
- 30  champion_list    48692 non-null  object 
+ 0   match_id         32455 non-null  object 
+ 1   puuid            32455 non-null  object 
+ 2   placement        32455 non-null  int64  
+ 3   level            32455 non-null  int64  
+ 4   time_eliminated  32455 non-null  float64
+ 5   total_damage     32455 non-null  int64  
+ 6   game_length      32455 non-null  float64
+ 7   game_version     32455 non-null  object 
+ 8   gold_left        32455 non-null  int64  
+ 9   traits           32455 non-null  object 
+ 10  units            32455 non-null  object 
+ 11  num_traits       32455 non-null  int64  
+ 12  num_units        32455 non-null  int64  
+ 13  num_1star        32455 non-null  int64  
+ 14  num_2star        32455 non-null  int64  
+ 15  num_3star        32455 non-null  int64  
+ 16  num_cost1        32455 non-null  int64  
+ 17  num_cost2        32455 non-null  int64  
+ 18  num_cost3        32455 non-null  int64  
+ 19  num_cost4        32455 non-null  int64  
+ 20  num_cost5        32455 non-null  int64  
+ 21  total_items      32455 non-null  int64  
+ 22  Release_Version  32455 non-null  float64
+ 23  total_traits     32455 non-null  int64  
+ 24  total_units      32455 non-null  int64  
+ 25  top1             32455 non-null  int64  
+ 26  top4             32455 non-null  int64  
+ 27  bottom4          32455 non-null  int64  
+ 28  champions        32455 non-null  object 
+ 29  raw_champions    32455 non-null  object 
+ 30  champion_list    32455 non-null  object 
 dtypes: float64(3), int64(20), object(8)
-memory usage: 11.5+ MB</code></pre>
+memory usage: 7.9+ MB</code></pre>
 </div>
 </div>
-<div id="cell-7" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get data types</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dfTFT.dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
-<pre><code>match_id            object
-puuid               object
-placement            int64
-level                int64
-time_eliminated    float64
-total_damage         int64
-game_length        float64
-game_version        object
-gold_left            int64
-traits              object
-units               object
-num_traits           int64
-num_units            int64
-num_1star            int64
-num_2star            int64
-num_3star            int64
-num_cost1            int64
-num_cost2            int64
-num_cost3            int64
-num_cost4            int64
-num_cost5            int64
-total_items          int64
-Release_Version    float64
-total_traits         int64
-total_units          int64
-top1                 int64
-top4                 int64
-bottom4              int64
-champions           object
-raw_champions       object
-champion_list       object
-dtype: object</code></pre>
-</div>
-</div>
-<div id="cell-8" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Get decriptive stats of int and float fields</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dfTFT.describe(include<span class="op">=</span>[<span class="st">'int64'</span>,<span class="st">'float64'</span>]).T</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="cell-7" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Get decriptive stats of int and float fields</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dfTFT.describe(include<span class="op">=</span>[<span class="st">'int64'</span>,<span class="st">'float64'</span>]).T</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
 
@@ -526,9 +317,9 @@ dtype: object</code></pre>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">placement</th>
-<td>48692.0</td>
-<td>4.496878</td>
-<td>2.292528</td>
+<td>32455.0</td>
+<td>4.497088</td>
+<td>2.292538e+00</td>
 <td>1.000000</td>
 <td>2.000000</td>
 <td>4.000000</td>
@@ -537,9 +328,9 @@ dtype: object</code></pre>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">level</th>
-<td>48692.0</td>
-<td>8.558778</td>
-<td>0.862634</td>
+<td>32455.0</td>
+<td>8.539670</td>
+<td>8.527264e-01</td>
 <td>1.000000</td>
 <td>8.000000</td>
 <td>9.000000</td>
@@ -548,53 +339,53 @@ dtype: object</code></pre>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">time_eliminated</th>
-<td>48692.0</td>
-<td>1880.757748</td>
-<td>276.654606</td>
+<td>32455.0</td>
+<td>1886.681196</td>
+<td>2.750301e+02</td>
 <td>7.777373</td>
-<td>1677.486755</td>
-<td>1898.756653</td>
-<td>2084.115784</td>
-<td>3036.849609</td>
+<td>1682.768311</td>
+<td>1904.160767</td>
+<td>2090.404053</td>
+<td>2748.024658</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">total_damage</th>
-<td>48692.0</td>
-<td>95.138791</td>
-<td>48.520575</td>
+<td>32455.0</td>
+<td>95.586597</td>
+<td>4.821405e+01</td>
 <td>0.000000</td>
-<td>58.000000</td>
+<td>59.000000</td>
 <td>89.000000</td>
 <td>128.000000</td>
-<td>283.000000</td>
+<td>270.000000</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">game_length</th>
-<td>48692.0</td>
-<td>2183.635953</td>
-<td>145.616022</td>
+<td>32455.0</td>
+<td>2190.228240</td>
+<td>1.451466e+02</td>
 <td>7.777373</td>
-<td>2089.311951</td>
-<td>2181.404297</td>
-<td>2278.620728</td>
-<td>3048.027588</td>
+<td>2098.891357</td>
+<td>2187.416260</td>
+<td>2284.013916</td>
+<td>2756.449219</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">gold_left</th>
-<td>48692.0</td>
-<td>8.981106</td>
-<td>16.462428</td>
+<td>32455.0</td>
+<td>8.620644</td>
+<td>1.544957e+01</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>1.000000</td>
 <td>9.000000</td>
-<td>438.000000</td>
+<td>183.000000</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">num_traits</th>
-<td>48692.0</td>
-<td>10.388524</td>
-<td>2.304766</td>
+<td>32455.0</td>
+<td>10.354830</td>
+<td>2.287158e+00</td>
 <td>0.000000</td>
 <td>9.000000</td>
 <td>10.000000</td>
@@ -603,42 +394,42 @@ dtype: object</code></pre>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">num_units</th>
-<td>48692.0</td>
-<td>8.735562</td>
-<td>1.101782</td>
+<td>32455.0</td>
+<td>8.695671</td>
+<td>1.048188e+00</td>
 <td>0.000000</td>
 <td>8.000000</td>
 <td>9.000000</td>
 <td>9.000000</td>
-<td>15.000000</td>
+<td>13.000000</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">num_1star</th>
-<td>48692.0</td>
-<td>2.153927</td>
-<td>1.548536</td>
+<td>32455.0</td>
+<td>2.155754</td>
+<td>1.543375e+00</td>
 <td>0.000000</td>
 <td>1.000000</td>
 <td>2.000000</td>
 <td>3.000000</td>
-<td>11.000000</td>
+<td>10.000000</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">num_2star</th>
-<td>48692.0</td>
-<td>5.679783</td>
-<td>2.142436</td>
+<td>32455.0</td>
+<td>5.646927</td>
+<td>2.119941e+00</td>
 <td>0.000000</td>
 <td>4.000000</td>
 <td>6.000000</td>
 <td>7.000000</td>
-<td>14.000000</td>
+<td>12.000000</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">num_3star</th>
-<td>48692.0</td>
-<td>0.895609</td>
-<td>1.236078</td>
+<td>32455.0</td>
+<td>0.886489</td>
+<td>1.238142e+00</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
@@ -647,20 +438,20 @@ dtype: object</code></pre>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">num_cost1</th>
-<td>48692.0</td>
-<td>1.517333</td>
-<td>0.884354</td>
+<td>32455.0</td>
+<td>1.506979</td>
+<td>8.895040e-01</td>
 <td>0.000000</td>
 <td>1.000000</td>
 <td>2.000000</td>
 <td>2.000000</td>
-<td>7.000000</td>
+<td>5.000000</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">num_cost2</th>
-<td>48692.0</td>
-<td>1.661854</td>
-<td>0.736219</td>
+<td>32455.0</td>
+<td>1.667971</td>
+<td>7.391302e-01</td>
 <td>0.000000</td>
 <td>1.000000</td>
 <td>2.000000</td>
@@ -669,9 +460,9 @@ dtype: object</code></pre>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">num_cost3</th>
-<td>48692.0</td>
-<td>1.540992</td>
-<td>0.999386</td>
+<td>32455.0</td>
+<td>1.549037</td>
+<td>1.033483e+00</td>
 <td>0.000000</td>
 <td>1.000000</td>
 <td>1.000000</td>
@@ -680,9 +471,9 @@ dtype: object</code></pre>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">num_cost4</th>
-<td>48692.0</td>
+<td>32455.0</td>
 <td>0.000000</td>
-<td>0.000000</td>
+<td>0.000000e+00</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
@@ -691,42 +482,42 @@ dtype: object</code></pre>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">num_cost5</th>
-<td>48692.0</td>
-<td>2.250801</td>
-<td>1.068626</td>
+<td>32455.0</td>
+<td>2.250932</td>
+<td>1.073448e+00</td>
 <td>0.000000</td>
 <td>1.000000</td>
 <td>2.000000</td>
 <td>3.000000</td>
-<td>7.000000</td>
+<td>6.000000</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">total_items</th>
-<td>48692.0</td>
-<td>12.569169</td>
-<td>3.783431</td>
+<td>32455.0</td>
+<td>12.385210</td>
+<td>3.510498e+00</td>
 <td>0.000000</td>
 <td>10.000000</td>
 <td>12.000000</td>
-<td>15.000000</td>
-<td>36.000000</td>
+<td>14.000000</td>
+<td>30.000000</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">Release_Version</th>
-<td>48692.0</td>
-<td>15.220215</td>
-<td>0.005771</td>
-<td>15.210000</td>
+<td>32455.0</td>
+<td>15.220000</td>
+<td>1.254305e-11</td>
 <td>15.220000</td>
 <td>15.220000</td>
 <td>15.220000</td>
-<td>15.230000</td>
+<td>15.220000</td>
+<td>15.220000</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">total_traits</th>
-<td>48692.0</td>
-<td>10.388524</td>
-<td>2.304766</td>
+<td>32455.0</td>
+<td>10.354830</td>
+<td>2.287158e+00</td>
 <td>0.000000</td>
 <td>9.000000</td>
 <td>10.000000</td>
@@ -735,20 +526,20 @@ dtype: object</code></pre>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">total_units</th>
-<td>48692.0</td>
-<td>8.735562</td>
-<td>1.101782</td>
+<td>32455.0</td>
+<td>8.695671</td>
+<td>1.048188e+00</td>
 <td>0.000000</td>
 <td>8.000000</td>
 <td>9.000000</td>
 <td>9.000000</td>
-<td>15.000000</td>
+<td>13.000000</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">top1</th>
-<td>48692.0</td>
-<td>0.125709</td>
-<td>0.331524</td>
+<td>32455.0</td>
+<td>0.125682</td>
+<td>3.314954e-01</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
@@ -757,9 +548,9 @@ dtype: object</code></pre>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">top4</th>
-<td>48692.0</td>
-<td>0.500472</td>
-<td>0.500005</td>
+<td>32455.0</td>
+<td>0.500447</td>
+<td>5.000075e-01</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>1.000000</td>
@@ -768,9 +559,9 @@ dtype: object</code></pre>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">bottom4</th>
-<td>48692.0</td>
-<td>0.499528</td>
-<td>0.500005</td>
+<td>32455.0</td>
+<td>0.499553</td>
+<td>5.000075e-01</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>0.000000</td>
@@ -783,13 +574,12 @@ dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-9" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create Histograms of all int and float fields</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>num_cols <span class="op">=</span> dfTFT.select_dtypes(include<span class="op">=</span>[<span class="st">'int64'</span>,<span class="st">'float64'</span>]).columns</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>dfTFT[num_cols].hist(bins <span class="op">=</span> <span class="dv">20</span>, figsize <span class="op">=</span> (<span class="dv">12</span>,<span class="dv">12</span>))</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-8" class="cell" data-scrolled="true" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create Histograms of all int and float fields</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>num_cols <span class="op">=</span> dfTFT.select_dtypes(include<span class="op">=</span>[<span class="st">'int64'</span>,<span class="st">'float64'</span>]).columns</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>dfTFT[num_cols].hist(bins <span class="op">=</span> <span class="dv">20</span>, figsize <span class="op">=</span> (<span class="dv">12</span>,<span class="dv">12</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -799,78 +589,85 @@ dtype: object</code></pre>
 </div>
 </div>
 <p><strong>Data Distribution</strong></p>
-<div id="cell-11" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram visually shows skew among a couple of fields </span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Lets determine the skew of num cols</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>dfTFT[num_cols].skew().sort_values()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>game_length       -1.623388
-total_units       -1.142394
-num_units         -1.142394
-level             -0.760068
-time_eliminated   -0.476707
-num_2star         -0.110126
-total_traits      -0.103944
-num_traits        -0.103944
-num_cost2         -0.091507
-num_cost5         -0.010236
-top4              -0.001889
+<div id="cell-10" class="cell" data-scrolled="true" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram visually shows skew among a couple of fields </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Lets determine the skew of num cols</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dfTFT[num_cols].skew().sort_values()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>game_length       -2.035491
+total_units       -1.231842
+num_units         -1.231842
+level             -0.769241
+time_eliminated   -0.462091
+total_traits      -0.124075
+num_traits        -0.124075
+num_cost2         -0.092288
+num_2star         -0.079416
+num_cost5         -0.024680
+top4              -0.001787
+Release_Version    0.000000
 num_cost4          0.000000
-Release_Version    0.000059
-placement          0.001034
-bottom4            0.001889
-num_cost1          0.192532
-total_damage       0.439728
-total_items        0.658633
-num_1star          0.858205
-num_3star          1.314868
-num_cost3          1.721612
-top1               2.258098
-gold_left          3.439884
+placement          0.000957
+bottom4            0.001787
+num_cost1          0.216555
+total_damage       0.439562
+total_items        0.513083
+num_1star          0.849210
+num_3star          1.298909
+num_cost3          1.776404
+top1               2.258501
+gold_left          2.865710
 dtype: float64</code></pre>
 </div>
 </div>
-<div id="cell-12" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Look at Kurtosis</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>dfTFT[num_cols].kurt().sort_values()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
-<pre><code>bottom4            -2.000079
-top4               -2.000079
-placement          -1.238927
-num_cost5          -0.581077
-num_2star          -0.470681
-total_damage       -0.400378
-Release_Version    -0.001055
+<div id="cell-11" class="cell" data-scrolled="true" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Look at Kurtosis</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dfTFT[num_cols].kurt().sort_values()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>top4               -2.000120
+bottom4            -2.000120
+placement          -1.238937
+num_cost5          -0.615949
+num_2star          -0.486263
+total_damage       -0.400370
+Release_Version     0.000000
 num_cost4           0.000000
-num_cost1           0.123231
-num_traits          0.327377
-total_traits        0.327377
-num_cost2           0.445530
-num_1star           0.787790
-num_3star           1.049547
-time_eliminated     1.082479
-total_items         1.672486
-level               2.460540
-top1                3.099134
-num_cost3           4.738643
-num_units           6.883389
-total_units         6.883389
-game_length        23.007420
-gold_left          24.175919
+num_cost1           0.100252
+num_traits          0.224385
+total_traits        0.224385
+num_cost2           0.435328
+num_1star           0.770351
+num_3star           0.939878
+time_eliminated     1.134067
+total_items         1.376238
+level               2.684690
+top1                3.101018
+num_cost3           4.749030
+num_units           7.040564
+total_units         7.040564
+gold_left          12.030834
+game_length        29.433887
 dtype: float64</code></pre>
 </div>
 </div>
-<div id="cell-13" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Highest skew and kurt is gold_left.</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Bottom4 having highest negative Kurtosis is odd. The data should be evenly split between 0 and 1.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-12" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">20</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sns.heatmap(dfTFT[num_cols].corr(),annot <span class="op">=</span> <span class="va">True</span>, cmap <span class="op">=</span> <span class="st">'coolwarm'</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Correlation Matrix of Numerical Fields"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<div id="cell-14" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#make corr matrix of num fields</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">20</span>))</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>sns.heatmap(dfTFT[num_cols].corr(),annot <span class="op">=</span> <span class="va">True</span>, cmap <span class="op">=</span> <span class="st">'coolwarm'</span>)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Correlation Matrix of Numerical Fields"</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="cell-13" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Look at pairwise relationships</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style <span class="op">=</span> <span class="st">"whitegrid"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>sns.pairplot(dfTFT[[<span class="st">'placement'</span>, <span class="st">'level'</span>, <span class="st">'total_damage'</span>, <span class="st">'game_length'</span>]])</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -879,45 +676,38 @@ dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-15" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#look at pairwise relationships</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>sns.pairplot(dfTFT[[<span class="st">'placement'</span>, <span class="st">'level'</span>, <span class="st">'total_damage'</span>, <span class="st">'game_length'</span>]])</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="main_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="cell-16" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create ttest assesing the siginfignace of gold left on placerplacement</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>win <span class="op">=</span> dfTFT[dfTFT[<span class="st">"top1"</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">"gold_left"</span>]</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>lose <span class="op">=</span> dfTFT[dfTFT[<span class="st">"top1"</span>] <span class="op">!=</span> <span class="dv">1</span>][<span class="st">"gold_left"</span>]</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>stats.ttest_ind(win, lose, equal_var <span class="op">=</span> <span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>H0: Gold lacks a significant effect on getting first place HA: Gold has a significant effect on getting first place</p>
+<div id="cell-15" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create ttest assesing the siginfignace of gold left on first place</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Despite heavy skew, i wont normalize. </span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>win <span class="op">=</span> dfTFT[dfTFT[<span class="st">"top1"</span>] <span class="op">==</span> <span class="dv">1</span>][<span class="st">"gold_left"</span>]</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>lose <span class="op">=</span> dfTFT[dfTFT[<span class="st">"top1"</span>] <span class="op">!=</span> <span class="dv">1</span>][<span class="st">"gold_left"</span>]</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>stats.ttest_ind(win, lose, equal_var <span class="op">=</span> <span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>TtestResult(statistic=13.884042157836218, pvalue=2.6679327293662187e-43, df=7596.385463513003)</code></pre>
+<pre><code>TtestResult(statistic=13.296788071192763, pvalue=1.0967396807080814e-39, df=5107.305276300659)</code></pre>
 </div>
 </div>
+<p>P val &lt; .05, so we reject the null hypothesis and can conclude that gold_left is significant for placement. This informs of modeling.</p>
 <div id="cell-17" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#TTest indicates high statistical siginifgance. </span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Lets use a violin plot top compare top and bottom cut players</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>dfTFT[<span class="st">"finish_group"</span>] <span class="op">=</span> dfTFT[<span class="st">"placement"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="st">"Top 4"</span> <span class="cf">if</span> x <span class="op">&lt;=</span> <span class="dv">4</span> <span class="cf">else</span> <span class="st">"Bottom 4"</span>)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>dfTFT[<span class="st">"finish_group"</span>].value_counts()</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize <span class="op">=</span> (<span class="dv">10</span>,<span class="dv">10</span>))</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>sns.violinplot(data <span class="op">=</span> dfTFT, x <span class="op">=</span> <span class="st">"finish_group"</span>, y <span class="op">=</span> <span class="st">"gold_left"</span> , palette <span class="op">=</span> <span class="st">"Set2"</span>)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Difference in gold economy between top 4 and bottom 4"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Placement Group"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Gold Left"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>plt.tight_layout</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#TTest indicates high statistical siginifgance. </span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Lets use a violin plot top and bottom cut players without normalzaling the highly skewed variable</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>dfTFT[<span class="st">"finish_group"</span>] <span class="op">=</span> dfTFT[<span class="st">"placement"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="st">"Top 4"</span> <span class="cf">if</span> x <span class="op">&lt;=</span> <span class="dv">4</span> <span class="cf">else</span> <span class="st">"Bottom 4"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>dfTFT[<span class="st">"finish_group"</span>].value_counts()</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize <span class="op">=</span> (<span class="dv">10</span>,<span class="dv">10</span>))</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>sns.violinplot(data <span class="op">=</span> dfTFT, x <span class="op">=</span> <span class="st">"finish_group"</span>, y <span class="op">=</span> <span class="st">"gold_left"</span> , palette <span class="op">=</span> <span class="st">"Set2"</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Difference in gold economy between top 4 and bottom 4"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Placement Group"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Gold Left"</span>, fontsize <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/6s/cxp6j6zd22s3tgzn53pm65900000gn/T/ipykernel_10519/3703048918.py:7: FutureWarning: 
+<pre><code>/var/folders/6s/cxp6j6zd22s3tgzn53pm65900000gn/T/ipykernel_27037/3703048918.py:7: FutureWarning: 
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
@@ -926,7 +716,102 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="main_files/figure-html/cell-14-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="main_files/figure-html/cell-13-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-18" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Only use 15.22. This build of game only matters for these 2 visuals</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>dfTFT[<span class="st">"champion_list"</span>] <span class="op">=</span> dfTFT[<span class="st">"champion_list"</span>].<span class="bu">apply</span>(ast.literal_eval)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>counter <span class="op">=</span> Counter()</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lst <span class="kw">in</span> dfTFT[<span class="st">'champion_list'</span>]:</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    counter.update(lst)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>top <span class="op">=</span> counter.most_common(<span class="dv">10</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>names <span class="op">=</span> [x[<span class="dv">0</span>] <span class="cf">for</span> x <span class="kw">in</span> top]</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> [x[<span class="dv">1</span>] <span class="cf">for</span> x <span class="kw">in</span> top]</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>plt.bar(names, counts)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Top 10 Most Used Champions"</span>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-19" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>champions <span class="op">=</span> <span class="bu">sorted</span>({c <span class="cf">for</span> row <span class="kw">in</span> dfTFT[<span class="st">"champion_list"</span>] <span class="cf">for</span> c <span class="kw">in</span> row})</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> pd.DataFrame(<span class="dv">0</span>, index <span class="op">=</span> champions, columns <span class="op">=</span> champions)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> champs <span class="kw">in</span> dfTFT[<span class="st">"champion_list"</span>]:</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c1, c2 <span class="kw">in</span> itertools.combinations(champs, <span class="dv">2</span>):</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        matrix.loc[c1, c2] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        matrix.loc[c2, c1] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> champions:</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    matrix.loc[c, c] <span class="op">=</span> dfTFT[<span class="st">"champion_list"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: c <span class="kw">in</span> x).<span class="bu">sum</span>()</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Champion Co-occurrence Matrix:"</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(matrix)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Champion Co-occurrence Matrix:
+        Aatrox  Ahri  Akali  Ashe  Braum  Caitlyn  Darius  DrMundo  Ezreal  \
+Aatrox    7023    23   1406   273    969       11    2972     1574      37   
+Ahri        23   729      3    23    157        0      17        8       7   
+Akali     1406     3   1975    12     38        7    1711       27     113   
+Ashe       273    23     12  4894   3030        1      29      407       3   
+Braum      969   157     38  3030  12614       42      63     3664     203   
+...        ...   ...    ...   ...    ...      ...     ...      ...     ...   
+Yone       734     7     28    43    593        0      22      243       1   
+Yuumi      107     6    113     5    297      499     229        2    3862   
+Zac       2444     6    350    18    140       10    2861      261      61   
+Ziggs      265     2     20    66    403        8      16       10       8   
+Zyra      1108    46     98  3716   6918       12     260     2946     186   
+
+        Gangplank  ...  Viego  Volibear  Xayah  XinZhao  Yasuo  Yone  Yuumi  \
+Aatrox        894  ...    150       695     25       46    378   734    107   
+Ahri            7  ...      1        19    217       47     17     7      6   
+Akali          29  ...     11        18      4       10     78    28    113   
+Ashe          228  ...    230       113      2       48      9    43      5   
+Braum          53  ...    527      2881   1184     3700    679   593    297   
+...           ...  ...    ...       ...    ...      ...    ...   ...    ...   
+Yone          616  ...     65       779    158      486    324  1546      2   
+Yuumi           1  ...      0        25      7      107      9     2   4291   
+Zac            23  ...     13        19     10        6      4    14    198   
+Ziggs          13  ...      3        35      1       35     23    12      8   
+Zyra           81  ...    105       712    126     1519    129   203    231   
+
+         Zac  Ziggs  Zyra  
+Aatrox  2444    265  1108  
+Ahri       6      2    46  
+Akali    350     20    98  
+Ashe      18     66  3716  
+Braum    140    403  6918  
+...      ...    ...   ...  
+Yone      14     12   203  
+Yuumi    198      8   231  
+Zac     3613      1   339  
+Ziggs      1   1549   144  
+Zyra     339    144  9162  
+
+[63 rows x 63 columns]</code></pre>
+</div>
+</div>
+<div id="cell-20" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize <span class="op">=</span> (<span class="dv">18</span>, <span class="dv">14</span>))</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sns.heatmap(matrix, cmap <span class="op">=</span> <span class="st">"Reds"</span>, square <span class="op">=</span> <span class="va">True</span>, cbar <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Champion Co-occurrence Heatmap"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>

@@ -2,23 +2,23 @@
 title: "Progress log"
 ---
 
-**11-01-2024**
+**11-01-2025**
 
 * Decided topic based on internship application post.
 
-**11-03-2024** 
+**11-03-2025** 
 
 * Conducted intial research/documentation on auto battler and Teamfight tactics
 
-**11-07-2024** 
+**11-07-2025** 
 
 * Added Sample Code for Riot API data extraction
 
-**11-12-2024** 
+**11-12-2025** 
 
-* Edited Riot API data extraction code
+* Created inital Riot API data extraction code
 
-**11-14-2024**
+**11-14-2025**
 
 * Began writing instructions for data-cleaning and data-collection. And edited documentation.
 
@@ -27,11 +27,18 @@ title: "Progress log"
 * API scrapping didnt work. Had to troubleshoot extensivlety. Got it to work and redid API script. 
 API script ran sucessfully.
 
-**11-23-2024**
+**11-23-2025**
 
 * Evaluated JSON scripts from API code. Then wrote code that would combine into singlar file for data processing.
 
-**11-30-2024**
+**11-30-2025**
 
 * Tested and ran script to combine JSON into a singular csv file which will be used for data processing.
 Updated documentation page
+
+**12-02-2024**
+* Created unsupervised clutering using HDBSCAN.
+
+**12-03-2025**
+* Redid unsupervised learning. Hierachitc Clustering was superior method.
+

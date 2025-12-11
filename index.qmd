@@ -5,25 +5,23 @@ author: "Robert George"
 
 ## Project Introduction
 
-
-
 ![](images/Teamfight_Tactics_logo.png)
-**Title: ** Statistical Analysis of TeamFight Tactics Top level Gameplay
-**Motivation: ** 
-My interest in the intersection of data science and the video-game industry inspired this project. In November 2025, Riot Games announced an opening for a Teamfight Tactics (TFT) Insights Analyst internship. After downloading TFT and spending time learning the game, I enjoyed the gameplay and its gameplay mechanics. How to build a good team, and how that team grows over the course of a match. Should I spend gold rerolling so I can get 2 or 3 star units? RNG creating uncertainty in outcome and increasing replayability but not at the expense of skill. 
+**Title:** Statistical Analysis of TeamFight Tactics Top level Gameplay
+**Motivation:** 
+My interest in the intersection of data science and the video-game industry inspired this project. In November 2025, Riot Games announced an opening for a Teamfight Tactics (TFT) Insights Analyst internship. After downloading TFT and spending time learning the game, I enjoyed the gameplay and its gameplay mechanics. A high amount of resource managment and long term stragetic planning mixed with in the moment improv due to critical elements such as the aguments received, and champions purchased are RNG. Questiosn like should I buy exp so I can deploy more units or should I keep spending gold to reroll so I can get 2 or 3 star units? Despite the RNG creating uncertainty in outcome, it did not at the total expense of skill. 
 
 This project uses TFT as a case study for applying statistical and data analytics to video games systems. I hope this work demonstrates how data science can support decision-making in esports analytics—an area that continues to grow in both academic relevance and industry demand.
 
 ## Research Questions
 
-- What game factors most strongly predict a player’s final placement (either 1st place or top 4)?
-- Does the number of high cost units (4-5) or 2/3 star units have a statistically significant impact on placement?
-- What are teams comps used by top level players?
-- What champions are most frequently seen at top level play? By extension, which are most common at top 4?
+1) Which variables most strongly influence overall player placement?
+2) Which factors are most predictive of finishing in first place?
+3) What are the most popular comps used at top level play?
+4) What comp consistently places the highest?
+5) What champions are seen the most at top level play?
 
 ## Literature Review 1 
 **Title:** Predicting Teamfight Tactics Results with Machine Learning Techniques. 
-https://researchportal.hkr.se/en/studentTheses/predicting-teamfight-tactics-results-with-machine-learning-techni-5/
 
 **Summary:** This undergraduate thesis evaluates whether machine-learning models commonly applied in traditional sports analytics can effectively predict outcomes within esports, using Teamfight Tactics as a test environment. The authors construct predictive models using features such as champions on the board, unit star levels, synergies, and item configurations. The study also highlights structural differences between esports and physical sports, particularly the rapidly shifting rulesets and high-dimensional gameplay data unique to TFT.
 
@@ -36,22 +34,19 @@ https://researchportal.hkr.se/en/studentTheses/predicting-teamfight-tactics-resu
 
 ## Literature Review 2
 **Title:** E-Sports Analytics: A Primer and Resource for Student Research Projects and Lesson Plans
-https://files.eric.ed.gov/fulltext/EJ1242004.pdf
 
 **Summary:** This paper provides an overview of esports analytics as an emerging academic domain. It outlines common analytical techniques used in competitive games—such as classification, clustering, and player behavioral modeling—and discusses the challenges caused by dynamic rulesets and patch updates.
 
 **Key Findings:**
 
 - Traditional statistical and machine-learning techniques are relevant to esports datasets such as TFT, but must account for sudden changes in gameplay mechanics.
--  
 
 **Takeaway:** This paper reinforces the value of analyzing TFT using structured statistical methods while acknowledging the complexity introduced by multiple game patches. It supports the inclusion of patch-specific analysis in my research questions
 
 ## Literature Review 3
 **Title:** ”Getting Mortdogged”; How high-ranking players experience randomness in Teamfight Tactics (TFT)
-https://uu.diva-portal.org/smash/get/diva2%3A1805620/FULLTEXT01.pdf
 
-**Summary:** This bachelor’s thesis examines how high-level TFT players interpret and respond to the inherent randomness embedded in the game design. Through qualitative interviews, the authors analyze how players conceptualize probability, perceive fairness, and adapt strategies to mitigate shop RNG, augment outcomes, item drops, and combat variance.
+**Summary:** This bachelor’s thesis examines how high-level TFT players interpret and respond to the inherent randomness embedded in the game design. Through qualitative interviews, the authors analyze how players conceptualize probability, perceive fairness, and adapt strategies to mitigate shop RNG, augment outcomes, item drops, and combat variance. 
 
 **Key Findings:**
 
@@ -62,3 +57,11 @@ https://uu.diva-portal.org/smash/get/diva2%3A1805620/FULLTEXT01.pdf
 **Takeaway:** This thesis shows the competitive depth of TFT and the importance of analyzing concrete, measurable gameplay features—such as champion choices and unit tiers—rather than viewing outcomes as purely luck-driven. Also, top level players can adapt to randomness to create consistent meta strategies such as specific team compositions.
 
 References:
+1.Ya, M., Shen, E. & Liu, J. A Novel Sign Language Translation Model: Gloss-Free Video-to-Sequence Translation Using Transformer Encoder and LLM Decoder.
+2.Rubleske, J., Fletcher, T. & Westerfeld, B. E-Sports Analytics: A Primer and Resource for Student Research Projects and Lesson Plans. 23,.
+3.Sanguineti, M. Get Teamfight Tactics (TFT) data with Python and Riot Games API. Medium https://marcosanguineti.medium.com/get-teamfight-tactics-tdf-data-with-python-and-riot-games-api-e3243e3c54dc (2022).
+4.Moraes, L. leomaurodesenv/game-datasets. (2025).
+5.Riot Developer Portal. https://developer.riotgames.com/.
+6.Magtanong, E. rndmagtanong/ph_tft. (2025).
+7.TFT Rank distribution - TeamFight Tactics - LeagueOfGraphs. https://www.leagueofgraphs.com/tft/rank-distribution.
+8.TFT Set 16 Champions List · Teamfight Tactics. TFTactics https://tftactics.gg/champions/.
